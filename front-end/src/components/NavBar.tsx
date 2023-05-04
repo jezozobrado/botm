@@ -8,8 +8,7 @@ import {
   Spacer,
   VStack,
 } from "@chakra-ui/react";
-import logo from "../assets/logo.svg";
-import reactt from "../assets/react.svg";
+
 import Logo from "../assets/Logo";
 import { Link } from "react-router-dom";
 import { BiUserCircle } from "react-icons/bi";
@@ -24,20 +23,24 @@ const NavBar = () => {
         marginY={3}
         alignItems="center"
       >
-        <Logo />
+        <Link to="/">
+          <Logo />
+        </Link>
         <HStack gap={5}>
-          <Link>May books</Link>
-          <Link>All books</Link>
-          <Link>How it works</Link>
-          <Link>Gifts</Link>
-          <Link>Relationship status</Link>
+          <Link to="/the-best-new-books">May books</Link>
+          <Link to="/all-books">All books</Link>
+          <Link to="/how-it-works">How it works</Link>
+          <Link to="/gift">Gifts</Link>
+          <Link to="/relationship-status">Relationship status</Link>
         </HStack>
         <Spacer width="100px" />
 
         <HStack>
-          <Button leftIcon={<BiUserCircle size="22px" />} variant="outline">
-            Login
-          </Button>
+          <Link to="/login">
+            <Button leftIcon={<BiUserCircle size="22px" />} variant="outline">
+              Login
+            </Button>
+          </Link>
           <Button variant="solid" width="120px" colorScheme="blue">
             Sign up
           </Button>

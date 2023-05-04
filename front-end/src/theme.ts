@@ -1,4 +1,5 @@
 import { extendTheme, ThemeConfig } from "@chakra-ui/react";
+import { Fonts } from "./components/Fonts";
 
 const config: ThemeConfig = {
   initialColorMode: "light",
@@ -19,6 +20,10 @@ const theme = extendTheme({
       800: "#121212",
       900: "#111",
     },
+  },
+  fonts: {
+    heading: "Patua One",
+    body: "Figtree",
   },
 });
 
