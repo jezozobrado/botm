@@ -1,7 +1,12 @@
-import { Button } from "@chakra-ui/react";
+import { Image } from "@chakra-ui/react";
+import logo from "./assets/logo.svg";
 
 const App = () => {
-  return <Button>Potangina</Button>;
+  return (
+    <>
+      <Image src={logo} />
+    </>
+  );
 };
 
 export default App;
