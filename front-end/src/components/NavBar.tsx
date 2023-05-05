@@ -35,7 +35,7 @@ const NavBar = () => {
                 Login
               </Button>
             </Link>
-            <Button variant="solid" width="120px" bg="brand.100" color="white">
+            <Button width="120px" variant="btn-primary">
               Sign up
             </Button>
           </HStack>

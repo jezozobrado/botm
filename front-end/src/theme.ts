@@ -24,15 +24,32 @@ const theme = extendTheme({
       100: "#11afe2",
     },
   },
+  components: {
+    Button: {
+      variants: {
+        "btn-primary": {
+          bg: "brand.100",
+          color: "white",
+          fontWeight: "normal",
+        },
+        "btn-secondary": {
+          bg: "white",
+          color: "brand.100",
+          borderColor: "black",
+          border: "1px",
+          fontWeight: "normal",
+        },
+      },
+    },
+  },
   fonts: {
     heading: "Patua One",
     body: "Figtree",
   },
   styles: {
     global: {
-      // styles for the `body`
       body: {
-        fontSize: { base: "28px", lg: "20px" },
+        fontSize: { base: "18px", lg: "20px" },
       },
     },
   },
