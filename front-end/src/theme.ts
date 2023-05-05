@@ -7,6 +7,9 @@ const config: ThemeConfig = {
 
 const theme = extendTheme({
   config,
+  breakpoints: {
+    xs: "320px",
+  },
   colors: {
     gray: {
       50: "#f9f9f9",
@@ -42,6 +45,13 @@ const theme = extendTheme({
         },
       },
     },
+    Input: {
+      variants: {
+        "input-primary": {
+          bg: "white",
+        },
+      },
+    },
   },
   fonts: {
     heading: "Patua One",
@@ -50,7 +60,7 @@ const theme = extendTheme({
   styles: {
     global: {
       body: {
-        fontSize: { base: "18px", lg: "20px" },
+        fontSize: { base: "18px", lg: "16px" },
       },
     },
   },
