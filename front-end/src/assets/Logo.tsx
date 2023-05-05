@@ -4,7 +4,7 @@ const Logo = () => {
       version="1.1"
       x="0px"
       y="0px"
-      width="336.5px"
+      width="250.5px"
       height="30px"
       viewBox="0 0 336.5 44"
       enable-background="new 0 0 336.5 44"

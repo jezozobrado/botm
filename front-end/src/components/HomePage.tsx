@@ -8,8 +8,7 @@ const HomePage = () => {
       <Flex
         margin="auto"
         width="800px"
-        justifyContent="center
-      "
+        justifyContent="center"
         flexDirection="column"
         textAlign={"center"}
         gap={5}
@@ -17,21 +16,18 @@ const HomePage = () => {
         <Heading fontSize="100px" fontWeight="medium" marginTop="60px">
           Books are cool &#13;&#13;&#13; again.
         </Heading>
-        <Text fontSize="20px">
+        <Text>
           Choose from a curated selection of the best new reads every month and
           get them delivered.
         </Text>
-        <HStack justifyContent="center" fontSize="20px">
+        <HStack justifyContent="center">
           <Button fontSize="18px">Join now</Button>
           <Button fontSize="18px" variant="outline">
             Give a gift
           </Button>
         </HStack>
-        <Text fontSize="20px">
-          Already a member?{" "}
-          <Button fontSize="18px" variant="link">
-            Sign in.
-          </Button>
+        <Text>
+          Already a member? <Button variant="link">Sign in.</Button>
         </Text>
       </Flex>
     </>

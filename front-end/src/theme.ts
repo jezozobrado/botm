@@ -20,10 +20,21 @@ const theme = extendTheme({
       800: "#121212",
       900: "#111",
     },
+    brand: {
+      100: "#11afe2",
+    },
   },
   fonts: {
     heading: "Patua One",
     body: "Figtree",
+  },
+  styles: {
+    global: {
+      // styles for the `body`
+      body: {
+        fontSize: { base: "28px", lg: "20px" },
+      },
+    },
   },
 });
 
