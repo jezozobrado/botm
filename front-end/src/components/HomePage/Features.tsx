@@ -11,7 +11,9 @@ import mom from "../../assets/mom-smiling.webp";
 import pileOfBooks from "../../assets/pile-of-books.webp";
 import blueBox from "../../assets/blue-box.webp";
 import girlReading from "../../assets/girl-reading.webp";
-import Feature from "./Feature";
+import vbt from "../../assets/vbt.jpg";
+import Feature from "../Feature";
+import FeatureReversed from "../FeatureReversed";
 
 const Features = () => {
   return (
@@ -40,7 +42,7 @@ const Features = () => {
         stepNumber="STEP 1"
         buttonType="btn-link"
       />
-      <Feature
+      <FeatureReversed
         picture={blueBox}
         heading="Get your box."
         body="Keep your eye out for that bright blue box. Trust us, you’re going to want to cancel all your plans."
@@ -55,6 +57,14 @@ const Features = () => {
         isButtonHidden={true}
         isProcedure={true}
         stepNumber="STEP 3"
+      />
+      <FeatureReversed
+        picture={vbt}
+        heading="Meet your new favorite podcast."
+        body="Lend us your ears for a look inside the minds of BOTM writers! Virtual Book Tour is a treasure trove of anecdotes, wisdom, and entertainment."
+        isButtonHidden={true}
+        isProcedure={false}
+        showMusic={true}
       />
     </>
   );

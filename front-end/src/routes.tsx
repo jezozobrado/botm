@@ -1,12 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
-import HomePage from "./components/HomePage";
+import HomePage from "./pages/HomePage";
 import Layout from "./components/Layout";
-import MonthlyBooks from "./components/MonthlyBooks";
-import AllBooks from "./components/AllBooks";
-import HowItWorks from "./components/HowItWorks";
-import Gift from "./components/Gift";
-import RelationshipStatus from "./components/RelationshipStatus";
-import Login from "./components/Login";
+import MonthlyBooks from "./pages/MonthlyBooks";
+import AllBooks from "./pages/AllBooks";
+import HowItWorks from "./pages/HowItWorks";
+import Gift from "./pages/Gift";
+import RelationshipStatus from "./pages/RelationshipStatus";
+import Login from "./pages/Login";
 
 const router = createBrowserRouter([
   {
