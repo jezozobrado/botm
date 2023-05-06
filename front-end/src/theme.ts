@@ -43,6 +43,13 @@ const theme = extendTheme({
           border: "1px",
           fontWeight: "normal",
         },
+        "btn-link": {
+          bg: "none",
+          color: "brand.100",
+          fontWeight: "normal",
+          paddingX: 0,
+          justifyContent: "start",
+        },
       },
     },
     Input: {
@@ -60,7 +67,7 @@ const theme = extendTheme({
   styles: {
     global: {
       body: {
-        fontSize: { base: "18px", lg: "16px" },
+        fontSize: { base: "16px", lg: "16px" },
       },
     },
   },
