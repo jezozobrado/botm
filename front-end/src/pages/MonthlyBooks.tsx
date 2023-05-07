@@ -1,21 +1,10 @@
-import {
-  Badge,
-  Button,
-  Card,
-  CardBody,
-  Container,
-  Heading,
-  Image,
-  SimpleGrid,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
-import halfMoon from "../assets/half-moon.webp";
+import { Heading, Text } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import BookCard from "../components/BookCard";
 
 interface Book {
+  _id: string;
   title: string;
   author: string;
   price: number;
@@ -38,12 +27,21 @@ const MonthlyBooks = () => {
 
   return (
     <>
-      <Heading fontSize={{ base: "60px", md: "110px" }} fontWeight="medium">
+      <Heading
+        fontSize={{ base: "60px", md: "110px" }}
+        fontWeight="medium"
+        textAlign="center"
+        marginTop="50px"
+      >
         May Books
       </Heading>
+      <Text textAlign="center">
+        New month. New reads. Add your favorite(s) to your box now.
+      </Text>
       {data?.map((book) => (
         <BookCard
-          image={halfMoon}
+          key={book._id}
+          image={book.image}
           mainGenre={book.mainGenre}
           abstract={book.description}
           title={book.title}

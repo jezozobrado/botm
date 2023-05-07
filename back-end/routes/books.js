@@ -7,7 +7,14 @@ router.get("/", async (req, res) => {
   const books = await Book.find();
   res.send(
     books.map((book) =>
-      lodash.pick(book, ["title", "description", "author", "mainGenre"])
+      lodash.pick(book, [
+        "title",
+        "description",
+        "author",
+        "mainGenre",
+        "image",
+        "_id",
+      ])
     )
   );
 });

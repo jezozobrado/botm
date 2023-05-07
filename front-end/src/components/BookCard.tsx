@@ -23,12 +23,12 @@ const BookCard = ({ image, mainGenre, title, abstract }: Props) => {
         columns={{ base: 1, md: 2 }}
         margin="auto"
         width="fit-content"
-        marginBottom={8}
+        marginY={8}
       >
         <Card
           variant="filled"
           width={{ base: "90vw", md: "430px" }}
-          height="340px"
+          height={{ base: "340px", md: "100%" }}
           borderRadius={0}
           justifyContent="center"
           margin="auto"
@@ -40,7 +40,7 @@ const BookCard = ({ image, mainGenre, title, abstract }: Props) => {
         <Card
           width={{ base: "90vw", md: "430px" }}
           textAlign={{ base: "center", md: "left" }}
-          height={{ base: "fit-content", md: "340px" }}
+          height={{ base: "fit-content", md: "fit-content" }}
           borderRadius={0}
           padding={{ base: "1px", md: "20px" }}
         >
