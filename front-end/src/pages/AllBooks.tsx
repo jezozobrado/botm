@@ -1,7 +1,12 @@
+import { Heading } from "@chakra-ui/react";
 import React from "react";
 
 const AllBooks = () => {
-  return <div>AllBooks</div>;
+  return (
+    <>
+      <Heading>May Books</Heading>
+    </>
+  );
 };
 
 export default AllBooks;
