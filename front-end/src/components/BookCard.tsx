@@ -66,7 +66,7 @@ const BookCard = ({ image, mainGenre, title, abstract, badges }: Props) => {
               <Text fontSize="28px" fontWeight="bold">
                 {title}
               </Text>
-              <HStack justifyContent="center">
+              <HStack justifyContent={{ base: "center", md: "start" }}>
                 {badges.map((badge, index) => (
                   <Badge
                     key={index}
