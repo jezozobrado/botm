@@ -63,7 +63,11 @@ const BookCard = ({ image, mainGenre, title, abstract, badges }: Props) => {
               >
                 {mainGenre}
               </Text>
-              <Text fontSize="28px" fontWeight="bold">
+              <Text
+                fontSize="28px"
+                fontWeight="bold"
+                textTransform="capitalize"
+              >
                 {title}
               </Text>
               <HStack justifyContent={{ base: "center", md: "start" }}>
