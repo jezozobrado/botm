@@ -1,12 +1,13 @@
 import {
-  SimpleGrid,
-  Card,
-  Container,
-  CardBody,
-  Stack,
   Badge,
   Button,
+  Card,
+  CardBody,
+  Container,
+  HStack,
   Image,
+  SimpleGrid,
+  Stack,
   Text,
 } from "@chakra-ui/react";
 
@@ -15,8 +16,15 @@ interface Props {
   mainGenre: string;
   abstract: string;
   title: string;
+  badges: string[];
 }
-const BookCard = ({ image, mainGenre, title, abstract }: Props) => {
+const BookCard = ({ image, mainGenre, title, abstract, badges }: Props) => {
+  const badgeMap: { [key: string]: string } = {
+    Debut: "green",
+    "Repeat Author": "brand.200",
+    "BOTY Finalist": "pink",
+  };
+
   return (
     <>
       <SimpleGrid
@@ -58,16 +66,24 @@ const BookCard = ({ image, mainGenre, title, abstract }: Props) => {
               <Text fontSize="28px" fontWeight="bold">
                 {title}
               </Text>
-              <Badge
-                width="fit-content"
-                color="white"
-                bg="brand.200"
-                alignSelf={{ base: "center", md: "normal" }}
-                fontSize="11px"
-                fontWeight="normal"
-              >
-                REPEAT AUTHOR
-              </Badge>
+              <HStack>
+                {badges.map((badge, index) => (
+                  <Badge
+                    key={index}
+                    width="fit-content"
+                    bg={badgeMap[badge]}
+                    color="white"
+                    alignSelf={{ base: "center", md: "normal" }}
+                    fontSize="11px"
+                    fontWeight="normal"
+                    paddingX="5px"
+                    paddingY="2px"
+                  >
+                    {badge}
+                  </Badge>
+                ))}
+              </HStack>
+
               <Text paddingBottom={{ base: "0", md: "20px" }} textAlign="left">
                 {abstract}
               </Text>

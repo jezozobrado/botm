@@ -12,6 +12,7 @@ const bookSchema = new mongoose.Schema({
   isInStock: Boolean,
   mainGenre: String,
   synopsis: String,
+  badges: [String],
 });
 
 const Book = mongoose.model("Book", bookSchema);
@@ -28,6 +29,7 @@ const validateBook = (book) => {
     isInStock: Joi.boolean().required(),
     mainGenre: Joi.string().required(),
     synopsis: Joi.string().required(),
+    badges: Joi.array().items(Joi.string()),
   });
   return schema.validate(book);
 };

@@ -13,6 +13,7 @@ router.get("/", async (req, res) => {
         "author",
         "mainGenre",
         "image",
+        "badges",
         "_id",
       ])
     )

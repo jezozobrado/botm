@@ -14,6 +14,7 @@ interface Book {
   isInStock: boolean;
   mainGenre: string;
   synopsis: string;
+  badges: string[];
 }
 
 const MonthlyBooks = () => {
@@ -45,6 +46,7 @@ const MonthlyBooks = () => {
           mainGenre={book.mainGenre}
           abstract={book.description}
           title={book.title}
+          badges={book.badges}
         />
       ))}
     </>
