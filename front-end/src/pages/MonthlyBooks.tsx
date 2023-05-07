@@ -4,15 +4,11 @@ import {
   Card,
   CardBody,
   CardFooter,
-  CardHeader,
   Container,
-  Divider,
   Heading,
   Image,
   SimpleGrid,
   Stack,
-  StackDivider,
-  Tag,
   Text,
 } from "@chakra-ui/react";
 import halfMoon from "../assets/half-moon.webp";
@@ -23,19 +19,29 @@ const MonthlyBooks = () => {
       <Heading fontSize={{ base: "60px", md: "110px" }} fontWeight="medium">
         May Books
       </Heading>
-      <SimpleGrid templateColumns="repeat(2, 1fr)" width="860px" margin="auto">
-        <Card variant="filled" width="430px" height="340px" borderRadius={0}>
+      <SimpleGrid
+        columns={{ base: 1, md: 2 }}
+        margin="auto"
+        width="fit-content"
+      >
+        <Card
+          variant="filled"
+          width={{ base: "90vw", md: "430px" }}
+          height="340px"
+          borderRadius={0}
+          justifyContent="center"
+          margin="auto"
+        >
           <Container margin="auto" centerContent>
             <Image src={halfMoon} width="180px" />
           </Container>
         </Card>
         <Card
-          width="430px"
-          justifyContent="center"
-          margin="auto"
-          height="340px"
+          width={{ base: "90vw", md: "430px" }}
+          textAlign={{ base: "center", md: "left" }}
+          height={{ base: "fit-content", md: "340px" }}
           borderRadius={0}
-          padding={5}
+          padding={{ base: "1px", md: "20px" }}
         >
           <CardBody>
             <Stack>
@@ -51,20 +57,36 @@ const MonthlyBooks = () => {
               <Text fontSize="28px" fontWeight="bold">
                 The Half Moon
               </Text>
-              <Badge width="fit-content" color="white" bg="brand.200">
+              <Badge
+                width="fit-content"
+                color="white"
+                bg="brand.200"
+                alignSelf={{ base: "center", md: "normal" }}
+                fontSize="11px"
+                fontWeight="normal"
+              >
                 REPEAT AUTHOR
               </Badge>
-              <Text>
+              <Text paddingBottom={{ base: "0", md: "20px" }} textAlign="left">
                 A husband drowning in debt and a wife grappling with infertility
                 have their relationship tested during a winter storm.
               </Text>
+              <Button
+                variant="btn-primary"
+                width={{ base: "85vw ", md: "fit-content" }}
+                alignSelf={{ base: "center", md: "normal" }}
+                paddingX={{ md: "40px" }}
+                paddingY="23px"
+              >
+                Make my BOTM
+              </Button>
             </Stack>
           </CardBody>
-          <CardFooter>
+          {/* <CardFooter>
             <Button variant="btn-primary" width="fit-content">
               Make my BOTM
             </Button>
-          </CardFooter>
+          </CardFooter> */}
         </Card>
       </SimpleGrid>
     </>
