@@ -4,7 +4,7 @@ const lodash = require("lodash");
 const { Book, validate } = require("../models/book");
 
 router.get("/", async (req, res) => {
-  const books = await Book.find({ defaultCategory: "May-2023" }).sort("title");
+  const books = await Book.find({ defaultCategory: "May-2021" }).sort("title");
   res.send(
     books.map((book) =>
       lodash.pick(book, [
