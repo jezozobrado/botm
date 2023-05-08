@@ -17,8 +17,8 @@ interface Props {
   mainGenre: string;
   abstract: string;
   title: string;
-  badges: string[];
   slug: string;
+  badges?: string[];
 }
 const BookCard = ({
   image,
@@ -82,7 +82,7 @@ const BookCard = ({
               </Text>
 
               <HStack justifyContent={{ base: "center", md: "start" }}>
-                {badges.map((badge, index) => (
+                {badges?.map((badge, index) => (
                   <Badge
                     key={index}
                     width="fit-content"

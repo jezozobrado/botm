@@ -2,7 +2,7 @@ export interface Book {
   _id: string;
   title: string;
   slug: string;
-  author: string[];
+  author: string[] | string;
   price: number;
   defaultCategory: string;
   description: string;
@@ -10,6 +10,6 @@ export interface Book {
   isInStock: boolean;
   mainGenre: string;
   synopsis: string;
-  badges: string[];
-  informers: string[];
+  badges?: string[];
+  informers?: string[];
 }
