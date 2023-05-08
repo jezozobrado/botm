@@ -19,14 +19,16 @@ interface Props {
   title: string;
   badges: string[];
   slug: string;
+  author: string[];
 }
-const BookCard = ({
+const BookDetailCard = ({
   image,
   mainGenre,
   title,
   abstract,
   badges,
   slug,
+  author,
 }: Props) => {
   const badgeMap: { [key: string]: string } = {
     Debut: "green",
@@ -36,27 +38,21 @@ const BookCard = ({
 
   return (
     <Link to={"/all-books/" + slug}>
-      <SimpleGrid
-        columns={{ base: 1, md: 2 }}
-        margin="auto"
-        width="fit-content"
-        marginY={8}
-      >
+      <SimpleGrid columns={1} margin="auto" width="fit-content" marginY={8}>
         <Card
           variant="filled"
-          width={{ base: "90vw", md: "430px" }}
-          height={{ base: "340px", md: "100%" }}
+          width="40vw"
+          height="fit-content"
+          paddingY="30px"
           borderRadius={0}
-          justifyContent="center"
-          margin="auto"
         >
           <Container margin="auto" centerContent>
             <Image src={image} width="180px" />
           </Container>
         </Card>
         <Card
-          width={{ base: "90vw", md: "430px" }}
-          textAlign={{ base: "center", md: "left" }}
+          width="40vw"
+          textAlign="center"
           height={{ base: "fit-content", md: "fit-content" }}
           borderRadius={0}
           padding={{ base: "1px", md: "20px" }}
@@ -81,7 +77,7 @@ const BookCard = ({
                 {title}
               </Text>
 
-              <HStack justifyContent={{ base: "center", md: "start" }}>
+              <HStack justifyContent="center">
                 {badges.map((badge, index) => (
                   <Badge
                     key={index}
@@ -99,13 +95,11 @@ const BookCard = ({
                 ))}
               </HStack>
 
-              <Text paddingBottom={{ base: "0", md: "20px" }} textAlign="left">
-                {abstract}
-              </Text>
+              <Text textAlign="center">by {author}</Text>
               <Button
                 variant="btn-primary"
                 width={{ base: "85vw ", md: "fit-content" }}
-                alignSelf={{ base: "center", md: "normal" }}
+                alignSelf="center"
                 paddingX={{ md: "40px" }}
                 paddingY="23px"
               >
@@ -119,4 +113,4 @@ const BookCard = ({
   );
 };
 
-export default BookCard;
+export default BookDetailCard;

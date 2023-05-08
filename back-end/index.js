@@ -12,7 +12,7 @@ mongoose
     "mongodb+srv://jezozobrado:hn3mTPRD@mongo-playground.nr0qfnc.mongodb.net/botm?retryWrites=true&w=majority"
   )
   .then(() => console.log("Connected to the database."))
-  .catch((err) => console.log("oops"));
+  .catch((err) => console.log("oops", err));
 
 app.use(express.json());
 app.use("/api/books", books);

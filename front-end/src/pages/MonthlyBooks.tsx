@@ -2,20 +2,7 @@ import { Heading, Text } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import BookCard from "../components/BookCard";
-
-interface Book {
-  _id: string;
-  title: string;
-  author: string;
-  price: number;
-  defaultCategory: string;
-  description: string;
-  image: string;
-  isInStock: boolean;
-  mainGenre: string;
-  synopsis: string;
-  badges: string[];
-}
+import { Book } from "../entities/Book";
 
 const MonthlyBooks = () => {
   const { data } = useQuery<Book[]>({
@@ -23,8 +10,6 @@ const MonthlyBooks = () => {
     queryFn: () =>
       axios.get("http://localhost:4000/api/books").then((res) => res.data),
   });
-
-  console.log(data);
 
   return (
     <>
@@ -47,6 +32,7 @@ const MonthlyBooks = () => {
           abstract={book.description}
           title={book.title}
           badges={book.badges}
+          slug={book.slug}
         />
       ))}
     </>

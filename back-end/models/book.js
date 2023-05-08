@@ -3,6 +3,7 @@ const Joi = require("joi");
 
 const bookSchema = new mongoose.Schema({
   title: String,
+  slug: String,
   abstractText: String,
   author: String,
   price: Number,
@@ -20,6 +21,7 @@ const Book = mongoose.model("Book", bookSchema);
 const validateBook = (book) => {
   const schema = Joi.object({
     title: Joi.string().required(),
+    slug: Joi.string().required(),
     abstractText: Joi.string().required(),
     author: Joi.string().required(),
     price: Joi.number().required(),

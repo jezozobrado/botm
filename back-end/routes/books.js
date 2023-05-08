@@ -9,6 +9,7 @@ router.get("/", async (req, res) => {
     books.map((book) =>
       lodash.pick(book, [
         "title",
+        "slug",
         "description",
         "author",
         "mainGenre",
@@ -20,6 +21,12 @@ router.get("/", async (req, res) => {
   );
 });
 
+router.get("/:slug", async (req, res) => {
+  const book = await Book.find({ slug: req.params.slug });
+  if (!book) return res.status(404).send("Book does not exist.");
+  res.send(book);
+});
+
 router.post("/", async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
@@ -27,6 +34,7 @@ router.post("/", async (req, res) => {
   book = new Book(
     lodash.pick(req.body, [
       "title",
+      "slug",
       "abstract",
       "author",
       "price",
