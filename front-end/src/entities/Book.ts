@@ -11,4 +11,5 @@ export interface Book {
   mainGenre: string;
   synopsis: string;
   badges: string[];
+  informers: string[];
 }

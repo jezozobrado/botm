@@ -14,6 +14,7 @@ const bookSchema = new mongoose.Schema({
   mainGenre: String,
   synopsis: String,
   badges: [String],
+  informers: [String],
 });
 
 const Book = mongoose.model("Book", bookSchema);
@@ -32,6 +33,7 @@ const validateBook = (book) => {
     mainGenre: Joi.string().required(),
     synopsis: Joi.string().required(),
     badges: Joi.array().items(Joi.string()),
+    informers: Joi.array().items(Joi.string()),
   });
   return schema.validate(book);
 };
