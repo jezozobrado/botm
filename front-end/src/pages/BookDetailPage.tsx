@@ -15,6 +15,8 @@ import emotional from "../assets/informers/emotional.svg";
 import loveTriangle from "../assets/informers/love-triangle.svg";
 import marriageIssues from "../assets/informers/marriage-issues.svg";
 import suburbanDrama from "../assets/informers/suburban-drama.svg";
+import parse from "html-react-parser";
+import ExpandableText from "../components/ExpandableText";
 
 const BookDetailPage = () => {
   const { slug } = useParams();
@@ -37,8 +39,7 @@ const BookDetailPage = () => {
 
   return (
     <>
-      <Image src={emotional}></Image>
-      <Stack divider={<Divider />} width="40vw" gap={5}>
+      <Stack divider={<Divider />} width="40vw" gap={10}>
         {data.map((book) => (
           <BookDetailCard
             image={book.image}
@@ -61,23 +62,29 @@ const BookDetailPage = () => {
           <Text fontSize="25px" fontWeight="bold">
             Good to know
           </Text>
-          <SimpleGrid columns={2}>
-            {data[0].informers.map((informer, index) => (
-              <HStack>
-                <Image key={index} src={informerMap[informer]} boxSize="45px" />
-                <Text>
-                  {informer.charAt(0).toUpperCase() +
-                    informer.slice(1).toLowerCase()}
-                </Text>
-              </HStack>
-            ))}
-          </SimpleGrid>
+          {data[0].informers && (
+            <SimpleGrid columns={2} rowGap={4}>
+              {data[0].informers.map((informer, index) => (
+                <HStack>
+                  <Image
+                    key={index}
+                    src={informerMap[informer]}
+                    boxSize="45px"
+                  />
+                  <Text>
+                    {informer.charAt(0).toUpperCase() +
+                      informer.slice(1).toLowerCase()}
+                  </Text>
+                </HStack>
+              ))}
+            </SimpleGrid>
+          )}
         </Stack>
         <Stack>
           <Text fontSize="25px" fontWeight="bold">
             Synopsis
           </Text>
-          <Text>{data[0].description}</Text>
+          <ExpandableText>{data[0].synopsis}</ExpandableText>
         </Stack>
       </Stack>
     </>
