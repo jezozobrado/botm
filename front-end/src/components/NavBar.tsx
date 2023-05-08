@@ -10,10 +10,18 @@ import {
 } from "@chakra-ui/react";
 import { BiUserCircle } from "react-icons/bi";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Logo from "../assets/Logo";
 
 const NavBar = () => {
+  const navItems: { url: string; displayName: string }[] = [
+    { url: "/the-best-new-books", displayName: "May Books" },
+    { url: "/all-books", displayName: "All Books" },
+    { url: "/how-it-works", displayName: "How it works" },
+    { url: "/gift", displayName: "Gifts" },
+    { url: "/relationship-status", displayName: "Relationship status" },
+  ];
+
   return (
     <>
       <Show above="xl">
@@ -22,11 +30,17 @@ const NavBar = () => {
             <Logo />
           </Link>
           <HStack gap={5} fontSize="16px" paddingStart="20px">
-            <Link to="/the-best-new-books">May books</Link>
-            <Link to="/all-books">All books</Link>
-            <Link to="/how-it-works">How it works</Link>
-            <Link to="/gift">Gifts</Link>
-            <Link to="/relationship-status">Relationship status</Link>
+            {navItems.map(({ url, displayName }, index) => (
+              <NavLink
+                key={index}
+                to={url}
+                style={({ isActive }: { isActive: boolean }) => ({
+                  color: isActive ? "#11afe2" : "",
+                })}
+              >
+                {displayName}
+              </NavLink>
+            ))}
           </HStack>
           <Spacer width="100px" />
           <HStack>
