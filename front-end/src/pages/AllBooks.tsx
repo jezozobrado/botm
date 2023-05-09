@@ -1,6 +1,6 @@
 import { Heading, Spinner, Text } from "@chakra-ui/react";
 import BookList from "../components/BookList";
-import useBooks from "../hooks/useBooks";
+import useBooks, { queryParams } from "../hooks/useBooks";
 import Header from "../components/Header";
 
 const AllBooks = () => {

@@ -18,9 +18,24 @@ import suburbanDrama from "../assets/informers/suburban-drama.svg";
 import ExpandableText from "../components/ExpandableText";
 import useBook from "../hooks/useBook";
 import { BiChevronRight } from "react-icons/bi";
+import MonthlyBooks from "../components/MonthlyBooks";
+import useBooks from "../hooks/useBooks";
 
 const BookDetailPage = () => {
   const { slug } = useParams();
+  console.log(slug);
+
+  if (slug?.includes("202")) {
+    const defaultCategory = slug.charAt(0).toUpperCase() + slug.slice(1);
+    console.log(defaultCategory);
+
+    const { data, isLoading } = useBooks({
+      defaultCategory: defaultCategory,
+    });
+    if (!data) return null;
+    return <MonthlyBooks books={data} isLoading={isLoading} />;
+  }
+
   const { data } = useBook(slug!);
   if (!data) return null;
 
@@ -43,6 +58,17 @@ const BookDetailPage = () => {
           <BreadcrumbLink as={Link} to="/all-books">
             <Text variant="text-tertiary" color="brand.100">
               All Books
+            </Text>
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+
+        <BreadcrumbItem>
+          <BreadcrumbLink
+            as={Link}
+            to={`/all-books/${data[0].defaultCategory.toLowerCase()}`}
+          >
+            <Text variant="text-tertiary" color="brand.100">
+              {data[0].defaultCategory.replace("-", " ")}
             </Text>
           </BreadcrumbLink>
         </BreadcrumbItem>

@@ -1,5 +1,4 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { redirect } from "react-router-dom";
 
 const axiosInstance = axios.create({
   baseURL: "http://localhost:4000/api",

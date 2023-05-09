@@ -4,22 +4,13 @@ const lodash = require("lodash");
 const { Book, validate } = require("../models/book");
 
 router.get("/", async (req, res) => {
-  const books = await Book.find();
-  res.send(
-    books.map((book) =>
-      lodash.pick(book, [
-        "title",
-        "slug",
-        "description",
-        "defaultCategory",
-        "author",
-        "mainGenre",
-        "image",
-        "badges",
-        "_id",
-      ])
-    )
-  );
+  console.log(req.query);
+  const books =
+    req.query && Object.keys(req.query).length === 0
+      ? await Book.find()
+      : await Book.find({ defaultCategory: req.query.defaultCategory });
+  if (!books) return res.status(404).send("Books do not exist.");
+  res.send(books);
 });
 
 router.get("/new-books", async (req, res) => {

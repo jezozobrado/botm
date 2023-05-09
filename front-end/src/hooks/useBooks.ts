@@ -2,16 +2,23 @@ import { useQuery } from "@tanstack/react-query";
 import { Book } from "../entities/Book";
 import APIClient from "../services/apiClient";
 
-const useBooks = () => {
+export interface queryParams {
+  mainGenre?: string;
+  defaultCategory?: string;
+}
+const useBooks = (queryParams?: queryParams) => {
   const apiClient = new APIClient<Book[]>("/books");
   return useQuery<Book[]>({
     queryKey: ["books"],
     queryFn: () =>
-      apiClient.getAllBooks({
-        params: {
-          defaultCategory: "May-2021",
-        },
-      }),
+      queryParams
+        ? apiClient.getAllBooks({
+            params: {
+              mainGenre: queryParams?.mainGenre || "",
+              defaultCategory: queryParams?.defaultCategory || "",
+            },
+          })
+        : apiClient.getAllBooks(),
   });
 };
 
