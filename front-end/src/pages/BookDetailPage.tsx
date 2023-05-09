@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { Book } from "../entities/Book";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import BookDetailCard from "../components/BookDetailCard";
 import {
   Divider,
@@ -10,6 +10,9 @@ import {
   Image,
   SimpleGrid,
   HStack,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
 } from "@chakra-ui/react";
 import emotional from "../assets/informers/emotional.svg";
 import loveTriangle from "../assets/informers/love-triangle.svg";
@@ -39,14 +42,25 @@ const BookDetailPage = () => {
 
   return (
     <>
+      <Breadcrumb>
+        <BreadcrumbItem>
+          <BreadcrumbLink as={Link} to="/all-books">
+            All Books
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+
+        <BreadcrumbItem isCurrentPage>
+          <BreadcrumbLink>{data[0].title}</BreadcrumbLink>
+        </BreadcrumbItem>
+      </Breadcrumb>
       <Stack divider={<Divider />} width="40vw" gap={10}>
         {data.map((book) => (
           <BookDetailCard
             image={book.image}
             mainGenre={book.mainGenre}
-            abstract={book.description}
+            abstractText={book.abstractText}
             title={book.title}
-            badges={book.badges}
+            badges={book.badges!}
             slug={book.slug}
             author={book.author}
           />
@@ -55,7 +69,7 @@ const BookDetailPage = () => {
           <Text fontSize="25px" fontWeight="bold">
             Quick Take
           </Text>
-          <Text>{data[0].description}</Text>
+          <Text>{data[0].abstractText}</Text>
         </Stack>
 
         <Stack>

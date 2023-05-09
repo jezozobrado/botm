@@ -15,17 +15,17 @@ import { Link } from "react-router-dom";
 interface Props {
   image: string;
   mainGenre: string;
-  abstract: string;
+  abstractText: string;
   title: string;
   badges: string[];
   slug: string;
-  author: string[];
+  author: string;
 }
 const BookDetailCard = ({
   image,
   mainGenre,
   title,
-  abstract,
+  abstractText,
   badges,
   slug,
   author,

@@ -2,7 +2,8 @@ export interface Book {
   _id: string;
   title: string;
   slug: string;
-  author: string[] | string;
+  abstractText: string;
+  author: string;
   price: number;
   defaultCategory: string;
   description: string;
