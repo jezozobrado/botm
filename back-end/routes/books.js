@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
     req.query && Object.keys(req.query).length === 0
       ? await Book.find()
       : await Book.find({ defaultCategory: req.query.defaultCategory }).sort(
-          "title"
+          req.query.ordering
         );
   if (!books) return res.status(404).send("Books do not exist.");
   res.send(books);

@@ -5,7 +5,9 @@ import APIClient from "../services/apiClient";
 export interface queryParams {
   mainGenre?: string;
   defaultCategory?: string;
+  ordering: string;
 }
+
 const useBooks = (queryParams?: queryParams) => {
   const apiClient = new APIClient<Book[]>("/books");
   return useQuery<Book[]>({
@@ -16,6 +18,7 @@ const useBooks = (queryParams?: queryParams) => {
             params: {
               mainGenre: queryParams?.mainGenre || "",
               defaultCategory: queryParams?.defaultCategory || "",
+              ordering: queryParams?.ordering || "",
             },
           })
         : apiClient.getAllBooks(),

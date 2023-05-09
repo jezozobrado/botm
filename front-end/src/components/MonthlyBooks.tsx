@@ -19,12 +19,12 @@ import { useState } from "react";
 interface Props {
   books: Book[];
   isLoading: boolean;
+  onSelectOrder: (orderOption: string) => void;
+  order: string;
 }
 
-const MonthlyBooks = ({ books, isLoading }: Props) => {
-  const [order, setOrder] = useState("");
-
-  const sortOptions = [
+const MonthlyBooks = ({ books, isLoading, onSelectOrder, order }: Props) => {
+  const orderOptions = [
     "BOTM",
     "A to Z by author",
     "A to Z by title",
@@ -43,9 +43,9 @@ const MonthlyBooks = ({ books, isLoading }: Props) => {
             {order === "BOTM" ? "" : order}
           </MenuButton>
           <MenuList>
-            {sortOptions.map((sortOption, index) => (
-              <MenuItem key={index} onClick={() => setOrder(sortOption)}>
-                {sortOption}
+            {orderOptions.map((orderOption, index) => (
+              <MenuItem key={index} onClick={() => onSelectOrder(orderOption)}>
+                {orderOption}
               </MenuItem>
             ))}
           </MenuList>
