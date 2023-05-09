@@ -8,15 +8,10 @@ router.get("/", async (req, res) => {
   const books =
     req.query && Object.keys(req.query).length === 0
       ? await Book.find()
-      : await Book.find({ defaultCategory: req.query.defaultCategory });
+      : await Book.find({ defaultCategory: req.query.defaultCategory }).sort(
+          "title"
+        );
   if (!books) return res.status(404).send("Books do not exist.");
-  res.send(books);
-});
-
-router.get("/new-books", async (req, res) => {
-  const books = await Book.find({ defaultCategory: "July-2022" });
-
-  if (!books) return res.status(404).send("Book does not exist.");
   res.send(books);
 });
 
@@ -25,13 +20,6 @@ router.get("/:slug", async (req, res) => {
   if (!book) return res.status(404).send("Book does not exist.");
   res.send(book);
 });
-
-// router.get("/:category", async (req, res) => {
-//   const books = await Book.find({ defaultCategory: req.params.category });
-//   if (!books) return res.status(404).send("Books does not exist.");
-
-//   res.send(books);
-// });
 
 router.post("/", async (req, res) => {
   const { error } = validate(req.body);
