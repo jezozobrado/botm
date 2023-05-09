@@ -9,7 +9,7 @@ export interface queryParams {
 const useBooks = (queryParams?: queryParams) => {
   const apiClient = new APIClient<Book[]>("/books");
   return useQuery<Book[]>({
-    queryKey: ["books"],
+    queryKey: ["books", queryParams],
     queryFn: () =>
       queryParams
         ? apiClient.getAllBooks({
