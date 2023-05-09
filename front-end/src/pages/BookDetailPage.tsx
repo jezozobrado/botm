@@ -1,6 +1,3 @@
-import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
-import { Book } from "../entities/Book";
 import { Link, useParams } from "react-router-dom";
 import BookDetailCard from "../components/BookDetailCard";
 import {
@@ -24,7 +21,6 @@ import useBook from "../hooks/useBook";
 const BookDetailPage = () => {
   const { slug } = useParams();
   const { data } = useBook(slug!);
-
   if (!data) return null;
 
   const informerMap: { [key: string]: string } = {
