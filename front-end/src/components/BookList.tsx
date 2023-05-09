@@ -13,15 +13,21 @@ const BookList = ({ books, isLoading }: Props) => {
   return (
     <>
       {isLoading && <Spinner />}
-      <Stack width="850px" margin="auto" marginY="50px">
+      {/* <Stack width="850px" margin="auto" marginY="50px">
         <BookListHeader books={books} />
-        <Divider />
-        <HStack justifyContent="center" gap={7} marginY="50px">
-          {books.map((book, index) => (
-            <BookListItem key={index} book={book} />
-          ))}
-        </HStack>
-      </Stack>
+        <Divider /> */}
+      <HStack
+        width="850px"
+        margin="auto"
+        justifyContent="center"
+        gap={7}
+        marginY="50px"
+      >
+        {books.map((book, index) => (
+          <BookListItem key={index} book={book} />
+        ))}
+      </HStack>
+      {/* </Stack> */}
     </>
   );
 };
