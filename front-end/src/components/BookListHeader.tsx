@@ -14,7 +14,7 @@ const BookListHeader = ({ books }: Props) => {
         as={RouterLink}
         to={
           "/all-books/" +
-          books[0].defaultCategory.toLowerCase().replace(" ", "-")
+          books[0]?.defaultCategory.toLowerCase().replace(" ", "-")
         }
         color="brand.100"
       >
