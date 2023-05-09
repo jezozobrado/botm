@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import Layout from "./components/Layout";
-import MonthlyBooks from "./pages/NewBooks";
 import AllBooks from "./pages/AllBooks";
 import HowItWorks from "./pages/HowItWorks";
 import Gift from "./pages/Gift";

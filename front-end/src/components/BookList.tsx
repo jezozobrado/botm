@@ -14,7 +14,7 @@ const BookList = ({ books, isLoading }: Props) => {
       {isLoading && <Spinner />}
       <Stack width="850px" margin="auto" marginY="50px">
         <HStack justifyContent="space-between">
-          <Text>{books[0].defaultCategory.replace("-", " ")}</Text>
+          <Text>{books[0]?.defaultCategory.replace("-", " ")}</Text>
           <Link as={RouterLink} to="/" color="brand.100">
             View all
           </Link>
