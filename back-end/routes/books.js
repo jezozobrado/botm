@@ -22,6 +22,13 @@ router.get("/", async (req, res) => {
   );
 });
 
+router.get("/new-books", async (req, res) => {
+  const books = await Book.find({ defaultCategory: "July-2022" });
+
+  if (!books) return res.status(404).send("Book does not exist.");
+  res.send(books);
+});
+
 router.get("/:slug", async (req, res) => {
   const book = await Book.find({ slug: req.params.slug });
   if (!book) return res.status(404).send("Book does not exist.");

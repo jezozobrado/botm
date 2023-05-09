@@ -1,16 +1,15 @@
-import { Heading, Text } from "@chakra-ui/react";
+import { Heading, Spinner, Text } from "@chakra-ui/react";
 import BookList from "../components/BookList";
-
 import useBooks from "../hooks/useBooks";
 
 const AllBooks = () => {
-  const { data } = useBooks();
-  console.log(data);
+  const { data, isLoading } = useBooks();
 
   if (!data) return null;
 
   return (
     <>
+      {isLoading && <Spinner />}
       <Heading
         fontSize={{ base: "60px", md: "110px" }}
         fontWeight="medium"

@@ -11,7 +11,7 @@ const BookList = ({ books }: Props) => {
   return (
     <Stack width="850px" margin="auto" marginY="50px">
       <HStack justifyContent="space-between">
-        <Text>{books[0].defaultCategory}</Text>
+        <Text>{books[0].defaultCategory.replace("-", " ")}</Text>
         <Link>View all</Link>
       </HStack>
       <Divider />

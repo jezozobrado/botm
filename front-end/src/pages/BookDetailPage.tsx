@@ -18,18 +18,12 @@ import emotional from "../assets/informers/emotional.svg";
 import loveTriangle from "../assets/informers/love-triangle.svg";
 import marriageIssues from "../assets/informers/marriage-issues.svg";
 import suburbanDrama from "../assets/informers/suburban-drama.svg";
-import parse from "html-react-parser";
 import ExpandableText from "../components/ExpandableText";
+import useBook from "../hooks/useBook";
 
 const BookDetailPage = () => {
   const { slug } = useParams();
-  const { data } = useQuery<Book[]>({
-    queryKey: ["books"],
-    queryFn: () =>
-      axios
-        .get("http://localhost:4000/api/books/" + slug)
-        .then((res) => res.data),
-  });
+  const { data } = useBook(slug!);
 
   if (!data) return null;
 
