@@ -63,15 +63,7 @@ const BookCard = ({
         >
           <CardBody>
             <Stack>
-              <Text
-                textTransform="uppercase"
-                fontSize="12px"
-                letterSpacing={2}
-                fontWeight="bold"
-                color="gray.400"
-              >
-                {mainGenre}
-              </Text>
+              <Text variant="text-tertiary">{mainGenre}</Text>
 
               <Text variant="text-primary" textTransform="capitalize">
                 {title}

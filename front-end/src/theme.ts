@@ -33,7 +33,14 @@ const theme = extendTheme({
       variants: {
         "text-primary": {
           fontSize: "25px",
-          fontWeight: "normal",
+          fontWeight: "bold",
+        },
+        "text-tertiary": {
+          textTransform: "uppercase",
+          fontSize: "13px",
+          fontWeight: "bold",
+          color: "gray.400",
+          letterSpacing: "1px",
         },
       },
     },

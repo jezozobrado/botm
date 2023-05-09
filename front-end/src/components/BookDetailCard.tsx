@@ -41,7 +41,7 @@ const BookDetailCard = ({
       <SimpleGrid columns={1} margin="auto" width="fit-content" marginY={8}>
         <Card
           variant="filled"
-          width="40vw"
+          width="600px"
           height="fit-content"
           paddingY="30px"
           borderRadius={0}
@@ -51,7 +51,7 @@ const BookDetailCard = ({
           </Container>
         </Card>
         <Card
-          width="40vw"
+          width="600px"
           textAlign="center"
           height={{ base: "fit-content", md: "fit-content" }}
           borderRadius={0}
@@ -59,21 +59,9 @@ const BookDetailCard = ({
         >
           <CardBody>
             <Stack>
-              <Text
-                textTransform="uppercase"
-                fontSize="12px"
-                letterSpacing={2}
-                fontWeight="bold"
-                color="gray.400"
-              >
-                {mainGenre}
-              </Text>
+              <Text variant="text-tertiary">{mainGenre}</Text>
 
-              <Text
-                fontSize="28px"
-                fontWeight="bold"
-                textTransform="capitalize"
-              >
+              <Text variant="text-primary" textTransform="capitalize">
                 {title}
               </Text>
 
