@@ -73,11 +73,7 @@ const BookCard = ({
                 {mainGenre}
               </Text>
 
-              <Text
-                fontSize="28px"
-                fontWeight="bold"
-                textTransform="capitalize"
-              >
+              <Text variant="text-primary" textTransform="capitalize">
                 {title}
               </Text>
 

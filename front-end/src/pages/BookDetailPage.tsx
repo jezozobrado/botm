@@ -17,6 +17,7 @@ import marriageIssues from "../assets/informers/marriage-issues.svg";
 import suburbanDrama from "../assets/informers/suburban-drama.svg";
 import ExpandableText from "../components/ExpandableText";
 import useBook from "../hooks/useBook";
+import { BiChevronRight } from "react-icons/bi";
 
 const BookDetailPage = () => {
   const { slug } = useParams();
@@ -32,9 +33,14 @@ const BookDetailPage = () => {
 
   return (
     <>
-      <Breadcrumb>
+      <Breadcrumb
+        width="40vw"
+        margin="auto"
+        marginTop="20px"
+        separator={<BiChevronRight color="gray.500" />}
+      >
         <BreadcrumbItem>
-          <BreadcrumbLink as={Link} to="/all-books">
+          <BreadcrumbLink as={Link} to="/all-books" color="brand.100">
             All Books
           </BreadcrumbLink>
         </BreadcrumbItem>
@@ -43,9 +49,11 @@ const BookDetailPage = () => {
           <BreadcrumbLink>{data[0].title}</BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
-      <Stack divider={<Divider />} width="40vw" gap={10}>
+
+      <Stack divider={<Divider />} width="40vw" gap={10} margin="auto">
         {data.map((book) => (
           <BookDetailCard
+            key={book._id}
             image={book.image}
             mainGenre={book.mainGenre}
             abstractText={book.abstractText}
@@ -61,7 +69,6 @@ const BookDetailPage = () => {
           </Text>
           <Text>{data[0].abstractText}</Text>
         </Stack>
-
         <Stack>
           <Text fontSize="25px" fontWeight="bold">
             Good to know
@@ -85,10 +92,8 @@ const BookDetailPage = () => {
           )}
         </Stack>
         <Stack>
-          <Text fontSize="25px" fontWeight="bold">
-            Synopsis
-          </Text>
-          <ExpandableText>{data[0].synopsis}</ExpandableText>
+          {/* <Text variant="text-primary">Synopsis</Text> */}
+          <ExpandableText>{data[0].description}</ExpandableText>
         </Stack>
       </Stack>
     </>

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import { redirect } from "react-router-dom";
 
 const axiosInstance = axios.create({
@@ -12,8 +12,8 @@ class APIClient<T> {
     this.endpoint = endpoint;
   }
 
-  getAllBooks = () =>
-    axiosInstance.get<T>(this.endpoint).then((res) => res.data);
+  getAllBooks = (config?: AxiosRequestConfig) =>
+    axiosInstance.get<T>(this.endpoint, config).then((res) => res.data);
 
   getBook = (slug: string) =>
     axiosInstance.get<T>(this.endpoint + "/" + slug).then((res) => res.data);

@@ -29,6 +29,14 @@ const theme = extendTheme({
     },
   },
   components: {
+    Text: {
+      variants: {
+        "text-primary": {
+          fontSize: "25px",
+          fontWeight: "normal",
+        },
+      },
+    },
     Button: {
       variants: {
         "btn-primary": {

@@ -6,7 +6,12 @@ const useBooks = () => {
   const apiClient = new APIClient<Book[]>("/books");
   return useQuery<Book[]>({
     queryKey: ["books"],
-    queryFn: apiClient.getAllBooks,
+    queryFn: () =>
+      apiClient.getAllBooks({
+        params: {
+          defaultCategory: "May-2021",
+        },
+      }),
   });
 };
 
