@@ -13,15 +13,13 @@ import {
 import { BsFilterLeft } from "react-icons/bs";
 import { Book } from "../entities/Book";
 import BookList from "./BookList";
+import { useState } from "react";
 
 interface Props {
-  books: Book[];
-  isFetching: boolean;
-  onSelectOrder: (orderOption: string) => void;
-  order: string;
+  defaultCategory: string;
 }
-
-const MonthlyBooks = ({ books, isFetching, onSelectOrder, order }: Props) => {
+const MonthlyBooks = ({ defaultCategory }: Props) => {
+  const [ordering, setOrdering] = useState("");
   const orderOptions = [
     "BOTM",
     "A to Z by author",
@@ -29,9 +27,6 @@ const MonthlyBooks = ({ books, isFetching, onSelectOrder, order }: Props) => {
     "Recently added",
   ];
 
-  {
-    isFetching && <Text>Fetching data...</Text>;
-  }
   return (
     <>
       <Stack width="850px" margin="auto" marginY="50px">
@@ -44,13 +39,13 @@ const MonthlyBooks = ({ books, isFetching, onSelectOrder, order }: Props) => {
                 rightIcon={<BsFilterLeft size="25px" />}
                 variant="unstyled"
               >
-                {order === "BOTM" ? "" : order}
+                {ordering === "BOTM" ? "" : ordering}
               </MenuButton>
               <MenuList>
                 {orderOptions.map((orderOption, index) => (
                   <MenuItem
                     key={index}
-                    onClick={() => onSelectOrder(orderOption)}
+                    onClick={() => setOrdering(orderOption)}
                   >
                     {orderOption}
                   </MenuItem>
@@ -60,7 +55,7 @@ const MonthlyBooks = ({ books, isFetching, onSelectOrder, order }: Props) => {
           </Box>
         </HStack>
         <Divider />
-        <BookList books={books} isLoading={isFetching} />;
+        <BookList ordering={ordering} defaultCategory={defaultCategory} />;
       </Stack>
     </>
   );

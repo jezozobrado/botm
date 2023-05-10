@@ -1,18 +1,29 @@
-import { Link as RouterLink } from "react-router-dom";
-import { Book } from "../entities/Book";
+import { HStack, Spinner } from "@chakra-ui/react";
+import useBooks from "../hooks/useBooks";
 import BookListItem from "./BookListItem";
-import { Divider, HStack, Spinner, Stack, Text, Link } from "@chakra-ui/react";
-import BookListHeader from "./BookListHeader";
 
 interface Props {
-  books: Book[];
-  isLoading: boolean;
+  ordering: string | "BOTM";
+  defaultCategory?: string;
 }
 
-const BookList = ({ books, isLoading }: Props) => {
+const orderMap: { [key: string]: string } = {
+  "Recently added": "_id",
+  "A to Z by author": "author",
+  "A to Z by title": "title",
+  BOTM: "",
+};
+
+const BookList = ({ ordering, defaultCategory }: Props) => {
+  const { data: books, isFetching } = useBooks({
+    defaultCategory: defaultCategory,
+    ordering: orderMap[ordering],
+  });
+
+  if (!books) return null;
   return (
     <>
-      {isLoading && <Spinner />}
+      {isFetching && <Spinner />}
 
       <HStack
         width="850px"
@@ -25,7 +36,6 @@ const BookList = ({ books, isLoading }: Props) => {
           <BookListItem key={index} book={book} />
         ))}
       </HStack>
-      {/* </Stack> */}
     </>
   );
 };
