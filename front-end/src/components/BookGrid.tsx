@@ -1,6 +1,6 @@
-import { SimpleGrid, Spinner, Text } from "@chakra-ui/react";
-import BookListItem from "./BookListItem";
+import { SimpleGrid } from "@chakra-ui/react";
 import useBooks from "../hooks/useBooks";
+import BookListItem from "./BookListItem";
 
 const BookGrid = () => {
   const { data, isLoading } = useBooks();
@@ -8,21 +8,17 @@ const BookGrid = () => {
 
   return (
     <>
-      {isLoading ? (
-        <Text>POtangina mo</Text>
-      ) : (
-        <SimpleGrid
-          width="950px"
-          margin="auto"
-          columns={5}
-          rowGap={5}
-          marginY="50px"
-        >
-          {data.map((book) => (
-            <BookListItem key={book._id} book={book} />
-          ))}
-        </SimpleGrid>
-      )}
+      <SimpleGrid
+        width="950px"
+        margin="auto"
+        columns={5}
+        rowGap={5}
+        marginY="50px"
+      >
+        {data.map((book) => (
+          <BookListItem key={book._id} book={book} />
+        ))}
+      </SimpleGrid>
     </>
   );
 };
