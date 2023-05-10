@@ -5,12 +5,16 @@ const { Book, validate } = require("../models/book");
 
 router.get("/", async (req, res) => {
   console.log(req.query);
-  const books =
-    req.query && Object.keys(req.query).length === 0
-      ? await Book.find()
-      : await Book.find({ defaultCategory: req.query.defaultCategory }).sort(
-          req.query.ordering
-        );
+  const books = await Book.find()
+    .or([
+      {
+        defaultCategory: req.query.defaultCategory || /[\s\S]*/,
+        title: req.query.searchText
+          ? new RegExp(".*" + req.query.searchText + ".*", "i")
+          : /[\s\S]*/,
+      },
+    ])
+    .sort(req.query.ordering);
   if (!books) return res.status(404).send("Books do not exist.");
   res.send(books);
 });

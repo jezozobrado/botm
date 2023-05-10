@@ -1,9 +1,13 @@
 import { SimpleGrid } from "@chakra-ui/react";
-import useBooks from "../hooks/useBooks";
+import useBooks, { QueryParams } from "../hooks/useBooks";
 import BookListItem from "./BookListItem";
 
-const BookGrid = () => {
-  const { data, isLoading } = useBooks();
+interface Props {
+  queryParams?: QueryParams;
+}
+
+const BookGrid = ({ queryParams }: Props) => {
+  const { data } = useBooks(queryParams);
   if (!data) return null;
 
   return (

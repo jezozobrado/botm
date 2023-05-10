@@ -2,13 +2,14 @@ import { useQuery } from "@tanstack/react-query";
 import { Book } from "../entities/Book";
 import APIClient from "../services/apiClient";
 
-export interface queryParams {
+export interface QueryParams {
+  ordering?: string;
   mainGenre?: string;
   defaultCategory?: string;
-  ordering: string;
+  searchText?: string;
 }
 
-const useBooks = (queryParams?: queryParams) => {
+const useBooks = (queryParams?: QueryParams) => {
   const apiClient = new APIClient<Book[]>("/books");
   return useQuery<Book[]>({
     queryKey: ["books", queryParams],
@@ -19,6 +20,7 @@ const useBooks = (queryParams?: queryParams) => {
               mainGenre: queryParams?.mainGenre || "",
               defaultCategory: queryParams?.defaultCategory || "",
               ordering: queryParams?.ordering || "",
+              searchText: queryParams?.searchText || "",
             },
           })
         : apiClient.getAllBooks(),
