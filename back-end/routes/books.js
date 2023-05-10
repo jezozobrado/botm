@@ -5,14 +5,13 @@ const { Book, validate } = require("../models/book");
 
 router.get("/", async (req, res) => {
   console.log(req.query);
-  const books = await Book.find()
+  const books = await Book.find({
+    defaultCategory: new RegExp(".*" + req.query.defaultCategory + ".*", "i"),
+  })
     .or([
-      {
-        defaultCategory: req.query.defaultCategory || /[\s\S]*/,
-        title: req.query.searchText
-          ? new RegExp(".*" + req.query.searchText + ".*", "i")
-          : /[\s\S]*/,
-      },
+      { title: new RegExp(".*" + req.query.searchText + ".*", "i") },
+      { mainGenre: new RegExp(".*" + req.query.searchText + ".*", "i") },
+      { author: new RegExp(".*" + req.query.searchText + ".*", "i") },
     ])
     .sort(req.query.ordering);
   if (!books) return res.status(404).send("Books do not exist.");
