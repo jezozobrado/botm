@@ -7,9 +7,12 @@ export interface QueryParams {
   mainGenre?: string;
   defaultCategory?: string;
   searchText?: string;
+  limit?: number;
 }
 
 const useBooks = (queryParams?: QueryParams) => {
+  console.log(queryParams);
+
   const apiClient = new APIClient<Book[]>("/books");
   return useQuery<Book[]>({
     queryKey: ["books", queryParams],
@@ -21,10 +24,12 @@ const useBooks = (queryParams?: QueryParams) => {
               defaultCategory: queryParams?.defaultCategory || "",
               ordering: queryParams?.ordering || "",
               searchText: queryParams?.searchText || "",
+              limit: queryParams?.limit,
             },
           })
         : apiClient.getAllBooks(),
     refetchOnWindowFocus: false,
+    keepPreviousData: true,
     staleTime: 24 * 60 * 60 * 1000,
   });
 };

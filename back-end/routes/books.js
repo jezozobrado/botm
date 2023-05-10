@@ -4,7 +4,6 @@ const lodash = require("lodash");
 const { Book, validate } = require("../models/book");
 
 router.get("/", async (req, res) => {
-  console.log(req.query);
   const books = await Book.find({
     defaultCategory: new RegExp(".*" + req.query.defaultCategory + ".*", "i"),
   })
@@ -13,7 +12,8 @@ router.get("/", async (req, res) => {
       { mainGenre: new RegExp(".*" + req.query.searchText + ".*", "i") },
       { author: new RegExp(".*" + req.query.searchText + ".*", "i") },
     ])
-    .sort(req.query.ordering);
+    .sort(req.query.ordering)
+    .limit(req.query.limit);
   if (!books) return res.status(404).send("Books do not exist.");
   res.send(books);
 });

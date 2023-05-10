@@ -16,17 +16,12 @@ import { useState } from "react";
 const AllBooks = () => {
   const { register, handleSubmit, reset } = useForm();
   const [searchText, setSearchText] = useState();
-  console.log(searchText);
 
   return (
     <>
       <form
         onChange={handleSubmit((data) => {
           setSearchText(data.searchText);
-          // reset();
-          // onSubmit={handleSubmit((data) => {
-          //   setSearchText(data.searchText);
-          //   reset();
         })}
       >
         <InputGroup width="950px" margin="auto" marginTop="50px">
