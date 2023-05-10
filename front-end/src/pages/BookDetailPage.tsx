@@ -36,7 +36,7 @@ const BookDetailPage = () => {
   if (slug?.includes("202")) {
     const defaultCategory = slug.charAt(0).toUpperCase() + slug.slice(1);
 
-    const { data, isLoading } = useBooks({
+    const { data, isFetching } = useBooks({
       defaultCategory: defaultCategory,
       ordering: orderMap[order],
     });
@@ -49,7 +49,7 @@ const BookDetailPage = () => {
         />
         <MonthlyBooks
           books={data}
-          isLoading={isLoading}
+          isFetching={isFetching}
           order={order}
           onSelectOrder={(orderOption) => setOrder(orderOption)}
         />

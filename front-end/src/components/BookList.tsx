@@ -13,9 +13,7 @@ const BookList = ({ books, isLoading }: Props) => {
   return (
     <>
       {isLoading && <Spinner />}
-      {/* <Stack width="850px" margin="auto" marginY="50px">
-        <BookListHeader books={books} />
-        <Divider /> */}
+
       <HStack
         width="850px"
         margin="auto"

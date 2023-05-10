@@ -7,6 +7,8 @@ const useBook = (slug: string) => {
   return useQuery({
     queryKey: ["book", slug],
     queryFn: () => apiClient.getBook(slug),
+    refetchOnWindowFocus: false,
+    staleTime: 24 * 60 * 60 * 1000,
   });
 };
 

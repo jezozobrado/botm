@@ -22,6 +22,8 @@ const useBooks = (queryParams?: queryParams) => {
             },
           })
         : apiClient.getAllBooks(),
+    refetchOnWindowFocus: false,
+    staleTime: 24 * 60 * 60 * 1000,
   });
 };
 
