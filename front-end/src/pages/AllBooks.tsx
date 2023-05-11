@@ -13,9 +13,14 @@ import Header from "../components/Header";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 
-const AllBooks = () => {
-  const { register, handleSubmit, reset } = useForm();
+interface Props {
+  onSearch: (searchText: string) => void;
+}
+
+const AllBooks = ({ onSearch }: Props) => {
+  const { register, handleSubmit, reset, getValues } = useForm();
   const [searchText, setSearchText] = useState();
+  console.log(getValues("searchText"));
 
   return (
     <>
@@ -24,7 +29,11 @@ const AllBooks = () => {
           setSearchText(data.searchText);
         })}
       >
-        <InputGroup width="950px" margin="auto" marginTop="50px">
+        <InputGroup
+          width={{ base: "90%", lg: "950px" }}
+          margin="auto"
+          marginTop="50px"
+        >
           <InputLeftElement
             children={<BiSearch color="gray.300" />}
             pointerEvents="none"

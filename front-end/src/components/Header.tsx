@@ -7,7 +7,7 @@ interface Props {
 
 const Header = ({ heading, subheading }: Props) => {
   return (
-    <Stack marginTop={10} width="800px " marginX="auto">
+    <Stack marginTop={10} width={{ base: "90%", md: "750px " }} marginX="auto">
       <Heading
         fontSize={{ base: "60px", md: "110px" }}
         fontWeight="medium"

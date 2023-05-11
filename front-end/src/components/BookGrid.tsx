@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import useBooks, { QueryParams } from "../hooks/useBooks";
 import BookListItem from "./BookListItem";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 
 interface Props {
@@ -18,6 +18,7 @@ interface Props {
 const BookGrid = ({ queryParams }: Props) => {
   const [pageSize, setPageSize] = useState(20);
   const [pageNumber, setPageNumber] = useState(1);
+
   const { data } = useBooks({
     ...queryParams,
     pageSize: pageSize,
@@ -25,9 +26,18 @@ const BookGrid = ({ queryParams }: Props) => {
   });
   if (!data) return null;
 
+  // useEffect(() => {
+  //   data.books.length === 0 && setPageNumber(1);
+  // }, [data.books]);
+
   return (
-    <Stack width="950px" margin="auto" marginY="50px" gap={10}>
-      <SimpleGrid width="950px" columns={5} rowGap={5}>
+    <Stack
+      width={{ base: "100%", lg: "950px" }}
+      margin="auto"
+      marginY="50px"
+      gap={10}
+    >
+      <SimpleGrid columns={{ base: 2, sm: 3, md: 4, lg: 5 }} rowGap={5}>
         {data.books.map((book) => (
           <BookListItem key={book._id} book={book} />
         ))}

@@ -15,16 +15,14 @@ const orderMap: { [key: string]: string } = {
 };
 
 const BookList = ({ ordering, defaultCategory }: Props) => {
-  const { data: books, isFetching } = useBooks({
+  const { data } = useBooks({
     defaultCategory: defaultCategory,
     ordering: orderMap[ordering],
   });
 
-  if (!books) return null;
+  if (!data) return null;
   return (
     <>
-      {isFetching && <Spinner />}
-
       <HStack
         width="850px"
         margin="auto"
@@ -32,7 +30,7 @@ const BookList = ({ ordering, defaultCategory }: Props) => {
         gap={7}
         marginY="50px"
       >
-        {books.map((book, index) => (
+        {data.books.map((book, index) => (
           <BookListItem key={index} book={book} />
         ))}
       </HStack>
