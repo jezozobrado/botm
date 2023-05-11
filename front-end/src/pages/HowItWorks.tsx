@@ -4,7 +4,7 @@ import model from "../assets/model.webp";
 import readingOnCouch from "../assets/reading-on-couch.webp";
 import hide from "../assets/hide.webp";
 import Feature from "../components/HowItWorks/Feature";
-import { HStack } from "@chakra-ui/react";
+import { HStack, Heading, Stack } from "@chakra-ui/react";
 import FeatureReversed from "../components/FeatureReversed";
 
 const HowItWorks = () => {
@@ -15,11 +15,11 @@ const HowItWorks = () => {
         subheading={""}
       />
 
-      <HStack
-        width="80vw"
+      <Stack
+        direction={{ base: "column", md: "row" }}
+        width={{ base: "90vw", md: "80vw" }}
         margin="auto"
         gap={10}
-        justifyContent="center"
         alignItems="start"
         marginTop="50px"
       >
@@ -40,7 +40,7 @@ const HowItWorks = () => {
             "Your first month’s book is just $9.99. After that, it’s $17.99/month."
           }
         />
-      </HStack>
+      </Stack>
       <FeatureReversed
         picture={hide}
         heading={"Not a fast reader? Skip whenever."}
@@ -50,6 +50,7 @@ const HowItWorks = () => {
         isButtonHidden={true}
         isProcedure={false}
       />
+      <Heading textAlign="center">Here’s your monthly breakdown.</Heading>
     </>
   );
 };

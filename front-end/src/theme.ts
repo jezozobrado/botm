@@ -29,6 +29,20 @@ const theme = extendTheme({
     },
   },
   components: {
+    Heading: {
+      variants: {
+        "heading-primary": {
+          fontWeight: "medium",
+          fontSize: "110px",
+          textAlign: "center",
+        },
+        "heading-small": {
+          fontWeight: "medium",
+          fontSize: "60px",
+          textAlign: "center",
+        },
+      },
+    },
     Text: {
       variants: {
         "text-primary": {

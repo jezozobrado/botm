@@ -1,4 +1,5 @@
 import { Flex, Heading, HStack, Button, Text } from "@chakra-ui/react";
+import Header from "../Header";
 
 const Hero = () => {
   return (
@@ -11,13 +12,13 @@ const Hero = () => {
       paddingX="20px"
       marginX="auto"
     >
-      <Heading fontSize={{ base: "60px", md: "110px" }} fontWeight="medium">
-        Books are cool again.
-      </Heading>
-      <Text width={{ base: "auto", md: "620px" }} margin="auto">
-        Choose from a curated selection of the best new reads every month and
-        get them delivered.
-      </Text>
+      <Header
+        heading={"Books are cool again."}
+        subheading={
+          "Choose from a curated selection of the best new reads every month and get them delivered."
+        }
+      />
+
       <HStack justifyContent="center">
         <Button
           fontSize="18px"

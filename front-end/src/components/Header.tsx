@@ -8,14 +8,12 @@ interface Props {
 const Header = ({ heading, subheading }: Props) => {
   return (
     <Stack marginTop={10} width={{ base: "90%", md: "750px " }} marginX="auto">
-      <Heading
-        fontSize={{ base: "60px", md: "110px" }}
-        fontWeight="medium"
-        textAlign="center"
-      >
+      <Heading variant={{ base: "heading-small", md: "heading-primary" }}>
         {heading}
       </Heading>
-      <Text textAlign="center">{subheading}</Text>
+      <Text width={{ base: "auto", md: "620px" }} alignSelf="center">
+        {subheading}
+      </Text>
     </Stack>
   );
 };

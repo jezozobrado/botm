@@ -8,7 +8,7 @@ interface Props {
 
 const Feature = ({ imageSrc, heading, body }: Props) => {
   return (
-    <Stack textAlign="center" gap={1} width="400px" flexShrink="0">
+    <Stack textAlign="center" gap={1} width={{ base: "90vw", md: "400px" }}>
       <Image src={imageSrc} />
       <Text variant="text-primary">{heading} </Text>
       <Text>{body}</Text>
