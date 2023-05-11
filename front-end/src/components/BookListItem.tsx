@@ -9,8 +9,8 @@ interface Props {
 const BookListItem = ({ book }: Props) => {
   return (
     <Link to={"/all-books/" + book.slug}>
-      <Card variant="unstyled">
-        <Image src={book.image} width="140px" margin="auto" />
+      <Card variant="unstyled" width="140px" margin="auto">
+        <Image src={book.image} />
         <CardBody marginTop={3}>
           <Text
             textAlign="center"

@@ -24,11 +24,11 @@ const BookList = ({ ordering, defaultCategory }: Props) => {
   return (
     <>
       <HStack
-        width="850px"
         margin="auto"
-        justifyContent="center"
+        justifyContent={{ base: "start", md: "center" }}
         gap={7}
         marginY="50px"
+        overflowX="auto"
       >
         {data.books.map((book, index) => (
           <BookListItem key={index} book={book} />

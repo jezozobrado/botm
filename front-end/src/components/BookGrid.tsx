@@ -32,7 +32,7 @@ const BookGrid = ({ queryParams }: Props) => {
 
   return (
     <Stack
-      width={{ base: "100%", lg: "950px" }}
+      width={{ base: "100%", lg: "860px" }}
       margin="auto"
       marginY="50px"
       gap={10}
