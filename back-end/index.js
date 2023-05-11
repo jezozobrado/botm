@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const books = require("./routes/books");
+const users = require("./routes/users");
 const cors = require("cors");
 
 const app = express();
@@ -16,5 +17,6 @@ mongoose
 
 app.use(express.json());
 app.use("/api/books", books);
+app.use("/api/users", users);
 
 app.listen(process.env.PORT, () => console.log("Listening on port 3000"));
