@@ -38,10 +38,11 @@ const BookDetailCard = ({
 
   return (
     <Link to={"/all-books/" + slug}>
-      <SimpleGrid columns={1} margin="auto" width="fit-content" marginY={8}>
+      <SimpleGrid columns={1} margin="auto" marginY={8}>
         <Card
+          margin="auto"
           variant="filled"
-          width="600px"
+          width={{ base: "80vw", md: "600px" }}
           height="fit-content"
           paddingY="30px"
           borderRadius={0}
@@ -51,7 +52,8 @@ const BookDetailCard = ({
           </Container>
         </Card>
         <Card
-          width="600px"
+          margin="auto"
+          width={{ base: "80vw", md: "600px" }}
           textAlign="center"
           height={{ base: "fit-content", md: "fit-content" }}
           borderRadius={0}
@@ -86,7 +88,7 @@ const BookDetailCard = ({
               <Text textAlign="center">by {author}</Text>
               <Button
                 variant="btn-primary"
-                width={{ base: "85vw ", md: "fit-content" }}
+                width={{ base: "90%", lg: "fit-content" }}
                 alignSelf="center"
                 paddingX={{ md: "40px" }}
                 paddingY="23px"

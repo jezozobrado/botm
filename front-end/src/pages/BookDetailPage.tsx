@@ -82,7 +82,12 @@ const BookDetailPage = () => {
         </BreadcrumbItem>
       </Breadcrumb>
 
-      <Stack divider={<Divider />} width="600px" gap={10} margin="auto">
+      <Stack
+        divider={<Divider />}
+        width={{ base: "90%", md: "600px" }}
+        gap={10}
+        margin="auto"
+      >
         {data.map((book) => (
           <BookDetailCard
             key={book._id}
