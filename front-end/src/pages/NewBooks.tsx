@@ -16,7 +16,7 @@ const NewBooks = () => {
         subheading="New month. New reads. Add your favorite(s) to your box now."
       />
 
-      {data?.map((book) => (
+      {data?.books.map((book) => (
         <BookCard
           key={book._id}
           image={book.image}

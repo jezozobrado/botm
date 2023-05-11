@@ -7,14 +7,21 @@ export interface QueryParams {
   mainGenre?: string;
   defaultCategory?: string;
   searchText?: string;
-  limit?: number;
+  pageSize?: number;
+  pageNumber?: number;
+}
+
+interface Response {
+  books: Book[];
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
 }
 
 const useBooks = (queryParams?: QueryParams) => {
   console.log(queryParams);
 
-  const apiClient = new APIClient<Book[]>("/books");
-  return useQuery<Book[]>({
+  const apiClient = new APIClient<Response>("/books");
+  return useQuery<Response>({
     queryKey: ["books", queryParams],
     queryFn: () =>
       queryParams
@@ -24,7 +31,8 @@ const useBooks = (queryParams?: QueryParams) => {
               defaultCategory: queryParams?.defaultCategory || "",
               ordering: queryParams?.ordering || "",
               searchText: queryParams?.searchText || "",
-              limit: queryParams?.limit,
+              pageSize: queryParams?.pageSize,
+              pageNumber: queryParams?.pageNumber,
             },
           })
         : apiClient.getAllBooks(),
