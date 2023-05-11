@@ -11,9 +11,7 @@ const RegEnd = () => {
         paddingY="70px"
         gap={2}
       >
-        <Text fontSize="25px" fontWeight="bold" letterSpacing={1}>
-          You'll like it, we promise.
-        </Text>
+        <Text variant="text-primary">You'll like it, we promise.</Text>
         <Text>(Besides, it's free to sign up.)</Text>
         <RegForm submitText="Sign up for free" />
       </Stack>

@@ -10,9 +10,7 @@ const SeeBooks = () => {
         paddingBottom="100px"
         gap={2}
       >
-        <Text fontSize="25px" fontWeight="bold" letterSpacing={1}>
-          See the May Books
-        </Text>
+        <Text variant="text-primary">See the May Books</Text>
         <Text>
           Each month, we curate an exceptional few new books for our members to
           choose from.

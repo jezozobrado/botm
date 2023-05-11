@@ -1,5 +1,5 @@
 import { extendTheme, ThemeConfig } from "@chakra-ui/react";
-import { Fonts } from "./components/Fonts";
+import headingTheme from "./themes/heading";
 
 const config: ThemeConfig = {
   initialColorMode: "light",
@@ -30,6 +30,7 @@ const theme = extendTheme({
   },
   components: {
     Heading: {
+      defaultProps: {},
       variants: {
         "heading-primary": {
           fontWeight: "medium",
@@ -48,6 +49,7 @@ const theme = extendTheme({
         "text-primary": {
           fontSize: "25px",
           fontWeight: "bold",
+          letterSpacing: "1px",
         },
         "text-tertiary": {
           textTransform: "uppercase",
