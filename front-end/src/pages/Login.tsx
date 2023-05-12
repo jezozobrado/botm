@@ -15,6 +15,7 @@ import { useMutation } from "@tanstack/react-query";
 import APIClient from "../services/apiClient";
 import User from "../entities/User";
 import { AxiosError } from "axios";
+import { useNavigate } from "react-router-dom";
 
 interface Auth {
   email: string;
@@ -48,9 +49,11 @@ const Login = () => {
   });
   const [show, setShow] = useState(false);
 
+  const navigate = useNavigate();
   const onSubmit = (data: User) => {
     authUser.mutate(data);
     console.log("pota", authUser.error);
+    navigate("/the-best-new-books");
   };
 
   const errorMessage = authUser?.error?.response?.data as string;
