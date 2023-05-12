@@ -40,7 +40,7 @@ const RegForm = ({ submitText }: Props) => {
   const apiClient = new APIClient<User>("users");
   const addUser = useMutation({
     mutationFn: (user: User) => apiClient.addUser(user),
-    onSuccess: (data) => console.log(data),
+    onSuccess: (data) => console.log("ulul", data),
     onError: (error) => console.log(error),
   });
 

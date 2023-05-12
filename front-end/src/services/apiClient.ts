@@ -30,6 +30,12 @@ class APIClient<T> {
       localStorage.setItem("x-auth-token", res.headers["x-auth-token"]);
       return res.data;
     });
+
+  authUser = (user: User) =>
+    axiosInstance.post<T>(this.endpoint, user).then((res) => {
+      localStorage.setItem("x-auth-token", res.headers["x-auth-token"]);
+      return res.data;
+    });
 }
 
 export default APIClient;
