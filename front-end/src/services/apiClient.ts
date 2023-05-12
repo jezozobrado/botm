@@ -1,8 +1,13 @@
 import axios, { AxiosRequestConfig } from "axios";
+import User from "../entities/User";
+import { FieldValues } from "react-hook-form";
 
 const axiosInstance = axios.create({
   baseURL: "http://localhost:4000/api",
 });
+
+axiosInstance.defaults.headers.common["Authorization"] =
+  localStorage.getItem("x-auth-token");
 
 class APIClient<T> {
   endpoint: string;
@@ -19,6 +24,12 @@ class APIClient<T> {
 
   getNewBooks = () =>
     axiosInstance.get<T>(`${this.endpoint}/new-books`).then((res) => res.data);
+
+  addUser = (user: User) =>
+    axiosInstance.post<T>(this.endpoint, user).then((res) => {
+      localStorage.setItem("x-auth-token", res.headers["x-auth-token"]);
+      return res.data;
+    });
 }
 
 export default APIClient;

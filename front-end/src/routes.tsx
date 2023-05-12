@@ -8,12 +8,13 @@ import RelationshipStatus from "./pages/RelationshipStatus";
 import Login from "./pages/Login";
 import BookDetailPage from "./pages/BookDetailPage";
 import NewBooks from "./pages/NewBooks";
+import ErrorPage from "./pages/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
-    // errorElement: <ErrorPage />,
+    errorElement: <ErrorPage />,
     children: [
       { index: true, element: <HomePage /> },
       { path: "/the-best-new-books", element: <NewBooks /> },

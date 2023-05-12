@@ -13,11 +13,7 @@ import Header from "../components/Header";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 
-interface Props {
-  onSearch: (searchText: string) => void;
-}
-
-const AllBooks = ({ onSearch }: Props) => {
+const AllBooks = () => {
   const { register, handleSubmit, reset, getValues } = useForm();
   const [searchText, setSearchText] = useState();
   console.log(getValues("searchText"));

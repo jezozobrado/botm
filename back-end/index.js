@@ -6,7 +6,12 @@ const users = require("./routes/users");
 const cors = require("cors");
 
 const app = express();
-app.use(cors());
+
+const corsOptions = {
+  exposedHeaders: ["x-auth-token"],
+};
+
+app.use(cors(corsOptions));
 
 mongoose
   .connect(

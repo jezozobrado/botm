@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 const lodash = require("lodash");
 const { Book, validate } = require("../models/book");
+const auth = require("../middleware/auth");
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
   console.log(req.query);
   const books = await Book.find({
     defaultCategory: new RegExp(".*" + req.query.defaultCategory + ".*", "i"),
@@ -28,7 +29,7 @@ router.get("/", async (req, res) => {
     .count();
 
   if (!books) return res.status(404).send("Books do not exist.");
-  // console.log(count, req.query);
+
   res.send({
     books: books,
     hasNextPage: parseInt(req.query.pageSize * req.query.pageNumber) < count,

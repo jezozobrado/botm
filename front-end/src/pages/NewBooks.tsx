@@ -1,10 +1,12 @@
-import { Spinner } from "@chakra-ui/react";
+import { Spinner, Text } from "@chakra-ui/react";
 import BookCard from "../components/BookCard";
 import Header from "../components/Header";
 import useBooks from "../hooks/useBooks";
 
 const NewBooks = () => {
-  const { data, isLoading } = useBooks({ defaultCategory: "May-2021" });
+  const { data, isLoading, error, isError } = useBooks({
+    defaultCategory: "May-2021",
+  });
 
   if (!data) return null;
 
