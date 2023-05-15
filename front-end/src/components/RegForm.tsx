@@ -14,6 +14,7 @@ import APIClient from "../services/apiClient";
 import User from "../entities/User";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   submitText: string;
@@ -48,7 +49,8 @@ const RegForm = ({ submitText }: Props) => {
     <>
       <form
         onSubmit={handleSubmit((data) => {
-          return addUser.mutate(data);
+          addUser.mutate(data);
+          navigate("/the-best-new-books");
         })}
       >
         <Stack color="black" gap={2}>

@@ -6,6 +6,7 @@ import {
   InputRightElement,
   Heading,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -16,11 +17,6 @@ import APIClient from "../services/apiClient";
 import User from "../entities/User";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
-
-interface Auth {
-  email: string;
-  password: string;
-}
 
 const schema = Joi.object({
   email: Joi.string()
@@ -36,7 +32,16 @@ const Login = () => {
 
   const authUser = useMutation({
     mutationFn: (user: User) => apiClient.authUser(user),
-    onSuccess: (data) => console.log("ulul", data),
+    onSuccess: (data) => {
+      console.log(data);
+      toast({
+        title: "Successful login.",
+        description: "Browse this month's books.",
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+      });
+    },
     onError: (err: AxiosError) => console.error("ulul", err),
   });
 
@@ -50,10 +55,15 @@ const Login = () => {
   const [show, setShow] = useState(false);
 
   const navigate = useNavigate();
+
+  const toast = useToast();
+
   const onSubmit = (data: User) => {
     authUser.mutate(data);
-    console.log("pota", authUser.error);
+
+    // window.location = "/the-best-new-books";
     navigate("/the-best-new-books");
+    // <Navigate to="/the-best-new-books" replace={true} />;
   };
 
   const errorMessage = authUser?.error?.response?.data as string;

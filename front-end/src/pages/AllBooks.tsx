@@ -16,7 +16,6 @@ import { useState } from "react";
 const AllBooks = () => {
   const { register, handleSubmit, reset, getValues } = useForm();
   const [searchText, setSearchText] = useState();
-  console.log(getValues("searchText"));
 
   return (
     <>
