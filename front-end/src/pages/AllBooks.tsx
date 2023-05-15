@@ -12,10 +12,12 @@ import BookGrid from "../components/BookGrid";
 import Header from "../components/Header";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import useBookStore from "../store/bookStore";
 
 const AllBooks = () => {
   const { register, handleSubmit, reset } = useForm();
-  const [searchText, setSearchText] = useState();
+  // const [searchText, setSearchText] = useState();
+  const { searchText, setSearchText } = useBookStore();
 
   return (
     <>

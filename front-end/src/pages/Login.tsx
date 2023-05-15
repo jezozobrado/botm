@@ -17,7 +17,8 @@ import APIClient from "../services/apiClient";
 import User from "../entities/User";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
-import useUserStore from "../store";
+import useUserStore from "../store/userStore";
+import jwtDecode from "jwt-decode";
 
 const schema = Joi.object({
   email: Joi.string()
@@ -35,7 +36,19 @@ const Login = () => {
   const authUser = useMutation({
     mutationFn: (user: User) => apiClient.authUser(user),
     onSuccess: (data) => {
-      setUser(data);
+      const token = localStorage.getItem("x-auth-token");
+      console.log(token);
+
+      if (token) {
+        const decoded = jwtDecode(token) as User;
+        console.log("decoded is", decoded);
+        setUser(decoded);
+      }
+      console.log("user is", user);
+
+      // setUser(data);
+      // console.log("login data", data);
+
       toast({
         title: "Successful login.",
         description: "Browse this month's books.",

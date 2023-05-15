@@ -27,10 +27,6 @@ const BookGrid = ({ queryParams }: Props) => {
   });
   if (!data) return null;
 
-  // useEffect(() => {
-  //   data.books.length === 0 && setPageNumber(1);
-  // }, [data.books]);
-
   return (
     <Stack
       width={{ base: "100%", lg: "860px" }}

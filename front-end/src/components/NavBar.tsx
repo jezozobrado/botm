@@ -13,7 +13,10 @@ import { BiUserCircle } from "react-icons/bi";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../assets/Logo";
-import useUserStore from "../store";
+import useUserStore from "../store/userStore";
+import jwtDecode from "jwt-decode";
+import User from "../entities/User";
+import { useEffect } from "react";
 
 const NavBar = () => {
   const navItems: { url: string; displayName: string }[] = [
@@ -25,11 +28,17 @@ const NavBar = () => {
   ];
 
   const { user, setUser } = useUserStore();
-  console.log(user);
+  const token = localStorage.getItem("x-auth-token");
+
+  useEffect(() => {
+    if (token) {
+      const decoded = jwtDecode(token) as User;
+      setUser(decoded);
+    }
+  }, [token]);
 
   return (
     <>
-      {}
       <Show above="xl">
         <HStack marginX="100px" marginY={3}>
           <Link to="/">

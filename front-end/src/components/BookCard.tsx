@@ -20,6 +20,7 @@ interface Props {
   slug: string;
   badges?: string[];
 }
+
 const BookCard = ({
   image,
   mainGenre,

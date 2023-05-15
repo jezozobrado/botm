@@ -16,7 +16,7 @@ import User from "../entities/User";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { useNavigate } from "react-router-dom";
-import useUserStore from "../store";
+import useUserStore from "../store/userStore";
 
 interface Props {
   submitText: string;
