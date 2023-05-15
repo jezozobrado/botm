@@ -19,6 +19,7 @@ import {
   Show,
   Spacer,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { BiUserCircle } from "react-icons/bi";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -30,6 +31,7 @@ import User from "../entities/User";
 import { useEffect } from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import useCartStore from "../store/cartStore";
+import CartItem from "./CartItem";
 
 const NavBar = () => {
   const navItems: { url: string; displayName: string }[] = [
@@ -42,6 +44,7 @@ const NavBar = () => {
 
   const { user, setUser } = useUserStore();
   const { cart, setCart } = useCartStore();
+  const { isOpen, onClose, onOpen, onToggle } = useDisclosure();
 
   const token = localStorage.getItem("x-auth-token");
 
@@ -82,25 +85,43 @@ const NavBar = () => {
             )}
             {user && (
               <>
-                <Popover>
+                <Popover
+                  returnFocusOnClose={false}
+                  isOpen={isOpen}
+                  onClose={onClose}
+                >
                   <PopoverTrigger>
-                    <Button variant="outline">
+                    <Button
+                      variant="outline"
+                      onClick={onToggle}
+                      onMouseEnter={onOpen}
+                      onMouseLeave={onClose}
+                    >
                       <Icon as={AiOutlineShoppingCart} boxSize="22px" />
                     </Button>
                   </PopoverTrigger>
                   <Portal>
-                    <PopoverContent>
+                    <PopoverContent width="400px">
                       <PopoverArrow />
                       <PopoverHeader>
                         You can choose up to 3 books!
                       </PopoverHeader>
                       <PopoverCloseButton />
                       <PopoverBody>
-                        {cart.map((c) => (
-                          <Text key={c._id}>{c.title}</Text>
+                        {cart.map((c, i) => (
+                          <CartItem key={i} book={c} />
                         ))}
                       </PopoverBody>
-                      <PopoverFooter>This is the footer</PopoverFooter>
+                      <PopoverFooter>
+                        <HStack>
+                          <Button variant="btn-primary">Check out</Button>
+                          <Link to="/all-books">
+                            <Button variant="btn-secondary">
+                              Choose add-ons
+                            </Button>
+                          </Link>
+                        </HStack>
+                      </PopoverFooter>
                     </PopoverContent>
                   </Portal>
                 </Popover>
