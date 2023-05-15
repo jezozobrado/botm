@@ -38,4 +38,5 @@ const validateBook = (book) => {
   return schema.validate(book);
 };
 
-(exports.Book = Book), (exports.validate = validateBook);
+exports.Book = Book;
+exports.validate = validateBook;

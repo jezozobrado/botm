@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import useBooks from "../hooks/useBooks";
 
 const NewBooks = () => {
-  const { data, isLoading, error, isError } = useBooks({
+  const { data, isLoading } = useBooks({
     defaultCategory: "May-2021",
   });
 
@@ -19,15 +19,7 @@ const NewBooks = () => {
       />
 
       {data?.books.map((book) => (
-        <BookCard
-          key={book._id}
-          image={book.image}
-          mainGenre={book.mainGenre}
-          abstract={book.description}
-          title={book.title}
-          badges={book.badges}
-          slug={book.slug}
-        />
+        <BookCard key={book._id} book={book} />
       ))}
     </>
   );

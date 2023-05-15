@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const books = require("./routes/books");
 const users = require("./routes/users");
 const auth = require("./routes/auth");
+const carts = require("./routes/carts");
 const cors = require("cors");
 
 const app = express();
@@ -25,5 +26,6 @@ app.use(express.json());
 app.use("/api/books", books);
 app.use("/api/users", users);
 app.use("/api/auth", auth);
+app.use("/api/carts", carts);
 
 app.listen(process.env.PORT, () => console.log("Listening on port 3000"));

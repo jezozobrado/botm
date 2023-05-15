@@ -1,5 +1,12 @@
 import axios, { AxiosRequestConfig, AxiosRequestHeaders } from "axios";
 import User from "../entities/User";
+import { Book } from "../entities/Book";
+import { ObjectId } from "bson";
+
+export interface CartRequest {
+  book: Book;
+  customer?: ObjectId;
+}
 
 const axiosInstance = axios.create({
   baseURL: "http://localhost:4000/api",
@@ -43,6 +50,9 @@ class APIClient<T> {
         localStorage.getItem("x-auth-token");
       return res.data;
     });
+
+  addToCart = (cartRequest: CartRequest) =>
+    axiosInstance.post<T>(this.endpoint, cartRequest).then((res) => res.data);
 }
 
 export default APIClient;

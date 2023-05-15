@@ -28,7 +28,7 @@ router.get("/", auth, async (req, res) => {
     ])
     .count();
 
-  if (!books) return res.status(404).send("Books do not exist.");
+  if (!books) return res.status(400).send("Books do not exist.");
 
   res.send({
     books: books,
