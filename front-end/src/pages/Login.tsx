@@ -17,6 +17,7 @@ import APIClient from "../services/apiClient";
 import User from "../entities/User";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
+import useUserStore from "../store";
 
 const schema = Joi.object({
   email: Joi.string()
@@ -28,12 +29,13 @@ const schema = Joi.object({
 });
 
 const Login = () => {
+  const { user, setUser } = useUserStore();
   const apiClient = new APIClient<User>("/auth");
 
   const authUser = useMutation({
     mutationFn: (user: User) => apiClient.authUser(user),
     onSuccess: (data) => {
-      console.log(data);
+      setUser(data);
       toast({
         title: "Successful login.",
         description: "Browse this month's books.",
@@ -60,10 +62,7 @@ const Login = () => {
 
   const onSubmit = (data: User) => {
     authUser.mutate(data);
-
-    // window.location = "/the-best-new-books";
     navigate("/the-best-new-books");
-    // <Navigate to="/the-best-new-books" replace={true} />;
   };
 
   const errorMessage = authUser?.error?.response?.data as string;

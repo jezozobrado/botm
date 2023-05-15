@@ -6,6 +6,7 @@ import {
   InputRightElement,
   Stack,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
@@ -15,6 +16,7 @@ import User from "../entities/User";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { useNavigate } from "react-router-dom";
+import useUserStore from "../store";
 
 interface Props {
   submitText: string;
@@ -38,13 +40,26 @@ const RegForm = ({ submitText }: Props) => {
     resolver: joiResolver(schema),
   });
 
+  const { setUser } = useUserStore();
+  const toast = useToast();
+
   const apiClient = new APIClient<User>("users");
   const addUser = useMutation({
     mutationFn: (user: User) => apiClient.addUser(user),
-    onSuccess: (data) => console.log("ulul", data),
+    onSuccess: (data) => {
+      setUser(data);
+      toast({
+        title: "Successful registration.",
+        description: "Browse this month's books.",
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+      });
+    },
     onError: (error) => console.log(error),
   });
 
+  const navigate = useNavigate();
   return (
     <>
       <form

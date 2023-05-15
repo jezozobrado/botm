@@ -14,7 +14,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 
 const AllBooks = () => {
-  const { register, handleSubmit, reset, getValues } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const [searchText, setSearchText] = useState();
 
   return (

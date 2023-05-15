@@ -7,11 +7,13 @@ import {
   Hide,
   Show,
   Spacer,
+  Text,
 } from "@chakra-ui/react";
 import { BiUserCircle } from "react-icons/bi";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../assets/Logo";
+import useUserStore from "../store";
 
 const NavBar = () => {
   const navItems: { url: string; displayName: string }[] = [
@@ -22,8 +24,12 @@ const NavBar = () => {
     { url: "/relationship-status", displayName: "Relationship status" },
   ];
 
+  const { user, setUser } = useUserStore();
+  console.log(user);
+
   return (
     <>
+      {}
       <Show above="xl">
         <HStack marginX="100px" marginY={3}>
           <Link to="/">
@@ -44,14 +50,36 @@ const NavBar = () => {
           </HStack>
           <Spacer width="100px" />
           <HStack>
-            <Link to="/login">
-              <Button leftIcon={<BiUserCircle size="22px" />} variant="outline">
-                Login
+            {user && <Text>{`Hello ${user?.firstName}`}</Text>}
+            {user && (
+              <Link to="/">
+                <Button
+                  leftIcon={<BiUserCircle size="22px" />}
+                  variant="outline"
+                  onClick={() => {
+                    localStorage.removeItem("x-auth-token");
+                    setUser(null);
+                  }}
+                >
+                  Logout
+                </Button>
+              </Link>
+            )}
+            {!user && (
+              <Link to="/login">
+                <Button
+                  leftIcon={<BiUserCircle size="22px" />}
+                  variant="outline"
+                >
+                  Login
+                </Button>
+              </Link>
+            )}
+            {!user && (
+              <Button width="120px" variant="btn-primary">
+                Sign up
               </Button>
-            </Link>
-            <Button width="120px" variant="btn-primary">
-              Sign up
-            </Button>
+            )}
           </HStack>
         </HStack>
       </Show>

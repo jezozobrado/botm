@@ -1,7 +1,9 @@
 import { Flex, Heading, HStack, Button, Text } from "@chakra-ui/react";
 import Header from "../Header";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
   return (
     <Flex
       width={{ base: "auto", md: "800px" }}
@@ -44,6 +46,7 @@ const Hero = () => {
           color="brand.100"
           fontSize="18px"
           paddingLeft={2}
+          onClick={() => navigate("/login")}
         >
           Sign in.
         </Button>

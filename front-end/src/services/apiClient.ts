@@ -9,8 +9,8 @@ const axiosInstance = axios.create({
   // },
 });
 
-// axiosInstance.defaults.headers.common["Authorization"] =
-//   localStorage.getItem("x-auth-token");
+axiosInstance.defaults.headers.common["Authorization"] =
+  localStorage.getItem("x-auth-token");
 
 class APIClient<T> {
   endpoint: string;
