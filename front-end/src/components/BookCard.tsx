@@ -3,6 +3,7 @@ import {
   Button,
   Card,
   CardBody,
+  CardFooter,
   Container,
   HStack,
   Image,
@@ -15,6 +16,7 @@ import { Link } from "react-router-dom";
 import APIClient, { CartRequest } from "../services/apiClient";
 import { Book } from "../entities/Book";
 import useUserStore from "../store/userStore";
+import useCartStore from "../store/cartStore";
 
 interface Props {
   book: Book;
@@ -28,6 +30,7 @@ const BookCard = ({ book }: Props) => {
   };
 
   const { user } = useUserStore();
+  const { cart, setCart } = useCartStore();
 
   const apiClient = new APIClient<CartRequest>("/carts");
 
@@ -103,7 +106,7 @@ const BookCard = ({ book }: Props) => {
               paddingY="23px"
               onClick={() => {
                 console.log(book, user);
-
+                setCart(book);
                 addToCart.mutate({ book: book, customer: user?._id });
               }}
             >
