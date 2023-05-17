@@ -12,6 +12,11 @@ import {
   PopoverFooter,
   HStack,
   useDisclosure,
+  Text,
+  Image,
+  Stack,
+  Box,
+  AspectRatio,
 } from "@chakra-ui/react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link } from "react-router-dom";
@@ -42,18 +47,39 @@ const PopOver = () => {
             <PopoverHeader>You can choose up to 3 books!</PopoverHeader>
             <PopoverCloseButton />
             <PopoverBody>
-              {data?.books.map((c, i) => (
-                <CartItem key={i} book={c} />
-              ))}
+              {data?.books.length! > 0 ? (
+                <>
+                  {data?.books.map((c, i) => (
+                    <CartItem key={i} book={c} />
+                  ))}
+                </>
+              ) : (
+                <HStack my={2}>
+                  <AspectRatio width="80px" ratio={2 / 3}>
+                    <Box border="solid RGBA(0, 0, 0, 0.1) 1px" />
+                  </AspectRatio>
+
+                  <Stack gap={0}>
+                    <Text fontWeight="bold">
+                      Add your favorites to your box now!
+                    </Text>
+                    <Link to="/all-books">
+                      <Button variant="btn-link">See the books</Button>
+                    </Link>
+                  </Stack>
+                </HStack>
+              )}
             </PopoverBody>
-            <PopoverFooter>
-              <HStack>
-                <Button variant="btn-primary">Check out</Button>
-                <Link to="/all-books">
-                  <Button variant="btn-secondary">Choose add-ons</Button>
-                </Link>
-              </HStack>
-            </PopoverFooter>
+            {!!data?.books.length && (
+              <PopoverFooter>
+                <HStack>
+                  <Button variant="btn-primary">Check out</Button>
+                  <Link to="/all-books">
+                    <Button variant="btn-secondary">Choose add-ons</Button>
+                  </Link>
+                </HStack>
+              </PopoverFooter>
+            )}
           </PopoverContent>
         </Portal>
       </Popover>
