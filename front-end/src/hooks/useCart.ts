@@ -23,7 +23,6 @@ const useCart = () => {
     staleTime: 24 * 60 * 1000 * 1000,
     refetchOnWindowFocus: false,
     keepPreviousData: true,
-    // initialData: () => ({ books: [], customer: "" }),
   });
 };
 

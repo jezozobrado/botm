@@ -45,6 +45,7 @@ class APIClient<T> {
       localStorage.setItem("x-auth-token", res.headers["x-auth-token"]);
       axiosInstance.defaults.headers.common["Authorization"] =
         localStorage.getItem("x-auth-token");
+      console.log("Authenticating...");
 
       return res.data;
     });

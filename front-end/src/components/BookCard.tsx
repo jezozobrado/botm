@@ -3,7 +3,6 @@ import {
   Button,
   Card,
   CardBody,
-  CardFooter,
   Container,
   HStack,
   Image,
@@ -12,13 +11,13 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import APIClient, { CartRequest } from "../services/apiClient";
 import { Book } from "../entities/Book";
-import useUserStore from "../store/userStore";
+import useAddItem from "../hooks/useAddItem";
 import useCartStore from "../store/cartStore";
-import useCart from "../hooks/useCart";
+import useUserStore from "../store/userStore";
+import { AxiosError } from "axios";
 
 interface Props {
   book: Book;
@@ -33,18 +32,13 @@ const BookCard = ({ book }: Props) => {
 
   const { user } = useUserStore();
   const setCurrent = useCartStore((s) => s.setCurrent);
-  const setCart = useCartStore((s) => s.setCart);
-  const editCart = useCartStore((s) => s.editCart);
 
-  const apiClient = new APIClient<CartRequest>("/carts");
+  const [disabled, setIsDisabled] = useState(false);
 
-  const addToCart = useMutation({
-    mutationFn: (cart: CartRequest) => apiClient.addToCart(cart),
-    onSuccess: (data) => {},
-    onError: (err) => {
-      console.error(err);
-    },
-  });
+  const addItem = useAddItem();
+  const setIsMoreThanThree = useCartStore((s) => s.setIsMoreThanThree);
+
+  if (addItem.isError) setIsMoreThanThree();
 
   return (
     <SimpleGrid
@@ -105,6 +99,7 @@ const BookCard = ({ book }: Props) => {
               {book.description}
             </Text>
             <Button
+              isDisabled={disabled}
               variant="btn-primary"
               width={{ base: "85vw ", md: "fit-content" }}
               alignSelf={{ base: "center", md: "normal" }}
@@ -112,16 +107,15 @@ const BookCard = ({ book }: Props) => {
               paddingY="23px"
               onClick={() => {
                 console.log("Clicked start");
-                addToCart
+                addItem
                   .mutateAsync({ book: book, customer: user?._id })
-                  .then((res) => setCurrent());
-                console.log(addToCart.status);
-
-                // if (addToCart.status === "success");
-                console.log("Clicked done");
+                  .then((res) => {
+                    setCurrent();
+                    setIsDisabled(true);
+                  });
               }}
             >
-              {addToCart.isLoading ? <Spinner /> : "Make my BOTM"}
+              {addItem.isLoading ? <Spinner /> : "Make my BOTM"}
             </Button>
           </Stack>
         </CardBody>

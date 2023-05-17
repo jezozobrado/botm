@@ -16,13 +16,10 @@ router.get("/", async (req, res) => {
 router.get("/:customerId", async (req, res) => {
   if (!req.params) return res.status(400).send("No cart.");
 
-  // const cart = await Cart.find();
   const cart = await Cart.findOne({ customer: req.params.customerId })
     .populate("books", "title author image _id slug")
     .populate("customer", "firstName")
     .select("books customer");
-
-  console.log(cart);
 
   if (!cart) return res.status(400).send("No cart.");
 
@@ -31,6 +28,7 @@ router.get("/:customerId", async (req, res) => {
 
 router.post("/:customerId/:bookId", async (req, res) => {
   console.log("params", req.params);
+
   const cart = await Cart.findOneAndUpdate(
     { customer: req.params.customerId },
     { $pull: { books: req.params.bookId } },
@@ -55,19 +53,32 @@ router.post("/", async (req, res) => {
     .populate("customer", "firstName")
     .select("books customer");
 
-  if (cart) {
-    console.log(book.title, cart);
-    cart.books.push(book);
-  } else {
+  //if no cart, create new instance
+  if (!cart) {
     cart = new Cart({
       customer: req.body.customer,
       books: [req.body.book],
     });
   }
 
-  await cart.save();
+  //check if more than 3 books
+  if (cart.books.length < 3) {
+    cart.books.push(book);
+    await cart.save();
+    res.send(cart);
+  } else {
+    res.status(400).send("Cart exceeds 3 books.");
+  }
 
-  res.send(cart);
+  // if (cart) {
+  //   console.log(book.title, cart);
+  //   cart.books.push(book);
+  // } else {
+  //   cart = new Cart({
+  //     customer: req.body.customer,
+  //     books: [req.body.book],
+  //   });
+  // }
 });
 
 module.exports = router;

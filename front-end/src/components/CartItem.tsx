@@ -1,10 +1,8 @@
 import { Book } from "../entities/Book";
 import { Button, HStack, Image, Spinner, Stack, Text } from "@chakra-ui/react";
-import APIClient from "../services/apiClient";
-import { CartResponse } from "../hooks/useCart";
-import { useMutation } from "@tanstack/react-query";
 import useUserStore from "../store/userStore";
 import useCartStore from "../store/cartStore";
+import useRemoveItem from "../hooks/useRemoveItem";
 
 interface Props {
   book?: Book;
@@ -16,15 +14,10 @@ export interface Params {
 }
 
 const CartItem = ({ book }: Props) => {
-  const apiClient = new APIClient<CartResponse>("/carts");
   const user = useUserStore((s) => s.user);
   const setCurrent = useCartStore((s) => s.setCurrent);
 
-  const removeItem = useMutation({
-    mutationFn: (params: Params) => apiClient.removeCartItem(params),
-    onSuccess: (data) => console.log("data", data),
-    onError: (err) => console.error("error", err),
-  });
+  const removeItem = useRemoveItem();
 
   return (
     <>

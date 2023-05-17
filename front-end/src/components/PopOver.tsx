@@ -14,6 +14,7 @@ import {
   useDisclosure,
   Text,
   Image,
+  Badge,
   Stack,
   Box,
   AspectRatio,
@@ -31,11 +32,19 @@ const PopOver = () => {
   const { data } = useCart();
   const current = useCartStore((s) => s.current);
 
+  const isMoreThanThree = useCartStore((s) => s.isMoreThanThree);
+
+  const setIsMoreThanThree = useCartStore((s) => s.setIsMoreThanThree);
   useEffect(() => onToggle, [current]);
 
   return (
     <>
-      <Popover trigger="hover">
+      <Popover
+        trigger="hover"
+        onClose={() => {
+          isMoreThanThree && setIsMoreThanThree();
+        }}
+      >
         <PopoverTrigger>
           <Button variant="outline">
             <Icon as={AiOutlineShoppingCart} boxSize="22px" />
@@ -44,7 +53,23 @@ const PopOver = () => {
         <Portal>
           <PopoverContent width="400px">
             <PopoverArrow />
-            <PopoverHeader>You can choose up to 3 books!</PopoverHeader>
+            <PopoverHeader>
+              {data?.books.length! < 3
+                ? "You can choose up to 3 books."
+                : isMoreThanThree
+                ? "Your box cannot exceed 3 books."
+                : "Your box is full."}
+              {/* {isMoreThanThree && (
+                <Badge
+                  color="white"
+                  bgColor="red.500"
+                  whiteSpace="normal"
+                  fontSize="15px"
+                >
+                  Cart can't exceed 3 books! Please remove one of the books.
+                </Badge>
+              )} */}
+            </PopoverHeader>
             <PopoverCloseButton />
             <PopoverBody>
               {data?.books.length! > 0 ? (
