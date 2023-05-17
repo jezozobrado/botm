@@ -2,6 +2,7 @@ import axios, { AxiosRequestConfig, AxiosRequestHeaders } from "axios";
 import User from "../entities/User";
 import { Book } from "../entities/Book";
 import { ObjectId } from "bson";
+import { Params } from "../components/CartItem";
 
 export interface CartRequest {
   book: Book;
@@ -55,6 +56,14 @@ class APIClient<T> {
     axiosInstance
       .get<T>(this.endpoint + "/" + customer)
       .then((res) => res.data);
+
+  removeCartItem = (params: Params) =>
+    axiosInstance
+      .post<T>(this.endpoint + "/" + params.user + "/" + params.book)
+      .then((res) => {
+        console.log("params", params);
+        return res.data;
+      });
 }
 
 export default APIClient;

@@ -1,7 +1,7 @@
 import { ObjectId } from "bson";
 
 export default interface User {
-  _id?: ObjectId;
+  _id?: string;
   firstName: string;
   lastName: string;
   email: string;

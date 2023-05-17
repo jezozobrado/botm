@@ -14,17 +14,11 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/:customerId", async (req, res) => {
-  console.log(
-    "customerid",
-    req.params.customerId,
-    typeof req.params.customerId
-  );
-
   if (!req.params) return res.status(400).send("No cart.");
 
   // const cart = await Cart.find();
   const cart = await Cart.findOne({ customer: req.params.customerId })
-    .populate("books", "title author image -_id")
+    .populate("books", "title author image _id slug")
     .populate("customer", "firstName")
     .select("books customer");
 
@@ -35,9 +29,18 @@ router.get("/:customerId", async (req, res) => {
   res.send(cart);
 });
 
+router.post("/:customerId/:bookId", async (req, res) => {
+  console.log("params", req.params);
+  const cart = await Cart.findOneAndUpdate(
+    { customer: req.params.customerId },
+    { $pull: { books: req.params.bookId } },
+    { new: true }
+  );
+
+  res.status(200).send(cart);
+});
+
 router.post("/", async (req, res) => {
-  // console.log(req.body);
-  // console.log(typeof req.body.customerId);
   //check if customer is authenticated.
   const customer = await User.findOne({ _id: req.body.customer });
   if (!customer) return res.status(400).send("Customer does not exist!");

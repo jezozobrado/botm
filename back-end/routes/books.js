@@ -37,39 +37,6 @@ router.get("/", auth, async (req, res) => {
   });
 });
 
-// router.get("/", async (req, res) => {
-//   // console.log(req.query);
-//   const books = await Book.find({
-//     defaultCategory: new RegExp(".*" + req.query.defaultCategory + ".*", "i"),
-//   })
-//     .or([
-//       { title: new RegExp(".*" + req.query.searchText + ".*", "i") },
-//       { mainGenre: new RegExp(".*" + req.query.searchText + ".*", "i") },
-//       { author: new RegExp(".*" + req.query.searchText + ".*", "i") },
-//     ])
-//     .sort(req.query.ordering)
-//     .skip((req.query.pageNumber - 1) * req.query.pageSize)
-//     .limit(req.query.pageSize);
-
-//   const count = await Book.find({
-//     defaultCategory: new RegExp(".*" + req.query.defaultCategory + ".*", "i"),
-//   })
-//     .or([
-//       { title: new RegExp(".*" + req.query.searchText + ".*", "i") },
-//       { mainGenre: new RegExp(".*" + req.query.searchText + ".*", "i") },
-//       { author: new RegExp(".*" + req.query.searchText + ".*", "i") },
-//     ])
-//     .count();
-
-//   if (!books) return res.status(400).send("Books do not exist.");
-
-//   res.send({
-//     books: books,
-//     hasNextPage: parseInt(req.query.pageSize * req.query.pageNumber) < count,
-//     hasPreviousPage: parseInt(req.query.pageNumber) !== 1,
-//   });
-// });
-
 router.get("/:slug", async (req, res) => {
   const book = await Book.find({ slug: req.params.slug });
   if (!book) return res.status(404).send("Book does not exist.");
@@ -99,4 +66,5 @@ router.post("/", async (req, res) => {
   await book.save();
   res.send(lodash.pick(book, ["title", "abstract"]));
 });
+
 module.exports = router;
