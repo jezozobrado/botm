@@ -1,25 +1,13 @@
 import {
-  Badge,
   Button,
   Divider,
   Grid,
   GridItem,
   HStack,
   Hide,
-  Icon,
-  Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverFooter,
-  PopoverHeader,
-  PopoverTrigger,
-  Portal,
   Show,
   Spacer,
   Text,
-  useDisclosure,
 } from "@chakra-ui/react";
 import { BiUserCircle } from "react-icons/bi";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -28,10 +16,9 @@ import Logo from "../assets/Logo";
 import useUserStore from "../store/userStore";
 import jwtDecode from "jwt-decode";
 import User from "../entities/User";
-import { useEffect } from "react";
-import { AiOutlineShoppingCart } from "react-icons/ai";
+import { useEffect, useMemo } from "react";
 import useCartStore from "../store/cartStore";
-import CartItem from "./CartItem";
+import Cart from "./Cart";
 
 const NavBar = () => {
   const navItems: { url: string; displayName: string }[] = [
@@ -43,17 +30,15 @@ const NavBar = () => {
   ];
 
   const { user, setUser } = useUserStore();
-  const { cart, setCart } = useCartStore();
-  const { isOpen, onClose, onOpen, onToggle } = useDisclosure();
-
-  const token = localStorage.getItem("x-auth-token");
+  const { resetCart } = useCartStore();
 
   useEffect(() => {
+    const token = localStorage.getItem("x-auth-token");
     if (token) {
       const decoded = jwtDecode(token) as User;
       setUser(decoded);
     }
-  }, [token]);
+  }, []);
 
   return (
     <>
@@ -78,55 +63,8 @@ const NavBar = () => {
           <Spacer width="100px" />
           <HStack>
             {user && <Text>{`Hello ${user?.firstName}`}</Text>}
-            {user && (
-              <Badge borderRadius="50%" bg="brand.100" color="white">
-                {cart.length}
-              </Badge>
-            )}
-            {user && (
-              <>
-                <Popover
-                  returnFocusOnClose={false}
-                  isOpen={isOpen}
-                  onClose={onClose}
-                >
-                  <PopoverTrigger>
-                    <Button
-                      variant="outline"
-                      onClick={onToggle}
-                      onMouseEnter={onOpen}
-                      onMouseLeave={onClose}
-                    >
-                      <Icon as={AiOutlineShoppingCart} boxSize="22px" />
-                    </Button>
-                  </PopoverTrigger>
-                  <Portal>
-                    <PopoverContent width="400px">
-                      <PopoverArrow />
-                      <PopoverHeader>
-                        You can choose up to 3 books!
-                      </PopoverHeader>
-                      <PopoverCloseButton />
-                      <PopoverBody>
-                        {cart.map((c, i) => (
-                          <CartItem key={i} book={c} />
-                        ))}
-                      </PopoverBody>
-                      <PopoverFooter>
-                        <HStack>
-                          <Button variant="btn-primary">Check out</Button>
-                          <Link to="/all-books">
-                            <Button variant="btn-secondary">
-                              Choose add-ons
-                            </Button>
-                          </Link>
-                        </HStack>
-                      </PopoverFooter>
-                    </PopoverContent>
-                  </Portal>
-                </Popover>
-              </>
-            )}
+            {user && <Cart />}
+            {/* {user && <PopOver />} */}
             {user && (
               <Link to="/">
                 <Button
@@ -135,6 +73,10 @@ const NavBar = () => {
                   onClick={() => {
                     localStorage.removeItem("x-auth-token");
                     setUser(null);
+                    resetCart();
+                    resetCart();
+                    localStorage.removeItem("cart");
+                    localStorage.removeItem("user");
                   }}
                 >
                   Logout
@@ -151,6 +93,7 @@ const NavBar = () => {
                 </Button>
               </Link>
             )}
+            f
             {!user && (
               <Button width="120px" variant="btn-primary">
                 Sign up

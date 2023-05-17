@@ -5,15 +5,11 @@ import { ObjectId } from "bson";
 
 export interface CartRequest {
   book: Book;
-  customer?: ObjectId;
+  customer?: ObjectId | string;
 }
 
 const axiosInstance = axios.create({
   baseURL: "http://localhost:4000/api",
-  // headers: {
-  //   Authorization: localStorage.getItem("x-auth-token"),
-  //   jake: "pota",
-  // },
 });
 
 axiosInstance.defaults.headers.common["Authorization"] =
@@ -48,11 +44,18 @@ class APIClient<T> {
       localStorage.setItem("x-auth-token", res.headers["x-auth-token"]);
       axiosInstance.defaults.headers.common["Authorization"] =
         localStorage.getItem("x-auth-token");
+      console.log("hoy", localStorage.getItem("x-auth-token"));
+
       return res.data;
     });
 
   addToCart = (cartRequest: CartRequest) =>
     axiosInstance.post<T>(this.endpoint, cartRequest).then((res) => res.data);
+
+  getCartItems = (customer?: ObjectId | string) =>
+    axiosInstance
+      .get<T>(this.endpoint + "/" + customer)
+      .then((res) => res.data);
 }
 
 export default APIClient;

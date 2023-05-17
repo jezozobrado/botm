@@ -13,6 +13,28 @@ router.get("/", async (req, res) => {
   res.send(carts);
 });
 
+router.get("/:customerId", async (req, res) => {
+  console.log(
+    "customerid",
+    req.params.customerId,
+    typeof req.params.customerId
+  );
+
+  if (!req.params) return res.status(400).send("No cart.");
+
+  // const cart = await Cart.find();
+  const cart = await Cart.findOne({ customer: req.params.customerId })
+    .populate("books", "title author image -_id")
+    .populate("customer", "firstName")
+    .select("books customer");
+
+  console.log(cart);
+
+  if (!cart) return res.status(400).send("No cart.");
+
+  res.send(cart);
+});
+
 router.post("/", async (req, res) => {
   // console.log(req.body);
   // console.log(typeof req.body.customerId);
@@ -26,7 +48,7 @@ router.post("/", async (req, res) => {
 
   //check if a cart exist associated with the user
   let cart = await Cart.findOne({ customer: req.body.customer })
-    .populate("books", "title -_id")
+    .populate("books", "title author image -_id")
     .populate("customer", "firstName")
     .select("books customer");
 

@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import { Book } from "../entities/Book";
 import APIClient from "../services/apiClient";
 import { AxiosError } from "axios";
-import { useNavigate } from "react-router-dom";
 
 export interface QueryParams {
   ordering?: string;
@@ -20,7 +19,6 @@ interface Response {
 }
 
 const useBooks = (queryParams?: QueryParams) => {
-  const navigate = useNavigate();
   const apiClient = new APIClient<Response>("/books");
   return useQuery<Response, AxiosError>({
     queryKey: ["books", queryParams],

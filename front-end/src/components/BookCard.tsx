@@ -8,6 +8,7 @@ import {
   HStack,
   Image,
   SimpleGrid,
+  Spinner,
   Stack,
   Text,
 } from "@chakra-ui/react";
@@ -17,6 +18,7 @@ import APIClient, { CartRequest } from "../services/apiClient";
 import { Book } from "../entities/Book";
 import useUserStore from "../store/userStore";
 import useCartStore from "../store/cartStore";
+import useCart from "../hooks/useCart";
 
 interface Props {
   book: Book;
@@ -30,14 +32,18 @@ const BookCard = ({ book }: Props) => {
   };
 
   const { user } = useUserStore();
-  const { cart, setCart } = useCartStore();
+  const setCurrent = useCartStore((s) => s.setCurrent);
+  const setCart = useCartStore((s) => s.setCart);
+  const editCart = useCartStore((s) => s.editCart);
 
   const apiClient = new APIClient<CartRequest>("/carts");
 
   const addToCart = useMutation({
     mutationFn: (cart: CartRequest) => apiClient.addToCart(cart),
-    onSuccess: (data) => console.log(data),
-    onError: (err) => console.error(err),
+    onSuccess: (data) => {},
+    onError: (err) => {
+      console.error(err);
+    },
   });
 
   return (
@@ -105,12 +111,17 @@ const BookCard = ({ book }: Props) => {
               paddingX={{ md: "40px" }}
               paddingY="23px"
               onClick={() => {
-                console.log(book, user);
-                setCart(book);
-                addToCart.mutate({ book: book, customer: user?._id });
+                console.log("Clicked start");
+                addToCart
+                  .mutateAsync({ book: book, customer: user?._id })
+                  .then((res) => setCurrent());
+                console.log(addToCart.status);
+
+                // if (addToCart.status === "success");
+                console.log("Clicked done");
               }}
             >
-              Make my BOTM
+              {addToCart.isLoading ? <Spinner /> : "Make my BOTM"}
             </Button>
           </Stack>
         </CardBody>

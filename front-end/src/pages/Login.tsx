@@ -12,13 +12,14 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import APIClient from "../services/apiClient";
 import User from "../entities/User";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import useUserStore from "../store/userStore";
 import jwtDecode from "jwt-decode";
+import useCartStore from "../store/cartStore";
 
 const schema = Joi.object({
   email: Joi.string()
@@ -37,14 +38,13 @@ const Login = () => {
     mutationFn: (user: User) => apiClient.authUser(user),
     onSuccess: (data) => {
       const token = localStorage.getItem("x-auth-token");
-      console.log(token);
 
       if (token) {
         const decoded = jwtDecode(token) as User;
-        console.log("decoded is", decoded);
+        // console.log("decoded is", decoded);
         setUser(decoded);
       }
-      console.log("user is", user);
+      // console.log("user is", user);
 
       // setUser(data);
       // console.log("login data", data);
