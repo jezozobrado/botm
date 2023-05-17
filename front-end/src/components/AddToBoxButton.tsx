@@ -20,11 +20,12 @@ const AddToBoxButton = ({ book }: Props) => {
   const setIsMoreThanThree = useCartStore((s) => s.setIsMoreThanThree);
   if (addItem.isError) setIsMoreThanThree();
 
-  const { data: cart, isSuccess, status, isLoading } = useCart();
+  const { data: cart, isFetching } = useCart();
+  console.log(cart?.books.length, status);
 
   useEffect(() => {
     setIsDisabled(Boolean(cart?.books.find((b) => b.title === book.title)));
-  }, [isLoading]);
+  }, [isFetching]);
 
   return (
     <Button

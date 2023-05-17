@@ -59,16 +59,6 @@ const PopOver = () => {
                 : isMoreThanThree
                 ? "Your box cannot exceed 3 books."
                 : "Your box is full."}
-              {/* {isMoreThanThree && (
-                <Badge
-                  color="white"
-                  bgColor="red.500"
-                  whiteSpace="normal"
-                  fontSize="15px"
-                >
-                  Cart can't exceed 3 books! Please remove one of the books.
-                </Badge>
-              )} */}
             </PopoverHeader>
             <PopoverCloseButton />
             <PopoverBody>
