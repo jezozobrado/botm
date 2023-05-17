@@ -6,19 +6,14 @@ import { CartResponse } from "../components/Cart";
 
 const useCart = () => {
   const apiClient = new APIClient<CartResponse>("/carts");
-  const { user } = useUserStore();
-  const cart = useCartStore((s) => s.cart);
-  const current = useCartStore((s) => s.current);
-  const setCart = useCartStore((s) => s.setCart);
 
-  console.log("current click is", current);
+  const user = useUserStore((s) => s.user);
+  const current = useCartStore((s) => s.current);
 
   return useQuery({
-    queryKey: ["cart", current, user?._id],
+    queryKey: ["cart", current, user],
     queryFn: () => apiClient.getCartItems(user?._id),
-    onSuccess: (data) => {
-      console.log("data-count", data?.books.length);
-    },
+    onSuccess: (data) => {},
     onError: (err) => console.error(err),
     staleTime: 24 * 60 * 1000 * 1000,
     refetchOnWindowFocus: false,

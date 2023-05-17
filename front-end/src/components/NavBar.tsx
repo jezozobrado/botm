@@ -19,6 +19,7 @@ import User from "../entities/User";
 import { useEffect, useMemo } from "react";
 import useCartStore from "../store/cartStore";
 import Cart from "./Cart";
+import PopOver from "./PopOver";
 
 const NavBar = () => {
   const navItems: { url: string; displayName: string }[] = [
@@ -64,7 +65,7 @@ const NavBar = () => {
           <HStack>
             {user && <Text>{`Hello ${user?.firstName}`}</Text>}
             {user && <Cart />}
-            {/* {user && <PopOver />} */}
+            {user && <PopOver />}
             {user && (
               <Link to="/">
                 <Button

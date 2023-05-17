@@ -21,25 +21,25 @@ import APIClient, { CartRequest } from "../services/apiClient";
 import CartItem from "./CartItem";
 import useCartStore from "../store/cartStore";
 import { CartResponse } from "./Cart";
+import useCart from "../hooks/useCart";
 
 const apiClient = new APIClient<CartResponse>("/carts");
 
 const PopOver = () => {
   const { isOpen, onClose, onOpen, onToggle } = useDisclosure();
 
-  const { user } = useUserStore();
-  const { cart, setCart } = useCartStore();
+  const { data } = useCart();
 
-  const { data } = useQuery({
-    queryKey: ["cart", cart],
-    queryFn: () => apiClient.getCartItems(user?._id),
-    onSuccess: (data) => {
-      console.log("data", data);
-    },
-    onError: (err) => console.error(err),
-    staleTime: 24 * 60 * 1000 * 1000,
-    refetchOnWindowFocus: false,
-  });
+  // const { data } = useQuery({
+  //   queryKey: ["cart", cart],
+  //   queryFn: () => apiClient.getCartItems(user?._id),
+  //   onSuccess: (data) => {
+  //     console.log("data", data);
+  //   },
+  //   onError: (err) => console.error(err),
+  //   staleTime: 24 * 60 * 1000 * 1000,
+  //   refetchOnWindowFocus: false,
+  // });
 
   return (
     <>
