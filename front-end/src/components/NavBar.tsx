@@ -1,27 +1,23 @@
 import {
-  Box,
   Button,
-  Container,
   Divider,
-  Flex,
   Grid,
   GridItem,
   HStack,
   Hide,
   Show,
   Spacer,
-  Stack,
   Text,
 } from "@chakra-ui/react";
+import jwtDecode from "jwt-decode";
+import { useEffect } from "react";
 import { BiUserCircle } from "react-icons/bi";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../assets/Logo";
-import useUserStore from "../store/userStore";
-import jwtDecode from "jwt-decode";
 import User from "../entities/User";
-import { useEffect } from "react";
 import useCartStore from "../store/cartStore";
+import useUserStore from "../store/userStore";
 import Cart from "./Cart";
 import PopOver from "./PopOver";
 
@@ -55,7 +51,7 @@ const NavBar = () => {
           position="fixed"
           w="100%"
           backgroundColor="white"
-          zIndex={200}
+          zIndex={1}
         >
           <Link to="/">
             <Logo />

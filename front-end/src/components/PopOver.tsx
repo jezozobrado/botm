@@ -30,14 +30,14 @@ const PopOver = () => {
 
   return (
     <>
-      <Popover isOpen={isOpen}>
+      <Popover trigger="hover">
         <PopoverTrigger>
           <Button variant="outline">
             <Icon as={AiOutlineShoppingCart} boxSize="22px" />
           </Button>
         </PopoverTrigger>
         <Portal>
-          <PopoverContent width="400px" onClick={onToggle}>
+          <PopoverContent width="400px">
             <PopoverArrow />
             <PopoverHeader>You can choose up to 3 books!</PopoverHeader>
             <PopoverCloseButton />

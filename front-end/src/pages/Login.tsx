@@ -19,7 +19,7 @@ import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import useUserStore from "../store/userStore";
 import jwtDecode from "jwt-decode";
-import useCartStore from "../store/cartStore";
+import useCart from "../hooks/useCart";
 
 const schema = Joi.object({
   email: Joi.string()
@@ -31,7 +31,7 @@ const schema = Joi.object({
 });
 
 const Login = () => {
-  const { user, setUser } = useUserStore();
+  const setUser = useUserStore((s) => s.setUser);
   const apiClient = new APIClient<User>("/auth");
 
   const authUser = useMutation({
@@ -41,21 +41,8 @@ const Login = () => {
 
       if (token) {
         const decoded = jwtDecode(token) as User;
-        // console.log("decoded is", decoded);
         setUser(decoded);
       }
-      // console.log("user is", user);
-
-      // setUser(data);
-      // console.log("login data", data);
-
-      toast({
-        title: "Successful login.",
-        description: "Browse this month's books.",
-        status: "success",
-        duration: 2000,
-        isClosable: true,
-      });
     },
     onError: (err: AxiosError) => console.error("ulul", err),
   });
@@ -67,11 +54,10 @@ const Login = () => {
   } = useForm<User>({
     resolver: joiResolver(schema),
   });
+
   const [show, setShow] = useState(false);
 
   const navigate = useNavigate();
-
-  const toast = useToast();
 
   const onSubmit = (data: User) => {
     authUser.mutate(data);
