@@ -22,7 +22,7 @@ const CartItem = ({ book }: Props) => {
   return (
     <>
       <HStack my={2}>
-        <Image src={book?.image} width="80px" />
+        <Image src={book?.image} width="100px" />
         <Stack gap={0}>
           <Text fontWeight="bold">{book?.title}</Text>
           <Text>{`by ${book?.author}`}</Text>
