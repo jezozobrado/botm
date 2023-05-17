@@ -101,12 +101,11 @@ const BookCard = ({ book }: Props) => {
             <Button
               isDisabled={disabled}
               variant="btn-primary"
-              width={{ base: "85vw ", md: "fit-content" }}
+              width={{ base: "85vw ", md: "80%" }}
               alignSelf={{ base: "center", md: "normal" }}
               paddingX={{ md: "40px" }}
               paddingY="23px"
               onClick={() => {
-                console.log("Clicked start");
                 addItem
                   .mutateAsync({ book: book, customer: user?._id })
                   .then((res) => {
@@ -115,7 +114,7 @@ const BookCard = ({ book }: Props) => {
                   });
               }}
             >
-              {addItem.isLoading ? <Spinner /> : "Make my BOTM"}
+              {addItem.isLoading ? <Spinner /> : "Add to box"}
             </Button>
           </Stack>
         </CardBody>

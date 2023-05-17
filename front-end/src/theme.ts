@@ -66,6 +66,7 @@ const theme = extendTheme({
           bg: "brand.100",
           color: "white",
           fontWeight: "normal",
+          fontSize: "18px",
         },
         "btn-secondary": {
           bg: "white",
@@ -73,6 +74,7 @@ const theme = extendTheme({
           borderColor: "black",
           border: "1px",
           fontWeight: "normal",
+          fontSize: "18px",
         },
         "btn-link": {
           bg: "none",
@@ -80,6 +82,7 @@ const theme = extendTheme({
           fontWeight: "normal",
           paddingX: 0,
           justifyContent: "start",
+          fontSize: "18px",
         },
       },
     },
