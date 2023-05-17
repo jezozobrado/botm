@@ -3,11 +3,16 @@ import { Heading, Stack, Text } from "@chakra-ui/react";
 interface Props {
   heading: string;
   subheading: string;
+  withSearchBar?: boolean;
 }
 
-const Header = ({ heading, subheading }: Props) => {
+const Header = ({ heading, subheading, withSearchBar = false }: Props) => {
   return (
-    <Stack marginTop={10} width={{ base: "90%", md: "750px " }} margin="auto">
+    <Stack
+      pt={withSearchBar ? "0px" : "100px"}
+      width={{ base: "90%", md: "750px " }}
+      margin="auto"
+    >
       <Heading variant={{ base: "heading-small", md: "heading-primary" }}>
         {heading}
       </Heading>

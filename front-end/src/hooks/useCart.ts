@@ -2,7 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import APIClient from "../services/apiClient";
 import useCartStore from "../store/cartStore";
 import useUserStore from "../store/userStore";
-import { CartResponse } from "../components/Cart";
+import { Book } from "../entities/Book";
+
+export interface CartResponse {
+  books: Book[];
+  customer: string;
+}
 
 const useCart = () => {
   const apiClient = new APIClient<CartResponse>("/carts");

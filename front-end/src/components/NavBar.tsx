@@ -1,12 +1,16 @@
 import {
+  Box,
   Button,
+  Container,
   Divider,
+  Flex,
   Grid,
   GridItem,
   HStack,
   Hide,
   Show,
   Spacer,
+  Stack,
   Text,
 } from "@chakra-ui/react";
 import { BiUserCircle } from "react-icons/bi";
@@ -16,7 +20,7 @@ import Logo from "../assets/Logo";
 import useUserStore from "../store/userStore";
 import jwtDecode from "jwt-decode";
 import User from "../entities/User";
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import useCartStore from "../store/cartStore";
 import Cart from "./Cart";
 import PopOver from "./PopOver";
@@ -44,7 +48,15 @@ const NavBar = () => {
   return (
     <>
       <Show above="xl">
-        <HStack marginX="100px" marginY={3}>
+        <HStack
+          borderBottom="solid RGBA(0, 0, 0, 0.1) 1px"
+          px="100px"
+          py={3}
+          position="fixed"
+          w="100%"
+          backgroundColor="white"
+          zIndex={200}
+        >
           <Link to="/">
             <Logo />
           </Link>

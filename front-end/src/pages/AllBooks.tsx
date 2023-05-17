@@ -16,7 +16,7 @@ import useBookStore from "../store/bookStore";
 
 const AllBooks = () => {
   const { register, handleSubmit, reset } = useForm();
-  // const [searchText, setSearchText] = useState();
+
   const { searchText, setSearchText } = useBookStore();
 
   return (
@@ -29,7 +29,7 @@ const AllBooks = () => {
         <InputGroup
           width={{ base: "90%", lg: "950px" }}
           margin="auto"
-          marginTop="50px"
+          marginTop="100px"
         >
           <InputLeftElement
             children={<BiSearch color="gray.300" />}
@@ -56,6 +56,7 @@ const AllBooks = () => {
       <Header
         heading="Our top books in one spot."
         subheading="Choose from our past and present favorites."
+        withSearchBar={true}
       />
 
       <BookGrid queryParams={{ searchText: searchText }} />

@@ -2,13 +2,8 @@ import { Badge } from "@chakra-ui/react";
 import { Book } from "../entities/Book";
 import useCart from "../hooks/useCart";
 
-export interface CartResponse {
-  books: Book[];
-  customer: string;
-}
-
 const Cart = () => {
-  const { data, isLoading } = useCart();
+  const { data } = useCart();
 
   return (
     <>

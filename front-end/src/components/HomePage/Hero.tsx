@@ -10,7 +10,6 @@ const Hero = () => {
       flexDirection="column"
       textAlign="center"
       gap={5}
-      marginTop="40px"
       paddingX="20px"
       marginX="auto"
     >

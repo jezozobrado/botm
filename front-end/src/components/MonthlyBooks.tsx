@@ -30,7 +30,7 @@ const MonthlyBooks = ({ defaultCategory }: Props) => {
 
   return (
     <>
-      <Stack width={{ base: "90%", lg: "860px" }} margin="auto" marginY="50px">
+      <Stack width={{ base: "90%", lg: "860px" }} margin="auto" marginY="100px">
         <HStack justifyContent="space-between">
           <Text>Books to browse</Text>
           <Box>
