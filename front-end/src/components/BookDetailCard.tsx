@@ -11,25 +11,13 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { Book } from "../entities/Book";
+import AddToBoxButton from "./AddToBoxButton";
 
 interface Props {
-  image: string;
-  mainGenre: string;
-  abstractText: string;
-  title: string;
-  badges: string[];
-  slug: string;
-  author: string;
+  book: Book;
 }
-const BookDetailCard = ({
-  image,
-  mainGenre,
-  title,
-  abstractText,
-  badges,
-  slug,
-  author,
-}: Props) => {
+const BookDetailCard = ({ book }: Props) => {
   const badgeMap: { [key: string]: string } = {
     Debut: "green",
     "Repeat Author": "brand.200",
@@ -37,7 +25,7 @@ const BookDetailCard = ({
   };
 
   return (
-    <Link to={"/all-books/" + slug}>
+    <Link to={"/all-books/" + book.slug}>
       <SimpleGrid columns={1} margin="auto" marginY={8}>
         <Card
           margin="auto"
@@ -48,7 +36,7 @@ const BookDetailCard = ({
           borderRadius={0}
         >
           <Container margin="auto" centerContent>
-            <Image src={image} width="180px" />
+            <Image src={book.image} width="180px" />
           </Container>
         </Card>
         <Card
@@ -61,14 +49,14 @@ const BookDetailCard = ({
         >
           <CardBody>
             <Stack>
-              <Text variant="text-tertiary">{mainGenre}</Text>
+              <Text variant="text-tertiary">{book.mainGenre}</Text>
 
               <Text variant="text-primary" textTransform="capitalize">
-                {title}
+                {book.title}
               </Text>
 
               <HStack justifyContent="center">
-                {badges.map((badge, index) => (
+                {book?.badges?.map((badge, index) => (
                   <Badge
                     key={index}
                     width="fit-content"
@@ -85,8 +73,11 @@ const BookDetailCard = ({
                 ))}
               </HStack>
 
-              <Text textAlign="center">by {author}</Text>
-              <Button
+              <Text textAlign="center">by {book.author}</Text>
+              <Container margin="auto">
+                <AddToBoxButton book={book} />
+              </Container>
+              {/* <Button
                 variant="btn-primary"
                 width={{ base: "90%", lg: "fit-content" }}
                 alignSelf="center"
@@ -94,7 +85,7 @@ const BookDetailCard = ({
                 paddingY="23px"
               >
                 Make my BOTM
-              </Button>
+              </Button> */}
             </Stack>
           </CardBody>
         </Card>

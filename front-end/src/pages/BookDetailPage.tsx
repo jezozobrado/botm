@@ -53,7 +53,7 @@ const BookDetailPage = () => {
       <Breadcrumb
         width="600px"
         margin="auto"
-        marginTop="20px"
+        marginTop="100px"
         separator={<BiChevronRight color="gray.500" />}
       >
         <BreadcrumbItem>
@@ -89,16 +89,7 @@ const BookDetailPage = () => {
         margin="auto"
       >
         {data.map((book) => (
-          <BookDetailCard
-            key={book._id}
-            image={book.image}
-            mainGenre={book.mainGenre}
-            abstractText={book.abstractText}
-            title={book.title}
-            badges={book.badges!}
-            slug={book.slug}
-            author={book.author}
-          />
+          <BookDetailCard key={book._id} book={book} />
         ))}
         <Stack>
           <Text variant="text-primary">Quick Take</Text>

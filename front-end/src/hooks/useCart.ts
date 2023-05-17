@@ -18,7 +18,7 @@ const useCart = () => {
   return useQuery({
     queryKey: ["cart", current, user],
     queryFn: () => apiClient.getCartItems(user?._id),
-    onSuccess: (data) => {},
+    onSuccess: (data) => data,
     onError: (err) => console.error(err),
     staleTime: 24 * 60 * 1000 * 1000,
     refetchOnWindowFocus: false,

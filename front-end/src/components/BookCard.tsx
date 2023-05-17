@@ -1,23 +1,20 @@
 import {
   Badge,
-  Button,
   Card,
   CardBody,
   Container,
   HStack,
   Image,
   SimpleGrid,
-  Spinner,
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Book } from "../entities/Book";
 import useAddItem from "../hooks/useAddItem";
 import useCartStore from "../store/cartStore";
-import useUserStore from "../store/userStore";
-import { AxiosError } from "axios";
+
+import AddToBoxButton from "./AddToBoxButton";
 
 interface Props {
   book: Book;
@@ -30,14 +27,8 @@ const BookCard = ({ book }: Props) => {
     "BOTY Finalist": "pink",
   };
 
-  const { user } = useUserStore();
-  const setCurrent = useCartStore((s) => s.setCurrent);
-
-  const [disabled, setIsDisabled] = useState(false);
-
   const addItem = useAddItem();
   const setIsMoreThanThree = useCartStore((s) => s.setIsMoreThanThree);
-
   if (addItem.isError) setIsMoreThanThree();
 
   return (
@@ -98,24 +89,7 @@ const BookCard = ({ book }: Props) => {
             <Text paddingBottom={{ base: "0", md: "20px" }} textAlign="left">
               {book.description}
             </Text>
-            <Button
-              isDisabled={disabled}
-              variant="btn-primary"
-              width={{ base: "85vw ", md: "80%" }}
-              alignSelf={{ base: "center", md: "normal" }}
-              paddingX={{ md: "40px" }}
-              paddingY="23px"
-              onClick={() => {
-                addItem
-                  .mutateAsync({ book: book, customer: user?._id })
-                  .then((res) => {
-                    setCurrent();
-                    setIsDisabled(true);
-                  });
-              }}
-            >
-              {addItem.isLoading ? <Spinner /> : "Add to box"}
-            </Button>
+            <AddToBoxButton book={book} />
           </Stack>
         </CardBody>
       </Card>
