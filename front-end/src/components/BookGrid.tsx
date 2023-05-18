@@ -20,7 +20,7 @@ const BookGrid = ({ queryParams }: Props) => {
   const [pageSize, setPageSize] = useState(20);
   const [pageNumber, setPageNumber] = useState(1);
 
-  const { data, isLoading } = useBooks({
+  const { data, isLoading, status } = useBooks({
     ...queryParams,
     pageSize: pageSize,
     pageNumber: pageNumber,

@@ -15,7 +15,7 @@ export interface Params {
 
 const CartItem = ({ book }: Props) => {
   const user = useUserStore((s) => s.user);
-  const setCurrent = useCartStore((s) => s.setCurrent);
+  const setRemoveClick = useCartStore((s) => s.setRemoveClick);
 
   const removeItem = useRemoveItem();
 
@@ -32,7 +32,7 @@ const CartItem = ({ book }: Props) => {
               onClick={() => {
                 removeItem
                   .mutateAsync({ user: user?._id, book: book?._id })
-                  .then(() => setCurrent())
+                  .then(() => setRemoveClick())
                   .catch((err) => console.error(err));
               }}
             >

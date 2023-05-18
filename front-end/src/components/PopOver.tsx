@@ -24,12 +24,16 @@ import useCart from "../hooks/useCart";
 import useCartStore from "../store/cartStore";
 import CartItem from "./CartItem";
 import _ from "lodash";
+import useUserStore from "../store/userStore";
 
 const PopOver = () => {
   const { isOpen, onClose, onOpen, onToggle } = useDisclosure();
 
-  const { data } = useCart();
+  const { user } = useUserStore();
+
   const current = useCartStore((s) => s.current);
+  const removeClick = useCartStore((s) => s.removeClick);
+  const { data } = useCart([current, removeClick]);
 
   const isMoreThanThree = useCartStore((s) => s.isMoreThanThree);
 

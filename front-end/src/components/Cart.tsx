@@ -1,8 +1,14 @@
 import { Badge, Spinner } from "@chakra-ui/react";
 import useCart from "../hooks/useCart";
+import useCartStore from "../store/cartStore";
+import useUserStore from "../store/userStore";
 
 const Cart = () => {
-  const { data, isLoading } = useCart();
+  const { user } = useUserStore();
+
+  const current = useCartStore((s) => s.current);
+  const removeClick = useCartStore((s) => s.removeClick);
+  const { data, isLoading } = useCart([current, removeClick]);
 
   return (
     <>

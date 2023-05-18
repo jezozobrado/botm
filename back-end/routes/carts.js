@@ -36,22 +36,31 @@ router.get("/:customerId", async (req, res) => {
 
 //adding item
 router.post("/", async (req, res) => {
+  // console.log(req.body);
   //check if customer is authenticated.
   const customer = await User.findOne({ _id: req.body.customer });
   if (!customer) return res.status(400).send("Customer does not exist!");
 
   //check if book is valid
-  const book = await Book.findOne({ _id: req.body.book._id });
+  let book = await Book.findOne({ _id: req.body.book._id });
   if (!book) return res.status(400).send("Book does not exist!");
 
-  //check if a cart exist associated with the user
+  //retrieve cart
   const cart = await Cart.findOne({ customer: req.body.customer })
     .populate("books", "title author image _id")
     .populate("customer", "firstName")
     .select("books customer");
 
-  //check if more than 3 books
+  // console.log("cart", cart);
+  // if (
+  //   cart.books.filter((book) => book._id === req.body.book._id).length !== 0
+  // ) {
+  //   console.log(cart.books.filter((book) => book._id === req.body.book._id));
+  //   return res.status(400).send("No duplicate books.");
+  // }
+
   if (cart.books && cart.books.length < 3) {
+    //check if more than 3 books
     cart.books.push(book);
     await cart.save();
     res.send(cart);

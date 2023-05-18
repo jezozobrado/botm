@@ -108,7 +108,7 @@ const NavBar = () => {
 
       <Show below="xl">
         <Grid
-          templateColumns={{ base: "40px 1fr", md: "40px 1fr auto" }}
+          templateColumns={{ base: "40px 1fr auto", md: "40px 1fr auto" }}
           marginX="20px"
           marginY={3}
         >
@@ -120,18 +120,43 @@ const NavBar = () => {
               <Logo />
             </Link>
           </GridItem>
-          <Hide below="md">
+          {user && (
             <GridItem>
-              <Button
-                variant="solid"
-                width="120px"
-                bg="brand.100"
-                color="white"
-              >
-                Sign up
-              </Button>
+              <HStack>
+                {/* {user && <Text>{`Hello ${user?.firstName}`}</Text>} */}
+                {user && <Cart />}
+                {user && <PopOver />}
+                {user && (
+                  <Link to="/">
+                    <Button
+                      leftIcon={<BiUserCircle size="22px" />}
+                      variant="outline"
+                      onClick={() => {
+                        localStorage.removeItem("x-auth-token");
+                        setUser(null);
+                      }}
+                    >
+                      Logout
+                    </Button>
+                  </Link>
+                )}
+              </HStack>
             </GridItem>
-          </Hide>
+          )}
+          {!user && (
+            <Hide below="md">
+              <GridItem>
+                <Button
+                  variant="solid"
+                  width="120px"
+                  bg="brand.100"
+                  color="white"
+                >
+                  Sign up
+                </Button>
+              </GridItem>
+            </Hide>
+          )}
         </Grid>
       </Show>
       <Divider />
