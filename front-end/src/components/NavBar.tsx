@@ -19,6 +19,8 @@ import User from "../entities/User";
 import useUserStore from "../store/userStore";
 import Cart from "./Cart";
 import PopOver from "./PopOver";
+import useDrawerStore from "../store/drawerStore";
+import NavDrawer from "./Drawer";
 
 const NavBar = () => {
   const navItems: { url: string; displayName: string }[] = [
@@ -30,6 +32,9 @@ const NavBar = () => {
   ];
 
   const { user, setUser } = useUserStore();
+
+  const setIsOpen = useDrawerStore((s) => s.setIsOpen);
+  const isOpen = useDrawerStore((s) => s.isOpen);
 
   useEffect(() => {
     const token = localStorage.getItem("x-auth-token");
@@ -113,7 +118,17 @@ const NavBar = () => {
           marginY={3}
         >
           <GridItem>
-            <RxHamburgerMenu size="40px" />
+            <Button
+              bg="none"
+              _hover={{ bg: "none" }}
+              onClick={() => {
+                setIsOpen();
+                console.log(isOpen);
+              }}
+            >
+              <RxHamburgerMenu size="40px" />
+            </Button>
+            <NavDrawer />
           </GridItem>
           <GridItem margin="auto">
             <Link to="/">

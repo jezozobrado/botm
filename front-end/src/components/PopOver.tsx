@@ -79,7 +79,10 @@ const PopOver = () => {
               {data?.books.length! < 3 ? (
                 "You can choose up to 3 books."
               ) : isMoreThanThree ? (
-                <Text color="red">Your box cannot exceed 3 books.</Text>
+                <Text color="red">
+                  Your box cannot exceed 3 books. Please remove one of the
+                  books.
+                </Text>
               ) : (
                 "Your box is full."
               )}
