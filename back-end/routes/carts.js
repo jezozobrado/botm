@@ -25,13 +25,39 @@ router.get("/:customerId", async (req, res) => {
 
   if (!cart) {
     cart = new Cart({
-      customer: req.body.customer,
+      customer: req.params.customerId,
       books: [],
     });
+    await cart.save();
   }
-  // if (!cart) return res.status(400).send("No cart.");
 
   res.send(cart);
+});
+
+//adding item
+router.post("/", async (req, res) => {
+  //check if customer is authenticated.
+  const customer = await User.findOne({ _id: req.body.customer });
+  if (!customer) return res.status(400).send("Customer does not exist!");
+
+  //check if book is valid
+  const book = await Book.findOne({ _id: req.body.book._id });
+  if (!book) return res.status(400).send("Book does not exist!");
+
+  //check if a cart exist associated with the user
+  const cart = await Cart.findOne({ customer: req.body.customer })
+    .populate("books", "title author image _id")
+    .populate("customer", "firstName")
+    .select("books customer");
+
+  //check if more than 3 books
+  if (cart.books && cart.books.length < 3) {
+    cart.books.push(book);
+    await cart.save();
+    res.send(cart);
+  } else {
+    res.status(400).send("Cart exceeds 3 books.");
+  }
 });
 
 //removing item
@@ -45,40 +71,6 @@ router.post("/:customerId/:bookId", async (req, res) => {
   );
 
   res.status(200).send(cart);
-});
-
-//adding item
-router.post("/", async (req, res) => {
-  //check if customer is authenticated.
-  const customer = await User.findOne({ _id: req.body.customer });
-  if (!customer) return res.status(400).send("Customer does not exist!");
-
-  //check if book is valid
-  const book = await Book.findOne({ _id: req.body.book });
-  if (!book) return res.status(400).send("Book does not exist!");
-
-  //check if a cart exist associated with the user
-  let cart = await Cart.findOne({ customer: req.body.customer })
-    .populate("books", "title author image -_id")
-    .populate("customer", "firstName")
-    .select("books customer");
-
-  //if no cart, create new instance
-  if (!cart) {
-    cart = new Cart({
-      customer: req.body.customer,
-      books: [req.body.book],
-    });
-  }
-
-  //check if more than 3 books
-  if (cart.books.length < 3) {
-    cart.books.push(book);
-    await cart.save();
-    res.send(cart);
-  } else {
-    res.status(400).send("Cart exceeds 3 books.");
-  }
 });
 
 module.exports = router;
