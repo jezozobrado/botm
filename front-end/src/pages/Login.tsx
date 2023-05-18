@@ -36,14 +36,14 @@ const Login = () => {
 
   const authUser = useMutation({
     mutationFn: (user: User) => apiClient.authUser(user),
-    onSuccess: (data) => {
-      const token = localStorage.getItem("x-auth-token");
+    // onSuccess: (data) => {
+    //   const token = localStorage.getItem("x-auth-token");
 
-      if (token) {
-        const decoded = jwtDecode(token) as User;
-        setUser(decoded);
-      }
-    },
+    //   if (token) {
+    //     const decoded = jwtDecode(token) as User;
+    //     setUser(decoded);
+    //   }
+    // },
     onError: (err: AxiosError) => console.error("ulul", err),
   });
 
@@ -60,8 +60,14 @@ const Login = () => {
   const navigate = useNavigate();
 
   const onSubmit = (data: User) => {
-    authUser.mutate(data);
-    navigate("/the-best-new-books");
+    authUser.mutateAsync(data).then((data) => {
+      const token = localStorage.getItem("x-auth-token");
+      if (token) {
+        const decoded = jwtDecode(token) as User;
+        setUser(decoded);
+        navigate("/the-best-new-books");
+      }
+    });
   };
 
   const errorMessage = authUser?.error?.response?.data as string;

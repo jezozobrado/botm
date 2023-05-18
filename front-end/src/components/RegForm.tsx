@@ -26,7 +26,6 @@ const schema = Joi.object({
   firstName: Joi.string().min(5).max(50).required(),
   lastName: Joi.string().min(5).max(50).required(),
   email: Joi.string().min(5).max(50).required(),
-  // .email({ tlds: { allow: false } }),
   password: Joi.string().min(5).max(50).required(),
 });
 
@@ -41,31 +40,23 @@ const RegForm = ({ submitText }: Props) => {
   });
 
   const { setUser } = useUserStore();
-  const toast = useToast();
+  const navigate = useNavigate();
 
   const apiClient = new APIClient<User>("users");
   const addUser = useMutation({
     mutationFn: (user: User) => apiClient.addUser(user),
     onSuccess: (data) => {
       setUser(data);
-      toast({
-        title: "Successful registration.",
-        description: "Browse this month's books.",
-        status: "success",
-        duration: 2000,
-        isClosable: true,
-      });
+      navigate("/the-best-new-books");
     },
     onError: (error) => console.log(error),
   });
 
-  const navigate = useNavigate();
   return (
     <>
       <form
         onSubmit={handleSubmit((data) => {
           addUser.mutate(data);
-          navigate("/the-best-new-books");
         })}
       >
         <Stack color="black" gap={2}>

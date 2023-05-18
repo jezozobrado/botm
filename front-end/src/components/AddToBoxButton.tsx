@@ -30,6 +30,7 @@ const AddToBoxButton = ({ book }: Props) => {
   return (
     <Button
       isDisabled={disabled}
+      _disabled={{ bgColor: "gray.300", _hover: { bgColor: "gray.300" } }}
       variant="btn-primary"
       width={{ base: "85vw ", md: "70%" }}
       alignSelf={{ base: "center", md: "normal" }}
@@ -42,7 +43,13 @@ const AddToBoxButton = ({ book }: Props) => {
         });
       }}
     >
-      {addItem.isLoading ? <Spinner /> : "Add to box"}
+      {addItem.isLoading ? (
+        <Spinner />
+      ) : disabled ? (
+        "Already picked"
+      ) : (
+        "Add to box"
+      )}
     </Button>
   );
 };

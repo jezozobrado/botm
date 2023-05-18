@@ -1,30 +1,29 @@
 import {
-  Popover,
-  PopoverTrigger,
-  Button,
-  Icon,
-  Portal,
-  PopoverContent,
-  PopoverArrow,
-  PopoverHeader,
-  PopoverCloseButton,
-  PopoverBody,
-  PopoverFooter,
-  HStack,
-  useDisclosure,
-  Text,
-  Image,
-  Badge,
-  Stack,
-  Box,
   AspectRatio,
+  Box,
+  Button,
+  HStack,
+  Icon,
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverFooter,
+  PopoverHeader,
+  PopoverTrigger,
+  Portal,
+  Stack,
+  Text,
+  useDisclosure,
 } from "@chakra-ui/react";
+import { useEffect } from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import CartItem from "./CartItem";
 import useCart from "../hooks/useCart";
 import useCartStore from "../store/cartStore";
-import { useEffect } from "react";
+import CartItem from "./CartItem";
+import _ from "lodash";
 
 const PopOver = () => {
   const { isOpen, onClose, onOpen, onToggle } = useDisclosure();
@@ -87,11 +86,19 @@ const PopOver = () => {
             </PopoverBody>
             {!!data?.books.length && (
               <PopoverFooter>
-                <HStack>
-                  <Button variant="btn-primary">Check out</Button>
-                  <Link to="/all-books">
-                    <Button variant="btn-secondary">Choose add-ons</Button>
-                  </Link>
+                <HStack justifyContent="space-around">
+                  {data?.books.length > 0 && (
+                    <Button variant="btn-primary" width="100%">
+                      Check out
+                    </Button>
+                  )}
+                  {_.inRange(data?.books.length, 0, 3) && (
+                    <Link to="/all-books">
+                      <Button variant="btn-secondary" width="100%">
+                        Choose add-ons
+                      </Button>
+                    </Link>
+                  )}
                 </HStack>
               </PopoverFooter>
             )}

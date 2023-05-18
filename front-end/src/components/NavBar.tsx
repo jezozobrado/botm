@@ -16,7 +16,6 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../assets/Logo";
 import User from "../entities/User";
-import useCartStore from "../store/cartStore";
 import useUserStore from "../store/userStore";
 import Cart from "./Cart";
 import PopOver from "./PopOver";
@@ -31,7 +30,6 @@ const NavBar = () => {
   ];
 
   const { user, setUser } = useUserStore();
-  const { resetCart } = useCartStore();
 
   useEffect(() => {
     const token = localStorage.getItem("x-auth-token");
@@ -82,10 +80,6 @@ const NavBar = () => {
                   onClick={() => {
                     localStorage.removeItem("x-auth-token");
                     setUser(null);
-                    resetCart();
-                    resetCart();
-                    localStorage.removeItem("cart");
-                    localStorage.removeItem("user");
                   }}
                 >
                   Logout

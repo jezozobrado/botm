@@ -6,7 +6,6 @@ interface CartStore {
   current: number;
   isMoreThanThree: boolean;
   setCart: (books: Book[]) => void;
-  editCart: () => void;
   setCurrent: () => void;
   setIsMoreThanThree: () => void;
 }
@@ -16,7 +15,6 @@ const useCartStore = create<CartStore>((set) => ({
   current: 0,
   isMoreThanThree: false,
   setCart: (books) => set((store) => ({ cart: [...books] })),
-  editCart: () => set((store) => ({ cart: store.cart.slice(-1) })),
   setCurrent: () => set((store) => ({ current: store.current + 1 })),
   setIsMoreThanThree: () =>
     set((store) => ({ isMoreThanThree: !store.isMoreThanThree })),

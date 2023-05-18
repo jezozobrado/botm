@@ -4,6 +4,7 @@ const { User } = require("../models/user");
 const { Book } = require("../models/book");
 const router = express.Router();
 
+//get all carts
 router.get("/", async (req, res) => {
   const carts = await Cart.find()
     .populate("books", "title -_id")
@@ -13,19 +14,27 @@ router.get("/", async (req, res) => {
   res.send(carts);
 });
 
+//retrieving items
 router.get("/:customerId", async (req, res) => {
-  if (!req.params) return res.status(400).send("No cart.");
+  if (!req.params.customerId) return res.status(400).send("No cart.");
 
-  const cart = await Cart.findOne({ customer: req.params.customerId })
+  let cart = await Cart.findOne({ customer: req.params.customerId })
     .populate("books", "title author image _id slug")
     .populate("customer", "firstName")
     .select("books customer");
 
-  if (!cart) return res.status(400).send("No cart.");
+  if (!cart) {
+    cart = new Cart({
+      customer: req.body.customer,
+      books: [],
+    });
+  }
+  // if (!cart) return res.status(400).send("No cart.");
 
   res.send(cart);
 });
 
+//removing item
 router.post("/:customerId/:bookId", async (req, res) => {
   console.log("params", req.params);
 
@@ -38,6 +47,7 @@ router.post("/:customerId/:bookId", async (req, res) => {
   res.status(200).send(cart);
 });
 
+//adding item
 router.post("/", async (req, res) => {
   //check if customer is authenticated.
   const customer = await User.findOne({ _id: req.body.customer });
@@ -69,16 +79,6 @@ router.post("/", async (req, res) => {
   } else {
     res.status(400).send("Cart exceeds 3 books.");
   }
-
-  // if (cart) {
-  //   console.log(book.title, cart);
-  //   cart.books.push(book);
-  // } else {
-  //   cart = new Cart({
-  //     customer: req.body.customer,
-  //     books: [req.body.book],
-  //   });
-  // }
 });
 
 module.exports = router;
