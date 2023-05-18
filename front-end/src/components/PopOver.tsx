@@ -29,41 +29,62 @@ import useUserStore from "../store/userStore";
 const PopOver = () => {
   const { isOpen, onClose, onOpen, onToggle } = useDisclosure();
 
-  const { user } = useUserStore();
-
   const current = useCartStore((s) => s.current);
   const removeClick = useCartStore((s) => s.removeClick);
+  const isMoreThanThree = useCartStore((s) => s.isMoreThanThree);
+  const setIsMoreThanThree = useCartStore((s) => s.setIsMoreThanThree);
+
   const { data } = useCart([current, removeClick]);
 
-  const isMoreThanThree = useCartStore((s) => s.isMoreThanThree);
-
-  const setIsMoreThanThree = useCartStore((s) => s.setIsMoreThanThree);
-  useEffect(() => onToggle, [current]);
+  useEffect(() => onOpen, [current]);
 
   return (
     <>
       <Popover
         trigger="hover"
+        isOpen={isOpen}
         onClose={() => {
-          isMoreThanThree && setIsMoreThanThree();
+          isMoreThanThree && setIsMoreThanThree(false);
         }}
       >
         <PopoverTrigger>
-          <Button variant="outline">
+          <Button
+            variant="outline"
+            onMouseEnter={onOpen}
+            onMouseLeave={onClose}
+            onFocus={onOpen}
+            onBlur={onClose}
+          >
             <Icon as={AiOutlineShoppingCart} boxSize="22px" />
           </Button>
         </PopoverTrigger>
         <Portal>
-          <PopoverContent width="400px">
+          <PopoverContent
+            width="400px"
+            onMouseEnter={onOpen}
+            onMouseLeave={onClose}
+            onFocus={onOpen}
+            onBlur={onClose}
+            _after={{
+              content: "''",
+              position: "absolute",
+              w: "100%",
+              h: "8px",
+              top: "-8px",
+              left: 0,
+            }}
+          >
             <PopoverArrow />
             <PopoverHeader>
-              {data?.books.length! < 3
-                ? "You can choose up to 3 books."
-                : isMoreThanThree
-                ? "Your box cannot exceed 3 books."
-                : "Your box is full."}
+              {data?.books.length! < 3 ? (
+                "You can choose up to 3 books."
+              ) : isMoreThanThree ? (
+                <Text color="red">Your box cannot exceed 3 books.</Text>
+              ) : (
+                "Your box is full."
+              )}
             </PopoverHeader>
-            <PopoverCloseButton />
+            <PopoverCloseButton onClick={onClose} />
             <PopoverBody>
               {data?.books.length! > 0 ? (
                 <>

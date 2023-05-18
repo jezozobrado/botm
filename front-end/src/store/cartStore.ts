@@ -9,7 +9,7 @@ interface CartStore {
   disabled: boolean;
   setCart: (books: Book[]) => void;
   setCurrent: () => void;
-  setIsMoreThanThree: () => void;
+  setIsMoreThanThree: (bool: boolean) => void;
   setRemoveClick: () => void;
   setIsDisabled: (bool: boolean) => Promise<void>;
 }
@@ -22,8 +22,7 @@ const useCartStore = create<CartStore>((set) => ({
   disabled: false,
   setCart: (books) => set((store) => ({ cart: [...books] }), true),
   setCurrent: () => set((store) => ({ current: store.current + 1 })),
-  setIsMoreThanThree: () =>
-    set((store) => ({ isMoreThanThree: !store.isMoreThanThree })),
+  setIsMoreThanThree: (bool) => set((store) => ({ isMoreThanThree: bool })),
   setRemoveClick: () =>
     set((store) => ({ removeClick: store.removeClick + 1 })),
   // setIsDisabled: (bool) => set((store) => ({ disabled: bool })),

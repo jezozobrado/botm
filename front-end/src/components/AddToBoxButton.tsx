@@ -22,19 +22,16 @@ const AddToBoxButton = ({ book }: Props) => {
 
   const addItem = useAddItem();
   const setIsMoreThanThree = useCartStore((s) => s.setIsMoreThanThree);
-  if (addItem.isError) setIsMoreThanThree();
+
+  if (addItem.isError) setIsMoreThanThree(true);
 
   const { data: cart, isFetching, isLoading, status } = useCart([removeClick]);
 
-  useEffect(() => {
-    // status === "loading" &&
-    setIsDisabled(Boolean(cart?.books.find((b) => b.title === book.title)));
-
-    console.log(
-      status,
-      Boolean(cart?.books.find((b) => b.title === book.title))
-    );
-  }, [isFetching]);
+  useEffect(
+    () =>
+      setIsDisabled(Boolean(cart?.books.find((b) => b.title === book.title))),
+    [isFetching]
+  );
 
   return (
     <>
@@ -62,8 +59,13 @@ const AddToBoxButton = ({ book }: Props) => {
             addItem
               .mutateAsync({ book: book, customer: user?._id })
               .then((res) => {
-                setCurrent();
-              });
+                // setCurrent();
+              })
+              .catch(() => {
+                setIsDisabled(false);
+                // setCurrent();
+              })
+              .finally(() => setCurrent());
           }}
         >
           {addItem.isLoading ? (
