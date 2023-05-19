@@ -4,8 +4,7 @@ const lodash = require("lodash");
 const { Book, validate } = require("../models/book");
 const auth = require("../middleware/auth");
 
-router.get("/", auth, async (req, res) => {
-  console.log(req.query);
+router.get("/", async (req, res) => {
   const books = await Book.find({
     defaultCategory: new RegExp(".*" + req.query.defaultCategory + ".*", "i"),
   })

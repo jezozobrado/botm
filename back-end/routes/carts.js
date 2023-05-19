@@ -36,7 +36,6 @@ router.get("/:customerId", async (req, res) => {
 
 //adding item
 router.post("/", async (req, res) => {
-  // console.log(req.body);
   //check if customer is authenticated.
   const customer = await User.findOne({ _id: req.body.customer });
   if (!customer) return res.status(400).send("Customer does not exist!");
@@ -51,14 +50,6 @@ router.post("/", async (req, res) => {
     .populate("customer", "firstName")
     .select("books customer");
 
-  // console.log("cart", cart);
-  // if (
-  //   cart.books.filter((book) => book._id === req.body.book._id).length !== 0
-  // ) {
-  //   console.log(cart.books.filter((book) => book._id === req.body.book._id));
-  //   return res.status(400).send("No duplicate books.");
-  // }
-
   if (cart.books && cart.books.length < 3) {
     //check if more than 3 books
     cart.books.push(book);
@@ -71,8 +62,6 @@ router.post("/", async (req, res) => {
 
 //removing item
 router.post("/:customerId/:bookId", async (req, res) => {
-  console.log("params", req.params);
-
   const cart = await Cart.findOneAndUpdate(
     { customer: req.params.customerId },
     { $pull: { books: req.params.bookId } },

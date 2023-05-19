@@ -48,7 +48,10 @@ const AddToBoxButton = ({ book }: Props) => {
       ) : (
         <Button
           isDisabled={disabled}
-          _disabled={{ bgColor: "gray.300", _hover: { bgColor: "gray.300" } }}
+          _disabled={{
+            bgColor: "gray.300",
+            _hover: { bgColor: "gray.300" },
+          }}
           variant="btn-primary"
           width={{ base: "85vw ", md: "70%" }}
           alignSelf={{ base: "center", md: "normal" }}

@@ -31,7 +31,7 @@ const RegFormModal = ({ buttonText, btnVariant }: Props) => {
       <Modal isOpen={isOpenSignUp} onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent bgColor="brand.200">
-          <ModalHeader color="white" letterSpacing={1}>
+          <ModalHeader color="white" letterSpacing={1} fontWeight="semibold">
             This is the good part.
           </ModalHeader>
           <ModalCloseButton color="white" />

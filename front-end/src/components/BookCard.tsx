@@ -15,6 +15,8 @@ import useAddItem from "../hooks/useAddItem";
 import useCartStore from "../store/cartStore";
 
 import AddToBoxButton from "./AddToBoxButton";
+import useUserStore from "../store/userStore";
+import AddToBoxButtonUnauthenticated from "./HowItWorks/AddToBoxButtonUnauthenticated";
 
 interface Props {
   book: Book;
@@ -27,9 +29,11 @@ const BookCard = ({ book }: Props) => {
     "BOTY Finalist": "pink",
   };
 
+  const user = useUserStore((s) => s.user);
+
   const addItem = useAddItem();
   const setIsMoreThanThree = useCartStore((s) => s.setIsMoreThanThree);
-  if (addItem.isError) setIsMoreThanThree();
+  if (addItem.isError) setIsMoreThanThree(false);
 
   return (
     <SimpleGrid
@@ -59,7 +63,7 @@ const BookCard = ({ book }: Props) => {
         borderRadius={0}
         padding={{ base: "1px", md: "20px" }}
       >
-        <CardBody>
+        <CardBody py={user ? "" : "40px"}>
           <Stack>
             <Text variant="text-tertiary">{book.mainGenre}</Text>
             <Link to={"/all-books/" + book.slug}>
@@ -89,7 +93,7 @@ const BookCard = ({ book }: Props) => {
             <Text paddingBottom={{ base: "0", md: "20px" }} textAlign="left">
               {book.description}
             </Text>
-            <AddToBoxButton book={book} />
+            {user && <AddToBoxButton book={book} />}
           </Stack>
         </CardBody>
       </Card>

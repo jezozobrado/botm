@@ -1,6 +1,5 @@
 import {
   Badge,
-  Button,
   Card,
   CardBody,
   Container,
@@ -13,11 +12,13 @@ import {
 import { Link } from "react-router-dom";
 import { Book } from "../entities/Book";
 import AddToBoxButton from "./AddToBoxButton";
+import useUserStore from "../store/userStore";
 
 interface Props {
   book: Book;
 }
 const BookDetailCard = ({ book }: Props) => {
+  const user = useUserStore((s) => s.user);
   const badgeMap: { [key: string]: string } = {
     Debut: "green",
     "Repeat Author": "brand.200",
@@ -74,18 +75,11 @@ const BookDetailCard = ({ book }: Props) => {
               </HStack>
 
               <Text textAlign="center">by {book.author}</Text>
-              <Container margin="auto">
-                <AddToBoxButton book={book} />
-              </Container>
-              {/* <Button
-                variant="btn-primary"
-                width={{ base: "90%", lg: "fit-content" }}
-                alignSelf="center"
-                paddingX={{ md: "40px" }}
-                paddingY="23px"
-              >
-                Make my BOTM
-              </Button> */}
+              {user && (
+                <Container margin="auto">
+                  <AddToBoxButton book={book} />
+                </Container>
+              )}
             </Stack>
           </CardBody>
         </Card>
