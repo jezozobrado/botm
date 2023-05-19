@@ -18,7 +18,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
-import { AiOutlineShoppingCart } from "react-icons/ai";
+import { BsBoxSeam } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import useCart from "../hooks/useCart";
 import useCartStore from "../store/cartStore";
@@ -50,12 +50,14 @@ const PopOver = () => {
         <PopoverTrigger>
           <Button
             variant="outline"
+            border="none"
+            _hover={{ bg: "none" }}
             onMouseEnter={onOpen}
             onMouseLeave={onClose}
             onFocus={onOpen}
             onBlur={onClose}
           >
-            <Icon as={AiOutlineShoppingCart} boxSize="22px" />
+            <Icon as={BsBoxSeam} boxSize="22px" />
           </Button>
         </PopoverTrigger>
         <Portal>

@@ -5,13 +5,6 @@ import {
   GridItem,
   HStack,
   Hide,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
   Show,
   Spacer,
   Text,
@@ -24,12 +17,11 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../assets/Logo";
 import User from "../entities/User";
+import useDrawerStore from "../store/drawerStore";
 import useUserStore from "../store/userStore";
 import Cart from "./Cart";
-import PopOver from "./PopOver";
-import useDrawerStore from "../store/drawerStore";
 import NavDrawer from "./Drawer";
-import RegForm from "./RegForm";
+import PopOver from "./PopOver";
 import RegFormModal from "./RegFormModal";
 
 const NavBar = () => {
