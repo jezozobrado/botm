@@ -30,6 +30,7 @@ import PopOver from "./PopOver";
 import useDrawerStore from "../store/drawerStore";
 import NavDrawer from "./Drawer";
 import RegForm from "./RegForm";
+import RegFormModal from "./RegFormModal";
 
 const NavBar = () => {
   const navItems: { url: string; displayName: string }[] = [
@@ -113,25 +114,7 @@ const NavBar = () => {
               </Link>
             )}
 
-            {!user && (
-              <Button width="120px" variant="btn-primary" onClick={onOpen}>
-                Sign up
-              </Button>
-            )}
-            <Modal isOpen={isOpenSignUp} onClose={onClose}>
-              <ModalOverlay />
-              <ModalContent bgColor="brand.200">
-                <ModalHeader color="white" letterSpacing={1}>
-                  Books are awaiting!
-                </ModalHeader>
-                <ModalCloseButton />
-                <ModalBody>
-                  <RegForm submitText={"See the books"} onSubmit={onClose} />
-                </ModalBody>
-
-                <ModalFooter></ModalFooter>
-              </ModalContent>
-            </Modal>
+            {!user && <RegFormModal buttonText={"Sign up"} />}
           </HStack>
         </HStack>
       </Show>

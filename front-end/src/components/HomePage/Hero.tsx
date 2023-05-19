@@ -1,9 +1,18 @@
-import { Flex, Heading, HStack, Button, Text } from "@chakra-ui/react";
+import {
+  Flex,
+  Heading,
+  HStack,
+  Button,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react";
 import Header from "../Header";
 import { useNavigate } from "react-router-dom";
+import RegFormModal from "../RegFormModal";
 
 const Hero = () => {
   const navigate = useNavigate();
+  const { isOpen: isOpenSignUp, onOpen, onClose } = useDisclosure();
   return (
     <Flex
       width={{ base: "auto", md: "800px" }}
@@ -21,20 +30,8 @@ const Hero = () => {
       />
 
       <HStack justifyContent="center">
-        <Button
-          fontSize="18px"
-          width="150px"
-          height="45px"
-          variant="btn-primary"
-        >
-          Join now
-        </Button>
-        <Button
-          fontSize="18px"
-          width="150px"
-          height="45px"
-          variant="btn-secondary"
-        >
+        <RegFormModal buttonText={"Join now"} />
+        <Button width="120px" variant="btn-secondary" onClick={onOpen}>
           Give a gift
         </Button>
       </HStack>
