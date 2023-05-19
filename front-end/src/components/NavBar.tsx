@@ -107,7 +107,7 @@ const NavBar = () => {
               <Link to="/login">
                 <Button
                   leftIcon={<BiUserCircle size="22px" />}
-                  variant="outline"
+                  variant="btn-secondary-black"
                 >
                   Login
                 </Button>

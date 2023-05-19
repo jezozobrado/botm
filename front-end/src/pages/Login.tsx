@@ -1,25 +1,23 @@
 import {
   Button,
-  Stack,
+  HStack,
   Input,
   InputGroup,
   InputRightElement,
-  Heading,
+  Stack,
   Text,
-  useToast,
 } from "@chakra-ui/react";
+import { joiResolver } from "@hookform/resolvers/joi";
+import { AxiosError } from "axios";
+import Joi from "joi";
+import jwtDecode from "jwt-decode";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import Joi from "joi";
-import { joiResolver } from "@hookform/resolvers/joi";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import APIClient from "../services/apiClient";
+import { Link, useNavigate } from "react-router-dom";
+import Header from "../components/Header";
 import User from "../entities/User";
-import { AxiosError } from "axios";
-import { useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 import useUserStore from "../store/userStore";
-import jwtDecode from "jwt-decode";
-import useCart from "../hooks/useCart";
 
 const schema = Joi.object({
   email: Joi.string()
@@ -31,21 +29,11 @@ const schema = Joi.object({
 });
 
 const Login = () => {
+  const authUser = useAuth();
+
   const setUser = useUserStore((s) => s.setUser);
-  const apiClient = new APIClient<User>("/auth");
-
-  const authUser = useMutation({
-    mutationFn: (user: User) => apiClient.authUser(user),
-    // onSuccess: (data) => {
-    //   const token = localStorage.getItem("x-auth-token");
-
-    //   if (token) {
-    //     const decoded = jwtDecode(token) as User;
-    //     setUser(decoded);
-    //   }
-    // },
-    onError: (err: AxiosError) => console.error("ulul", err),
-  });
+  const navigate = useNavigate();
+  const [show, setShow] = useState(false);
 
   const {
     register,
@@ -54,10 +42,6 @@ const Login = () => {
   } = useForm<User>({
     resolver: joiResolver(schema),
   });
-
-  const [show, setShow] = useState(false);
-
-  const navigate = useNavigate();
 
   const onSubmit = (data: User) => {
     authUser.mutateAsync(data).then((data) => {
@@ -74,9 +58,10 @@ const Login = () => {
 
   return (
     <>
-      <Heading variant="heading-small" marginTop="100px" marginBottom="30px">
-        Hey, you
-      </Heading>
+      <Header
+        heading={"Books rock."}
+        subheading={"If you were a book, you'd be a classic ;)"}
+      />
       {errors?.email && (
         <Text color="red" textAlign="center">
           {errors.email.message}
@@ -94,9 +79,10 @@ const Login = () => {
       )}
       <form onSubmit={handleSubmit((data) => onSubmit(data))}>
         <Stack
-          width={{ base: "90%", md: "500px " }}
+          width={{ base: "90%", md: "480px " }}
           margin="auto"
           marginTop={5}
+          gap={1}
         >
           <Input
             {...register("email")}
@@ -127,6 +113,12 @@ const Login = () => {
           </Button>
         </Stack>
       </form>
+      <HStack justifyContent="center" mt={2}>
+        <Text textAlign="center">New around here?</Text>
+        <Link>
+          <Button variant="btn-link">Join now.</Button>
+        </Link>
+      </HStack>
     </>
   );
 };
