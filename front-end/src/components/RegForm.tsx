@@ -10,13 +10,15 @@ import {
 import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { FieldErrors, useForm } from "react-hook-form";
 import User from "../entities/User";
 import useAddUser from "../hooks/useAddUser";
+import AuthAlert from "./AuthAlert";
+import axios, { AxiosError } from "axios";
 
 interface Props {
   submitText: string;
-  onSubmit?: () => void;
+  onSubmit?: (errors: FieldErrors) => void;
 }
 
 const schema = Joi.object({
@@ -37,6 +39,8 @@ const RegForm = ({ submitText, onSubmit }: Props) => {
   } = useForm<User>({
     resolver: joiResolver(schema),
   });
+
+  const axiosError = addUser.error as AxiosError;
 
   return (
     <>
@@ -94,16 +98,18 @@ const RegForm = ({ submitText, onSubmit }: Props) => {
             _hover={{ color: "none" }}
             color="white"
             type="submit"
-            onClick={onSubmit}
+            onClick={() => onSubmit?.(errors)}
           >
             {submitText}
           </Button>
           {errors.firstName?.message && (
-            <Text>{errors.firstName?.message}</Text>
+            <Text color="white">{errors.firstName?.message}</Text>
           )}
+
           {errors.lastName?.message && <Text>{errors.lastName?.message}</Text>}
           {errors.email?.message && <Text>{errors.email?.message}</Text>}
           {errors.password?.message && <Text>{errors.password?.message}</Text>}
+          {axiosError && <Text>{axiosError?.response?.data as string}</Text>}
         </Stack>
       </form>
     </>

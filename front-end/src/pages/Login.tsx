@@ -1,4 +1,8 @@
 import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
   Button,
   HStack,
   Input,
@@ -18,6 +22,7 @@ import Header from "../components/Header";
 import User from "../entities/User";
 import useAuth from "../hooks/useAuth";
 import useUserStore from "../store/userStore";
+import AuthAlert from "../components/AuthAlert";
 
 const schema = Joi.object({
   email: Joi.string()
@@ -62,21 +67,7 @@ const Login = () => {
         heading={"Books rock."}
         subheading={"If you were a book, you'd be a classic ;)"}
       />
-      {errors?.email && (
-        <Text color="red" textAlign="center">
-          {errors.email.message}
-        </Text>
-      )}
-      {authUser.error instanceof AxiosError && (
-        <Text color="red" textAlign="center">
-          {errorMessage}
-        </Text>
-      )}
-      {errors?.password && (
-        <Text color="red" textAlign="center">
-          {errors.password.message}
-        </Text>
-      )}
+
       <form onSubmit={handleSubmit((data) => onSubmit(data))}>
         <Stack
           width={{ base: "90%", md: "480px " }}
@@ -119,6 +110,19 @@ const Login = () => {
           <Button variant="btn-link">Join now.</Button>
         </Link>
       </HStack>
+      <Stack alignItems="center">
+        {errors?.email && (
+          <AuthAlert status={"error"} errorMessage={errors.email.message} />
+        )}
+
+        {errors?.password && (
+          <AuthAlert status={"error"} errorMessage={errors.password.message} />
+        )}
+
+        {authUser.error instanceof AxiosError && (
+          <AuthAlert status={"error"} errorMessage={errorMessage} />
+        )}
+      </Stack>
     </>
   );
 };

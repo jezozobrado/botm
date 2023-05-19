@@ -1,13 +1,6 @@
-import {
-  Flex,
-  Heading,
-  HStack,
-  Button,
-  Text,
-  useDisclosure,
-} from "@chakra-ui/react";
-import Header from "../Header";
+import { Button, Flex, HStack, Text } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import Header from "../Header";
 import RegFormModal from "../RegFormModal";
 
 const Hero = () => {

@@ -14,6 +14,7 @@ import RegForm from "./RegForm";
 interface Props {
   buttonText: string;
 }
+
 const RegFormModal = ({ buttonText }: Props) => {
   const { isOpen: isOpenSignUp, onOpen, onClose } = useDisclosure();
   return (
@@ -34,7 +35,10 @@ const RegFormModal = ({ buttonText }: Props) => {
           </ModalHeader>
           <ModalCloseButton color="white" />
           <ModalBody>
-            <RegForm submitText={"See the books"} onSubmit={onClose} />
+            <RegForm
+              submitText={"See the books"}
+              onSubmit={(error) => !error && onOpen}
+            />
           </ModalBody>
 
           <ModalFooter></ModalFooter>
