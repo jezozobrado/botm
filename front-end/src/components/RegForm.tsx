@@ -6,17 +6,13 @@ import {
   InputRightElement,
   Stack,
   Text,
-  useToast,
 } from "@chakra-ui/react";
-import { useMutation } from "@tanstack/react-query";
+import { joiResolver } from "@hookform/resolvers/joi";
+import Joi from "joi";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import APIClient from "../services/apiClient";
 import User from "../entities/User";
-import Joi from "joi";
-import { joiResolver } from "@hookform/resolvers/joi";
-import { useNavigate } from "react-router-dom";
-import useUserStore from "../store/userStore";
+import useAddUser from "../hooks/useAddUser";
 
 interface Props {
   submitText: string;
@@ -31,25 +27,14 @@ const schema = Joi.object({
 
 const RegForm = ({ submitText }: Props) => {
   const [show, setShow] = useState(false);
+  const addUser = useAddUser();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<User>({
     resolver: joiResolver(schema),
-  });
-
-  const { setUser } = useUserStore();
-  const navigate = useNavigate();
-
-  const apiClient = new APIClient<User>("users");
-  const addUser = useMutation({
-    mutationFn: (user: User) => apiClient.addUser(user),
-    onSuccess: (data) => {
-      setUser(data);
-      navigate("/the-best-new-books");
-    },
-    onError: (error) => console.log(error),
   });
 
   return (

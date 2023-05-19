@@ -84,7 +84,7 @@ const PopOver = () => {
                   books.
                 </Text>
               ) : (
-                "Your box is full."
+                <Text fontWeight="bold">Your box is full.</Text>
               )}
             </PopoverHeader>
             <PopoverCloseButton onClick={onClose} />
