@@ -71,6 +71,7 @@ const NavBar = () => {
                 to={url}
                 style={({ isActive }: { isActive: boolean }) => ({
                   color: isActive ? "#11afe2" : "",
+                  fontSize: "17px",
                 })}
               >
                 {displayName}
