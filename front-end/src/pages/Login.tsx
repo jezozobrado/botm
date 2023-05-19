@@ -25,8 +25,16 @@ const schema = Joi.object({
   email: Joi.string()
     .max(50)
     .required()
-    .email({ tlds: { allow: false } }),
-  password: Joi.string().max(50).required(),
+    .email({ tlds: { allow: false } })
+    .messages({
+      "string.empty": "Email field cannot be empty.",
+      "string.max": "Email field cannot be more than 50 letters.",
+    }),
+  password: Joi.string().min(5).max(50).required().messages({
+    "string.empty": "Password field cannot be empty.",
+    "string.min": "Password field cannot be less than 5 characters.",
+    "string.max": "Password field cannot be more than 50 letters.",
+  }),
 });
 
 const Login = () => {

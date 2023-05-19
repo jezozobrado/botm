@@ -25,10 +25,26 @@ interface Props {
 }
 
 const schema = Joi.object({
-  firstName: Joi.string().min(5).max(50).required(),
-  lastName: Joi.string().min(5).max(50).required(),
-  email: Joi.string().min(5).max(50).required(),
-  password: Joi.string().min(5).max(50).required(),
+  firstName: Joi.string().min(5).max(50).required().messages({
+    "string.empty": "First name field cannot be empty.",
+    "string.min": "First name field cannot be less than 5 letters.",
+    "string.max": "First name field cannot be more than 50 letters.",
+  }),
+  lastName: Joi.string().min(5).max(50).required().messages({
+    "string.empty": "Last name field cannot be empty.",
+    "string.min": "Last name field cannot be less than 5 letters.",
+    "string.max": "Last name field cannot be more than 50 letters.",
+  }),
+  email: Joi.string().min(5).max(50).required().messages({
+    "string.empty": "Email field cannot be empty.",
+    "string.min": "Email field cannot be less than 5 letters.",
+    "string.max": "Email field cannot be more than 50 letters.",
+  }),
+  password: Joi.string().min(5).max(50).required().messages({
+    "string.empty": "Password field cannot be empty.",
+    "string.min": "Password field cannot be less than 5 letters.",
+    "string.max": "Password field cannot be more than 50 letters.",
+  }),
 });
 
 const RegForm = ({ submitText, onSubmit }: Props) => {
