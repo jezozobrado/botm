@@ -1,4 +1,7 @@
 import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
   Button,
   HStack,
   Input,
@@ -103,13 +106,42 @@ const RegForm = ({ submitText, onSubmit }: Props) => {
             {submitText}
           </Button>
           {errors.firstName?.message && (
-            <Text color="white">{errors.firstName?.message}</Text>
+            <AuthAlert
+              status={"error"}
+              errorMessage={errors.firstName?.message}
+              modal={true}
+            />
           )}
 
-          {errors.lastName?.message && <Text>{errors.lastName?.message}</Text>}
-          {errors.email?.message && <Text>{errors.email?.message}</Text>}
-          {errors.password?.message && <Text>{errors.password?.message}</Text>}
-          {axiosError && <Text>{axiosError?.response?.data as string}</Text>}
+          {errors.lastName?.message && (
+            <AuthAlert
+              status={"error"}
+              errorMessage={errors.lastName?.message}
+              modal={true}
+            />
+          )}
+
+          {errors.email?.message && (
+            <AuthAlert
+              status={"error"}
+              errorMessage={errors.email?.message}
+              modal={true}
+            />
+          )}
+          {errors.password?.message && (
+            <AuthAlert
+              status={"error"}
+              errorMessage={errors.password?.message}
+              modal={true}
+            />
+          )}
+          {axiosError && (
+            <AuthAlert
+              status={"error"}
+              errorMessage={axiosError?.response?.data as string}
+              modal={true}
+            />
+          )}
         </Stack>
       </form>
     </>

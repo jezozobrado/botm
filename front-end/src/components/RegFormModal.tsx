@@ -13,15 +13,16 @@ import RegForm from "./RegForm";
 
 interface Props {
   buttonText: string;
+  btnVariant: string;
 }
 
-const RegFormModal = ({ buttonText }: Props) => {
+const RegFormModal = ({ buttonText, btnVariant }: Props) => {
   const { isOpen: isOpenSignUp, onOpen, onClose } = useDisclosure();
   return (
     <>
       <Button
         width="120px"
-        variant="btn-primary"
+        variant={btnVariant}
         onClick={onOpen}
         fontWeight="normal"
       >
@@ -31,7 +32,7 @@ const RegFormModal = ({ buttonText }: Props) => {
         <ModalOverlay />
         <ModalContent bgColor="brand.200">
           <ModalHeader color="white" letterSpacing={1}>
-            Books are awaiting!
+            This is the good part.
           </ModalHeader>
           <ModalCloseButton color="white" />
           <ModalBody>

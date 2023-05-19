@@ -1,8 +1,4 @@
 import {
-  Alert,
-  AlertDescription,
-  AlertIcon,
-  AlertTitle,
   Button,
   HStack,
   Input,
@@ -23,14 +19,14 @@ import User from "../entities/User";
 import useAuth from "../hooks/useAuth";
 import useUserStore from "../store/userStore";
 import AuthAlert from "../components/AuthAlert";
+import RegFormModal from "../components/RegFormModal";
 
 const schema = Joi.object({
   email: Joi.string()
-    .min(5)
     .max(50)
     .required()
     .email({ tlds: { allow: false } }),
-  password: Joi.string().min(5).max(50).required(),
+  password: Joi.string().max(50).required(),
 });
 
 const Login = () => {
@@ -107,16 +103,20 @@ const Login = () => {
       <HStack justifyContent="center" mt={2}>
         <Text textAlign="center">New around here?</Text>
         <Link>
-          <Button variant="btn-link">Join now.</Button>
+          {/* <Button variant="btn-link">Join now.</Button> */}
+          <RegFormModal buttonText={"Join now."} btnVariant={"btn-link"} />
         </Link>
       </HStack>
       <Stack alignItems="center">
         {errors?.email && (
-          <AuthAlert status={"error"} errorMessage={errors.email.message} />
+          <AuthAlert status={"error"} errorMessage={errors?.email?.message} />
         )}
 
         {errors?.password && (
-          <AuthAlert status={"error"} errorMessage={errors.password.message} />
+          <AuthAlert
+            status={"error"}
+            errorMessage={errors?.password?.message}
+          />
         )}
 
         {authUser.error instanceof AxiosError && (

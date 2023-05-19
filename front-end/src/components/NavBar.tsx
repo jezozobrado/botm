@@ -114,7 +114,9 @@ const NavBar = () => {
               </Link>
             )}
 
-            {!user && <RegFormModal buttonText={"Sign up"} />}
+            {!user && (
+              <RegFormModal buttonText={"Sign up"} btnVariant={"btn-primary"} />
+            )}
           </HStack>
         </HStack>
       </Show>
