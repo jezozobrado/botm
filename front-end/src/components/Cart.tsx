@@ -1,19 +1,22 @@
-import { Badge, Spinner } from "@chakra-ui/react";
+import { Badge } from "@chakra-ui/react";
 import useCart from "../hooks/useCart";
 import useCartStore from "../store/cartStore";
-import useUserStore from "../store/userStore";
 
 const Cart = () => {
-  const { user } = useUserStore();
-
   const current = useCartStore((s) => s.current);
   const removeClick = useCartStore((s) => s.removeClick);
-  const { data, isLoading } = useCart([current, removeClick]);
+  const { data } = useCart([current, removeClick]);
 
   return (
     <>
-      {isLoading && <Spinner />}
-      <Badge borderRadius="50%" bg="brand.100" color="white">
+      <Badge
+        borderRadius="50%"
+        bg="brand.100"
+        color="white"
+        width="17px"
+        height="17px"
+        textAlign="center"
+      >
         {data?.books.reduce((acc, cur) => acc + 1, 0)}
       </Badge>
     </>

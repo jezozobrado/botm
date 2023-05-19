@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Divider,
   Grid,
@@ -77,9 +78,13 @@ const NavBar = () => {
             ))}
           </HStack>
           <Spacer width="100px" />
-          <HStack>
-            {user && <Text>{`Hello ${user?.firstName}`}</Text>}
-            {user && <Cart />}
+          <HStack gap={0}>
+            {user && <Text me="-30px">{`Hello ${user?.firstName}`}</Text>}
+            {user && (
+              <Box position="relative" left="56px" bottom="10px" zIndex={1}>
+                <Cart />
+              </Box>
+            )}
             {user && <PopOver />}
             {user && (
               <Link to="/">
