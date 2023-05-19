@@ -5,9 +5,17 @@ import {
   GridItem,
   HStack,
   Hide,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Show,
   Spacer,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react";
 import jwtDecode from "jwt-decode";
 import { useEffect } from "react";
@@ -21,6 +29,7 @@ import Cart from "./Cart";
 import PopOver from "./PopOver";
 import useDrawerStore from "../store/drawerStore";
 import NavDrawer from "./Drawer";
+import RegForm from "./RegForm";
 
 const NavBar = () => {
   const navItems: { url: string; displayName: string }[] = [
@@ -30,6 +39,8 @@ const NavBar = () => {
     { url: "/gift", displayName: "Gifts" },
     { url: "/relationship-status", displayName: "Relationship status" },
   ];
+
+  const { isOpen: isOpenSignUp, onOpen, onClose } = useDisclosure();
 
   const { user, setUser } = useUserStore();
 
@@ -101,12 +112,26 @@ const NavBar = () => {
                 </Button>
               </Link>
             )}
-            f
+
             {!user && (
-              <Button width="120px" variant="btn-primary">
+              <Button width="120px" variant="btn-primary" onClick={onOpen}>
                 Sign up
               </Button>
             )}
+            <Modal isOpen={isOpenSignUp} onClose={onClose}>
+              <ModalOverlay />
+              <ModalContent bgColor="brand.200">
+                <ModalHeader color="white" letterSpacing={1}>
+                  Books are awaiting!
+                </ModalHeader>
+                <ModalCloseButton />
+                <ModalBody>
+                  <RegForm submitText={"See the books"} onSubmit={onClose} />
+                </ModalBody>
+
+                <ModalFooter></ModalFooter>
+              </ModalContent>
+            </Modal>
           </HStack>
         </HStack>
       </Show>

@@ -16,6 +16,7 @@ import useAddUser from "../hooks/useAddUser";
 
 interface Props {
   submitText: string;
+  onSubmit?: () => void;
 }
 
 const schema = Joi.object({
@@ -25,7 +26,7 @@ const schema = Joi.object({
   password: Joi.string().min(5).max(50).required(),
 });
 
-const RegForm = ({ submitText }: Props) => {
+const RegForm = ({ submitText, onSubmit }: Props) => {
   const [show, setShow] = useState(false);
   const addUser = useAddUser();
 
@@ -93,6 +94,7 @@ const RegForm = ({ submitText }: Props) => {
             _hover={{ color: "none" }}
             color="white"
             type="submit"
+            onClick={onSubmit}
           >
             {submitText}
           </Button>
