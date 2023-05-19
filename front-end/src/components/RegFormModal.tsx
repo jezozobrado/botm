@@ -18,16 +18,21 @@ const RegFormModal = ({ buttonText }: Props) => {
   const { isOpen: isOpenSignUp, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Button width="120px" variant="btn-primary" onClick={onOpen}>
+      <Button
+        width="120px"
+        variant="btn-primary"
+        onClick={onOpen}
+        fontWeight="normal"
+      >
         {buttonText}
       </Button>
-      <Modal isOpen={isOpenSignUp} onClose={onClose}>
+      <Modal isOpen={isOpenSignUp} onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent bgColor="brand.200">
           <ModalHeader color="white" letterSpacing={1}>
             Books are awaiting!
           </ModalHeader>
-          <ModalCloseButton />
+          <ModalCloseButton color="white" />
           <ModalBody>
             <RegForm submitText={"See the books"} onSubmit={onClose} />
           </ModalBody>

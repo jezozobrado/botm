@@ -12,7 +12,7 @@ import RegFormModal from "../RegFormModal";
 
 const Hero = () => {
   const navigate = useNavigate();
-  const { isOpen: isOpenSignUp, onOpen, onClose } = useDisclosure();
+
   return (
     <Flex
       width={{ base: "auto", md: "800px" }}
@@ -31,7 +31,7 @@ const Hero = () => {
 
       <HStack justifyContent="center">
         <RegFormModal buttonText={"Join now"} />
-        <Button width="120px" variant="btn-secondary" onClick={onOpen}>
+        <Button width="120px" variant="btn-secondary">
           Give a gift
         </Button>
       </HStack>
