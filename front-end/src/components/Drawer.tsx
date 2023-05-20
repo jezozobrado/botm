@@ -10,7 +10,6 @@ import {
 } from "@chakra-ui/react";
 import useDrawerStore from "../store/drawerStore";
 import { Link, NavLink } from "react-router-dom";
-import { BiUserCircle } from "react-icons/bi";
 import useUserStore from "../store/userStore";
 
 const NavDrawer = () => {
@@ -25,7 +24,6 @@ const NavDrawer = () => {
     { url: "/all-books", displayName: "All Books" },
     { url: "/how-it-works", displayName: "How it works" },
     { url: "/gift", displayName: "Gifts" },
-    { url: "/relationship-status", displayName: "Relationship status" },
   ];
 
   return (

@@ -1,5 +1,4 @@
 import { extendTheme, ThemeConfig } from "@chakra-ui/react";
-import headingTheme from "./themes/heading";
 
 const config: ThemeConfig = {
   initialColorMode: "light",
@@ -8,8 +7,8 @@ const config: ThemeConfig = {
 const theme = extendTheme({
   config,
   breakpoints: {
-    xs: "320px",
-    sm: "425px",
+    xs: "20em", //"320px",
+    sm: "27em", //"425px",
     md: "48em", // 768px
     lg: "62em", // 992px
     xl: "80em", // 1280px

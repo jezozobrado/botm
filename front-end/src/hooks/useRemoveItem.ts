@@ -7,7 +7,6 @@ const useRemoveItem = () => {
   const apiClient = new APIClient<CartResponse>("/carts");
   return useMutation({
     mutationFn: (params: Params) => apiClient.removeCartItem(params),
-    onSuccess: (data) => console.log("data", data),
     onError: (err) => console.error("error", err),
   });
 };

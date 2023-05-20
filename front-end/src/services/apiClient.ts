@@ -1,8 +1,8 @@
-import axios, { AxiosRequestConfig, AxiosRequestHeaders } from "axios";
-import User from "../entities/User";
-import { Book } from "../entities/Book";
+import axios, { AxiosRequestConfig } from "axios";
 import { ObjectId } from "bson";
 import { Params } from "../components/CartItem";
+import { Book } from "../entities/Book";
+import User from "../entities/User";
 
 export interface CartRequest {
   book: Book;
@@ -37,7 +37,6 @@ class APIClient<T> {
       localStorage.setItem("x-auth-token", res.headers["x-auth-token"]);
       axiosInstance.defaults.headers.common["Authorization"] =
         localStorage.getItem("x-auth-token");
-      console.log("Registration done...");
       return res.data;
     });
 
@@ -46,7 +45,6 @@ class APIClient<T> {
       localStorage.setItem("x-auth-token", res.headers["x-auth-token"]);
       axiosInstance.defaults.headers.common["Authorization"] =
         localStorage.getItem("x-auth-token");
-      console.log("Authenticating...");
 
       return res.data;
     });
@@ -63,7 +61,6 @@ class APIClient<T> {
     axiosInstance
       .post<T>(this.endpoint + "/" + params.user + "/" + params.book)
       .then((res) => {
-        console.log("params", params);
         return res.data;
       });
 }

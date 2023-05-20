@@ -17,7 +17,6 @@ const Header = ({ heading, subheading, withSearchBar = false }: Props) => {
         variant={{
           base: "heading-small",
           md: "heading-primary",
-          lg: "heading-primary",
         }}
       >
         {heading}

@@ -21,7 +21,6 @@ const router = createBrowserRouter([
       { path: "/all-books", element: <AllBooks /> },
       { path: "/how-it-works", element: <HowItWorks /> },
       { path: "/gift", element: <Gift /> },
-      { path: "/relationship-status", element: <RelationshipStatus /> },
       { path: "/login", element: <Login /> },
       { path: "/all-books/:slug", element: <BookDetailPage /> },
     ],

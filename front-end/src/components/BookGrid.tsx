@@ -1,16 +1,16 @@
 import {
   Button,
-  SimpleGrid,
-  Stack,
   HStack,
-  Text,
   Icon,
+  SimpleGrid,
   Spinner,
+  Stack,
+  Text,
 } from "@chakra-ui/react";
+import { useState } from "react";
+import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import useBooks, { QueryParams } from "../hooks/useBooks";
 import BookListItem from "./BookListItem";
-import { useEffect, useState } from "react";
-import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 
 interface Props {
   queryParams?: QueryParams;
@@ -20,7 +20,7 @@ const BookGrid = ({ queryParams }: Props) => {
   const [pageSize, setPageSize] = useState(20);
   const [pageNumber, setPageNumber] = useState(1);
 
-  const { data, isLoading, status } = useBooks({
+  const { data, isLoading } = useBooks({
     ...queryParams,
     pageSize: pageSize,
     pageNumber: pageNumber,
