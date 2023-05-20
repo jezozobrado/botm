@@ -6,6 +6,7 @@ import {
   HStack,
   Image,
   SimpleGrid,
+  Spinner,
   Stack,
   Text,
 } from "@chakra-ui/react";
@@ -38,7 +39,7 @@ const BookDetailPage = () => {
     );
   }
 
-  const { data } = useBook(slug!);
+  const { data, isLoading } = useBook(slug!);
   if (!data) return null;
 
   const informerMap: { [key: string]: string } = {

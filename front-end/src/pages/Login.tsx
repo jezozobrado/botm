@@ -4,6 +4,7 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  Spinner,
   Stack,
   Text,
 } from "@chakra-ui/react";
@@ -104,7 +105,7 @@ const Login = () => {
             </InputRightElement>
           </InputGroup>
           <Button fontWeight="normal" type="submit" variant="btn-primary">
-            Login
+            {authUser.isLoading ? <Spinner /> : "Login"}
           </Button>
         </Stack>
       </form>
