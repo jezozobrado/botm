@@ -1,6 +1,8 @@
 import { HStack, Stack, Button, Text, Box } from "@chakra-ui/react";
 import Header from "../components/Header";
 import PricePlan from "../components/PricePlan";
+import Poster1 from "../components/HomePage/Poster1";
+import poster from "../assets/gurl.webp";
 
 const Gift = () => {
   return (
@@ -10,12 +12,14 @@ const Gift = () => {
         subheading={"Let them choose their next reads, on you."}
       />
 
-      <HStack justifyContent="center" my="20px">
+      <HStack justifyContent="center" mt="20px">
         <Button variant="btn-primary">Give a gift</Button>
         <Button variant="btn-secondary">Redeem a gift</Button>
       </HStack>
 
-      <Box bg="brand.200" py="40px">
+      <Poster1 image={poster} />
+
+      <Box bg="brand.200" pb="40px">
         <Text textAlign="center" color="white" variant="text-primary" mb="20px">
           Choose your plan.
         </Text>

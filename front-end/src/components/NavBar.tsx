@@ -27,7 +27,7 @@ const NavBar = () => {
     { url: "/the-best-new-books", displayName: "May Books" },
     { url: "/all-books", displayName: "All Books" },
     { url: "/how-it-works", displayName: "How it works" },
-    { url: "/gift", displayName: "Gifts" },
+    { url: "/gifts", displayName: "Gifts" },
   ];
 
   const user = useUserStore((s) => s.user);

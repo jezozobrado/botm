@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Drawer,
   DrawerBody,
@@ -9,8 +10,9 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import useDrawerStore from "../store/drawerStore";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import useUserStore from "../store/userStore";
+import RegFormModal from "./RegFormModal";
 
 const NavDrawer = () => {
   const user = useUserStore((s) => s.user);
@@ -18,6 +20,8 @@ const NavDrawer = () => {
 
   const isOpen = useDrawerStore((s) => s.isOpen);
   const resetIsOpen = useDrawerStore((s) => s.resetIsOpen);
+
+  const navigate = useNavigate();
 
   const navItems: { url: string; displayName: string }[] = [
     { url: "/the-best-new-books", displayName: "May Books" },
@@ -32,7 +36,7 @@ const NavDrawer = () => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>Create your account</DrawerHeader>
+          <DrawerHeader>Books are our jam.</DrawerHeader>
 
           <DrawerBody>
             <Stack gap={5} fontSize="16px" paddingStart="20px">
@@ -62,6 +66,15 @@ const NavDrawer = () => {
                   </Button>
                 </Link>
               )}
+              <Button
+                variant="btn-link"
+                onClick={() => {
+                  navigate("/login");
+                  resetIsOpen();
+                }}
+              >
+                Login
+              </Button>
             </Stack>
           </DrawerBody>
         </DrawerContent>

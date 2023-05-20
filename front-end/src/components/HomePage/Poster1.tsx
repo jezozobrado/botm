@@ -1,7 +1,9 @@
 import { Box, Container, Image } from "@chakra-ui/react";
-import poster from "../../assets/girl-lying-bed.webp";
 
-const Poster1 = () => {
+interface Props {
+  image: string;
+}
+const Poster1 = ({ image }: Props) => {
   return (
     <Box
       bg="linear-gradient(
@@ -12,7 +14,7 @@ const Poster1 = () => {
     >
       <Container centerContent paddingY={{ base: "30px", md: "70px" }}>
         <Image
-          src={poster}
+          src={image}
           maxW={{ base: "100vw", lg: "90vw" }}
           paddingX={{ md: "30px" }}
         />

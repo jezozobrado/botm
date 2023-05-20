@@ -50,7 +50,6 @@ const HowItWorks = () => {
         isButtonHidden={true}
         isProcedure={false}
       />
-      <Heading textAlign="center">Here’s your monthly breakdown.</Heading>
     </>
   );
 };
