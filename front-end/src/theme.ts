@@ -62,6 +62,13 @@ const theme = extendTheme({
           color: "gray.400",
           letterSpacing: "1px",
         },
+        "text-tertiary-white": {
+          textTransform: "uppercase",
+          fontSize: "13px",
+          fontWeight: "bold",
+          color: "white",
+          letterSpacing: "1px",
+        },
       },
     },
     Button: {
