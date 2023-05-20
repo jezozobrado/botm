@@ -1,5 +1,5 @@
 import { Button, Stack, Text } from "@chakra-ui/react";
-import { ReactNode, useState } from "react";
+import { useState } from "react";
 import parse from "html-react-parser";
 
 interface Props {

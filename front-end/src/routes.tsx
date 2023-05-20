@@ -4,7 +4,7 @@ import Layout from "./components/Layout";
 import AllBooks from "./pages/AllBooks";
 import HowItWorks from "./pages/HowItWorks";
 import Gift from "./pages/Gift";
-import RelationshipStatus from "./pages/RelationshipStatus";
+
 import Login from "./pages/Login";
 import BookDetailPage from "./pages/BookDetailPage";
 import NewBooks from "./pages/NewBooks";

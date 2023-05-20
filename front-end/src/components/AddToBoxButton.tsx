@@ -40,7 +40,6 @@ const AddToBoxButton = ({ book }: Props) => {
           alignSelf={{ base: "center", md: "normal" }}
           paddingX={{ md: "40px" }}
           paddingY="23px"
-          // margin="auto"
         >
           Add to box
         </Button>

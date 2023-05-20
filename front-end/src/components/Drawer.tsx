@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Drawer,
   DrawerBody,
@@ -12,7 +11,6 @@ import {
 import useDrawerStore from "../store/drawerStore";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import useUserStore from "../store/userStore";
-import RegFormModal from "./RegFormModal";
 
 const NavDrawer = () => {
   const user = useUserStore((s) => s.user);

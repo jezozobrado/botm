@@ -112,7 +112,6 @@ const Login = () => {
       <HStack justifyContent="center" mt={2}>
         <Text textAlign="center">New around here?</Text>
         <Link>
-          {/* <Button variant="btn-link">Join now.</Button> */}
           <RegFormModal buttonText={"Join now."} btnVariant={"btn-link"} />
         </Link>
       </HStack>

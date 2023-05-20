@@ -27,5 +27,6 @@ app.use("/api/books", books);
 app.use("/api/users", users);
 app.use("/api/auth", auth);
 app.use("/api/carts", carts);
+require("./prod")(app);
 
 app.listen(process.env.PORT, () => console.log("Listening on port 3000"));

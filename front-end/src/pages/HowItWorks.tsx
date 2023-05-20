@@ -4,7 +4,7 @@ import model from "../assets/model.webp";
 import readingOnCouch from "../assets/reading-on-couch.webp";
 import hide from "../assets/hide.webp";
 import Feature from "../components/HowItWorks/Feature";
-import { HStack, Heading, Stack } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
 import FeatureReversed from "../components/FeatureReversed";
 
 const HowItWorks = () => {
