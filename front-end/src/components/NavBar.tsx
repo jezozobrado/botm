@@ -9,7 +9,6 @@ import {
   Show,
   Spacer,
   Text,
-  useDisclosure,
 } from "@chakra-ui/react";
 import jwtDecode from "jwt-decode";
 import { useEffect } from "react";
@@ -34,9 +33,8 @@ const NavBar = () => {
     { url: "/relationship-status", displayName: "Relationship status" },
   ];
 
-  const { isOpen: isOpenSignUp, onOpen, onClose } = useDisclosure();
-
-  const { user, setUser } = useUserStore();
+  const user = useUserStore((s) => s.user);
+  const setUser = useUserStore((s) => s.setUser);
 
   const setIsOpen = useDrawerStore((s) => s.setIsOpen);
   const isOpen = useDrawerStore((s) => s.isOpen);
@@ -79,8 +77,8 @@ const NavBar = () => {
             ))}
           </HStack>
           <Spacer width="100px" />
-          <HStack gap={0}>
-            {user && <Text me="-30px">{`Hello ${user?.firstName}`}</Text>}
+          <HStack>
+            {user && <Text me="-35px">{`${user?.firstName}'s box`}</Text>}
             {user && (
               <Box position="relative" left="56px" bottom="10px" zIndex={1}>
                 <Cart />
@@ -121,7 +119,7 @@ const NavBar = () => {
 
       <Show below="xl">
         <Grid
-          templateColumns={{ base: "40px 1fr auto", md: "40px 1fr auto" }}
+          templateColumns={{ base: "1fr 1fr 1fr", md: "40px 1fr auto" }}
           marginX="20px"
           marginY={3}
         >
@@ -146,23 +144,12 @@ const NavBar = () => {
           {user && (
             <GridItem>
               <HStack>
-                {/* {user && <Text>{`Hello ${user?.firstName}`}</Text>} */}
-                {user && <Cart />}
-                {user && <PopOver />}
                 {user && (
-                  <Link to="/">
-                    <Button
-                      leftIcon={<BiUserCircle size="22px" />}
-                      variant="outline"
-                      onClick={() => {
-                        localStorage.removeItem("x-auth-token");
-                        setUser(null);
-                      }}
-                    >
-                      Logout
-                    </Button>
-                  </Link>
+                  <Box position="relative" left="56px" bottom="10px" zIndex={1}>
+                    <Cart />
+                  </Box>
                 )}
+                {user && <PopOver />}
               </HStack>
             </GridItem>
           )}

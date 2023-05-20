@@ -4,16 +4,19 @@ import {
   DrawerBody,
   DrawerCloseButton,
   DrawerContent,
-  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   Stack,
-  Text,
 } from "@chakra-ui/react";
 import useDrawerStore from "../store/drawerStore";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { BiUserCircle } from "react-icons/bi";
+import useUserStore from "../store/userStore";
 
 const NavDrawer = () => {
+  const user = useUserStore((s) => s.user);
+  const setUser = useUserStore((s) => s.setUser);
+
   const isOpen = useDrawerStore((s) => s.isOpen);
   const resetIsOpen = useDrawerStore((s) => s.resetIsOpen);
 
@@ -24,6 +27,7 @@ const NavDrawer = () => {
     { url: "/gift", displayName: "Gifts" },
     { url: "/relationship-status", displayName: "Relationship status" },
   ];
+
   return (
     <>
       <Drawer isOpen={isOpen} placement="left" onClose={resetIsOpen}>
@@ -46,15 +50,22 @@ const NavDrawer = () => {
                   {displayName}
                 </NavLink>
               ))}
+              {user && (
+                <Link to="/">
+                  <Button
+                    variant="btn-link"
+                    onClick={() => {
+                      localStorage.removeItem("x-auth-token");
+                      setUser(null);
+                      resetIsOpen();
+                    }}
+                  >
+                    Logout
+                  </Button>
+                </Link>
+              )}
             </Stack>
           </DrawerBody>
-
-          <DrawerFooter>
-            {/* <Button variant="outline" mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button colorScheme="blue">Save</Button> */}
-          </DrawerFooter>
         </DrawerContent>
       </Drawer>
     </>

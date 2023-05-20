@@ -27,6 +27,7 @@ const BookCard = ({ book }: Props) => {
     Debut: "green",
     "Repeat Author": "brand.200",
     "BOTY Finalist": "pink",
+    "Book of the year": "brown",
   };
 
   const user = useUserStore((s) => s.user);
