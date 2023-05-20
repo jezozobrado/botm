@@ -20,7 +20,7 @@ const router = createBrowserRouter([
       { path: "/the-best-new-books", element: <NewBooks /> },
       { path: "/all-books", element: <AllBooks /> },
       { path: "/how-it-works", element: <HowItWorks /> },
-      { path: "/gift", element: <Gift /> },
+      { path: "/gifts", element: <Gift /> },
       { path: "/login", element: <Login /> },
       { path: "/all-books/:slug", element: <BookDetailPage /> },
     ],

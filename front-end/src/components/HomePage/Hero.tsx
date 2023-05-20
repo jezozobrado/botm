@@ -38,9 +38,11 @@ const Hero = () => {
         <>
           <HStack justifyContent="center">
             <RegFormModal buttonText={"Join now"} btnVariant={"btn-primary"} />
-            <Button width="120px" variant="btn-secondary">
-              Give a gift
-            </Button>
+            <Link to="/gifts">
+              <Button width="120px" variant="btn-secondary">
+                Give a gift
+              </Button>
+            </Link>
           </HStack>
           <Text>
             Already a member?
