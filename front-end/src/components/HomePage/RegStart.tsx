@@ -1,5 +1,5 @@
 import RegForm from "../RegForm";
-import { Box, Button, Stack, Text } from "@chakra-ui/react";
+import { Box, Stack, Text } from "@chakra-ui/react";
 
 const SeeBooks = () => {
   return (

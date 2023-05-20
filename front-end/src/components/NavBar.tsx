@@ -118,9 +118,54 @@ const NavBar = () => {
       </Show>
 
       <Show below="xl">
-        <Grid
-          templateColumns={{ base: "1fr 1fr 1fr", md: "40px 1fr auto" }}
-          marginX="20px"
+        <HStack
+          borderBottom="solid RGBA(0, 0, 0, 0.1) 1px"
+          py={3}
+          position="fixed"
+          w="100%"
+          backgroundColor="white"
+          zIndex={1}
+          justifyContent="space-between"
+        >
+          <Button
+            bg="none"
+            _hover={{ bg: "none" }}
+            onClick={() => {
+              setIsOpen();
+              console.log(isOpen);
+            }}
+          >
+            <RxHamburgerMenu size="30px" />
+          </Button>
+          <NavDrawer />
+          <Link to="/">
+            <Logo />
+          </Link>
+          {user && (
+            <HStack>
+              <Box position="relative" left="56px" bottom="10px" zIndex={1}>
+                <Cart />
+              </Box>
+
+              <PopOver />
+            </HStack>
+          )}
+          {!user && (
+            <Hide below="xm">
+              <Button
+                variant="solid"
+                width="120px"
+                bg="brand.100"
+                color="white"
+              >
+                Sign up
+              </Button>
+            </Hide>
+          )}
+        </HStack>
+        {/* <Grid
+          templateColumns={{ base: "40px 1fr 1fr", md: "40px 1fr auto" }}
+          marginX={{ base: "", md: "20px" }}
           marginY={3}
         >
           <GridItem>
@@ -132,7 +177,7 @@ const NavBar = () => {
                 console.log(isOpen);
               }}
             >
-              <RxHamburgerMenu size="40px" />
+              <RxHamburgerMenu size="30px" />
             </Button>
             <NavDrawer />
           </GridItem>
@@ -141,7 +186,40 @@ const NavBar = () => {
               <Logo />
             </Link>
           </GridItem>
-          {user && (
+
+          <GridItem>
+            {user && (
+              <HStack>
+                <Box position="relative" left="56px" bottom="10px" zIndex={1}>
+                  <Cart />
+                </Box>
+
+                <PopOver />
+              </HStack>
+            )}
+            {!user && (
+              <Hide below="xm">
+                <Button
+                  variant="solid"
+                  width="120px"
+                  bg="brand.100"
+                  color="white"
+                >
+                  Sign up
+                </Button>
+              </Hide>
+            )}
+          </GridItem>
+        </Grid> */}
+      </Show>
+      <Divider />
+    </>
+  );
+};
+
+export default NavBar;
+
+/* {user && (
             <GridItem>
               <HStack>
                 {user && (
@@ -166,12 +244,4 @@ const NavBar = () => {
                 </Button>
               </GridItem>
             </Hide>
-          )}
-        </Grid>
-      </Show>
-      <Divider />
-    </>
-  );
-};
-
-export default NavBar;
+          )} */

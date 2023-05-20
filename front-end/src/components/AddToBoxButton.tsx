@@ -14,8 +14,6 @@ const AddToBoxButton = ({ book }: Props) => {
   const { user } = useUserStore();
   const [disabled, setIsDisabled] = useState(false);
 
-  // const disabled = useCartStore((s) => s.disabled);
-  // const setIsDisabled = useCartStore((s) => s.setIsDisabled);
   const setCurrent = useCartStore((s) => s.setCurrent);
   const current = useCartStore((s) => s.current);
   const removeClick = useCartStore((s) => s.removeClick);
@@ -25,7 +23,7 @@ const AddToBoxButton = ({ book }: Props) => {
 
   if (addItem.isError) setIsMoreThanThree(true);
 
-  const { data: cart, isFetching, isLoading, status } = useCart([removeClick]);
+  const { data: cart, isFetching, isLoading } = useCart([removeClick]);
 
   useEffect(
     () =>
@@ -42,6 +40,7 @@ const AddToBoxButton = ({ book }: Props) => {
           alignSelf={{ base: "center", md: "normal" }}
           paddingX={{ md: "40px" }}
           paddingY="23px"
+          // margin="auto"
         >
           Add to box
         </Button>
@@ -53,7 +52,7 @@ const AddToBoxButton = ({ book }: Props) => {
             _hover: { bgColor: "gray.300" },
           }}
           variant="btn-primary"
-          width={{ base: "85vw ", md: "70%" }}
+          width={{ base: "100% ", md: "70%" }}
           alignSelf={{ base: "center", md: "normal" }}
           paddingX={{ md: "40px" }}
           paddingY="23px"
@@ -61,12 +60,9 @@ const AddToBoxButton = ({ book }: Props) => {
             setIsDisabled(true);
             addItem
               .mutateAsync({ book: book, customer: user?._id })
-              .then((res) => {
-                // setCurrent();
-              })
+              .then((res) => {})
               .catch(() => {
                 setIsDisabled(false);
-                // setCurrent();
               })
               .finally(() => setCurrent());
           }}

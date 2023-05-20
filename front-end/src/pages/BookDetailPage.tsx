@@ -51,7 +51,7 @@ const BookDetailPage = () => {
   return (
     <>
       <Breadcrumb
-        width="600px"
+        width={{ base: "90%", md: "600px" }}
         margin="auto"
         marginTop="100px"
         separator={<BiChevronRight color="gray.500" />}

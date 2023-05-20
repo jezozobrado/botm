@@ -13,7 +13,13 @@ const Header = ({ heading, subheading, withSearchBar = false }: Props) => {
       width={{ base: "90%", md: "750px " }}
       margin="auto"
     >
-      <Heading variant={{ base: "heading-small", md: "heading-primary" }}>
+      <Heading
+        variant={{
+          base: "heading-small",
+          md: "heading-primary",
+          lg: "heading-primary",
+        }}
+      >
         {heading}
       </Heading>
       <Text
