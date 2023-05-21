@@ -10,7 +10,7 @@ export interface CartRequest {
 }
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "https://glacial-basin-38558.herokuapp.com/api",
 });
 
 axiosInstance.defaults.headers.common["Authorization"] =
