@@ -16,9 +16,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 mongoose
-  .connect(
-    "mongodb+srv://jezozobrado:hn3mTPRD@mongo-playground.nr0qfnc.mongodb.net/botm?retryWrites=true&w=majority"
-  )
+  .connect(process.env.MONGODB_URL)
   .then(() => console.log("Connected to the database."))
   .catch((err) => console.log("oops", err));
 
@@ -29,4 +27,6 @@ app.use("/api/auth", auth);
 app.use("/api/carts", carts);
 require("./prod")(app);
 
-app.listen(process.env.PORT, () => console.log("Listening on port 3000"));
+app.listen(process.env.PORT || 8080, () =>
+  console.log("Listening on port 3000")
+);
