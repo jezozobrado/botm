@@ -111,9 +111,7 @@ const Login = () => {
       </form>
       <HStack justifyContent="center" mt={2}>
         <Text textAlign="center">New around here?</Text>
-        <Link>
-          <RegFormModal buttonText={"Join now."} btnVariant={"btn-link"} />
-        </Link>
+        <RegFormModal buttonText={"Join now."} btnVariant={"btn-link"} />
       </HStack>
       <Stack alignItems="center">
         {errors?.email && (
