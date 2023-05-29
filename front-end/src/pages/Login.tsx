@@ -104,7 +104,7 @@ const Login = () => {
               </Button>
             </InputRightElement>
           </InputGroup>
-          <Button fontWeight="normal" type="submit" variant="btn-primary">
+          <Button type="submit" variant="btn-primary-block">
             {authUser.isLoading ? <Spinner /> : "Login"}
           </Button>
         </Stack>

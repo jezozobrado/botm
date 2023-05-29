@@ -21,7 +21,7 @@ const RegFormModal = ({ buttonText, btnVariant }: Props) => {
   return (
     <>
       <Button
-        width="120px"
+        // width="120px"
         variant={btnVariant}
         onClick={onOpen}
         fontWeight="normal"

@@ -4,13 +4,15 @@ import {
   DrawerBody,
   DrawerCloseButton,
   DrawerContent,
+  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   Stack,
 } from "@chakra-ui/react";
+import { NavLink, useNavigate } from "react-router-dom";
 import useDrawerStore from "../store/drawerStore";
-import { Link, NavLink, useNavigate } from "react-router-dom";
 import useUserStore from "../store/userStore";
+import DrawerWithoutUser from "./DrawerWithoutUser";
 
 const NavDrawer = () => {
   const user = useUserStore((s) => s.user);
@@ -37,10 +39,13 @@ const NavDrawer = () => {
           <DrawerHeader>Books are our jam.</DrawerHeader>
 
           <DrawerBody>
-            <Stack gap={5} fontSize="16px" paddingStart="20px">
+            <Stack gap={5} fontSize="19px">
               {navItems.map(({ url, displayName }, index) => (
                 <NavLink
-                  onClick={resetIsOpen}
+                  onClick={() => {
+                    resetIsOpen();
+                    navigate("/");
+                  }}
                   key={index}
                   to={url}
                   style={({ isActive }: { isActive: boolean }) => ({
@@ -50,31 +55,25 @@ const NavDrawer = () => {
                   {displayName}
                 </NavLink>
               ))}
-              {user && (
-                <Link to="/">
-                  <Button
-                    variant="btn-link"
-                    onClick={() => {
-                      localStorage.removeItem("x-auth-token");
-                      setUser(null);
-                      resetIsOpen();
-                    }}
-                  >
-                    Logout
-                  </Button>
-                </Link>
-              )}
-              <Button
-                variant="btn-link"
-                onClick={() => {
-                  navigate("/login");
-                  resetIsOpen();
-                }}
-              >
-                Login
-              </Button>
             </Stack>
           </DrawerBody>
+          <DrawerFooter width="100%">
+            {user ? (
+              <Button
+                variant="btn-primary-block"
+                onClick={() => {
+                  localStorage.removeItem("x-auth-token");
+                  setUser(null);
+                  resetIsOpen();
+                  navigate("/");
+                }}
+              >
+                Logout
+              </Button>
+            ) : (
+              <DrawerWithoutUser />
+            )}
+          </DrawerFooter>
         </DrawerContent>
       </Drawer>
     </>

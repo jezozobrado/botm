@@ -78,6 +78,14 @@ const theme = extendTheme({
           color: "white",
           fontWeight: "normal",
           fontSize: "18px",
+          width: "120px",
+        },
+        "btn-primary-block": {
+          bg: "brand.100",
+          color: "white",
+          fontWeight: "normal",
+          fontSize: "18px",
+          width: "100%",
         },
         "btn-secondary": {
           bg: "white",
