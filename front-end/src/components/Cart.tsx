@@ -10,6 +10,8 @@ const Cart = () => {
   return (
     <>
       <Badge
+        // padding={0}
+        // marginLeft={"-20px"}
         borderRadius="50%"
         bg="brand.100"
         color="white"

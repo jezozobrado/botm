@@ -2,8 +2,12 @@ import {
   Box,
   Button,
   Divider,
+  Grid,
+  GridItem,
   HStack,
   Hide,
+  Icon,
+  Popover,
   Show,
   Spacer,
   Text,
@@ -21,6 +25,8 @@ import Cart from "./Cart";
 import NavDrawer from "./Drawer";
 import PopOver from "./PopOver";
 import RegFormModal from "./RegFormModal";
+import { BsBoxSeam } from "react-icons/bs";
+import CartDrawer from "./CartDrawer";
 
 const NavBar = () => {
   const navItems: { url: string; displayName: string }[] = [
@@ -115,37 +121,116 @@ const NavBar = () => {
       </Show>
 
       <Show below="xl">
-        <HStack
-          borderBottom="solid RGBA(0, 0, 0, 0.1) 1px"
-          py={3}
-          position="fixed"
-          w="100%"
-          backgroundColor="white"
-          zIndex={1}
-          justifyContent="space-between"
-        >
-          <Button bg="none" _hover={{ bg: "none" }} onClick={() => setIsOpen()}>
-            <RxHamburgerMenu size="30px" />
-          </Button>
-          <NavDrawer />
-          <Link to="/">
-            <Logo />
-          </Link>
-          {user && (
+        {user && (
+          <Grid templateColumns={"50px 1fr 50px"} py={3} alignItems={"center"}>
+            <GridItem>
+              <Button
+                paddingRight={0}
+                bg="none"
+                _hover={{ bg: "none" }}
+                onClick={() => setIsOpen()}
+              >
+                <RxHamburgerMenu size="30px" />
+              </Button>
+              <NavDrawer />
+            </GridItem>
+            <GridItem>
+              <Box
+                margin="auto"
+                width="230px"
+                transform={{ base: "scale(0.8)", sm: "scale(1)" }}
+              >
+                <Link to="/">
+                  <Logo />
+                </Link>
+              </Box>
+            </GridItem>
+
+            <Show below="md">
+              <GridItem>
+                <CartDrawer />
+              </GridItem>
+            </Show>
+
+            <Hide below="md">
+              <GridItem>
+                <PopOver />
+              </GridItem>
+            </Hide>
+          </Grid>
+        )}
+        {/* {user && (
+          <HStack
+            borderBottom="solid RGBA(0, 0, 0, 0.1) 1px"
+            py={3}
+            // position="fixed"
+            w="100%"
+            backgroundColor="white"
+            zIndex={1}
+            // justifyContent="space-between"
+          >
+            <Button
+              bg="none"
+              _hover={{ bg: "none" }}
+              onClick={() => setIsOpen()}
+            >
+              <RxHamburgerMenu size="30px" />
+            </Button>
+            <NavDrawer />
+            <Box transform="scale(0.8)">
+              <Link to="/">
+                <Logo />
+              </Link>
+            </Box>
             <HStack>
-              <Box position="relative" left="56px" bottom="10px" zIndex={1}>
+              <Box
+                margin={0}
+                padding={0}
+                position="relative"
+                left="56px"
+                bottom="10px"
+                zIndex={1}
+              >
                 <Cart />
               </Box>
 
               <PopOver />
             </HStack>
-          )}
-          {!user && (
-            <Hide below="xm">
-              <RegFormModal buttonText={"Sign up"} btnVariant={"btn-primary"} />
-            </Hide>
-          )}
-        </HStack>
+          </HStack>
+        )} */}
+
+        {!user && (
+          <HStack
+            borderBottom="solid RGBA(0, 0, 0, 0.1) 1px"
+            py={3}
+            position="fixed"
+            w="100%"
+            backgroundColor="white"
+            zIndex={1}
+            // justifyContent="space-between"
+          >
+            <Button
+              paddingLeft={"16px"}
+              paddingRight={"0px"}
+              bg="none"
+              _hover={{ bg: "none" }}
+              onClick={() => setIsOpen()}
+            >
+              <RxHamburgerMenu size="30px" />
+            </Button>
+            <NavDrawer />
+            <Box
+              flexGrow={1}
+              display="flex"
+              justifyContent="center"
+              paddingRight={"70px"}
+            >
+              <Link to="/">
+                <Logo />
+              </Link>
+            </Box>
+          </HStack>
+        )}
       </Show>
       <Divider />
     </>

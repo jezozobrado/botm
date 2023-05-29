@@ -41,6 +41,7 @@ const PopOver = () => {
   return (
     <>
       <Popover
+        placement="top-start"
         trigger="hover"
         isOpen={isOpen}
         onClose={() => {
@@ -49,6 +50,8 @@ const PopOver = () => {
       >
         <PopoverTrigger>
           <Button
+            // padding={0}
+            // margin={0}
             variant="outline"
             border="none"
             _hover={{ bg: "none" }}
@@ -62,7 +65,7 @@ const PopOver = () => {
         </PopoverTrigger>
         <Portal>
           <PopoverContent
-            width="400px"
+            width={{ base: "300px", md: "400px" }}
             onMouseEnter={onOpen}
             onMouseLeave={onClose}
             onFocus={onOpen}
